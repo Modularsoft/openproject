@@ -29,6 +29,7 @@
  */
 
 import { Controller } from '@hotwired/stimulus';
+import dragula from 'dragula';
 
 export default class CustomFieldsController extends Controller {
   static targets = [
@@ -205,7 +206,6 @@ export default class CustomFieldsController extends Controller {
 
   private setupDragAndDrop() {
     // Make custom fields draggable
-    // eslint-disable-next-line no-undef
     const drake = dragula([this.dragContainerTarget], {
       isContainer: () => false,
       moves: (el, source, handle:HTMLElement) => handle.classList.contains('dragula-handle'),

@@ -34,7 +34,7 @@ export class OpApplicationController extends ApplicationController {
       if (!registered.includes(controller) && !this.loaded.has(controller)) {
         debugLog(`Loading controller ${controller}`);
         this.loaded.add(controller);
-        void import(/* webpackChunkName: "[request]" */`./dynamic/${path}.controller`)
+        void import(/* webpackChunkName: "[request]" */`./dynamic/${path}.controller.ts`)
           .then((imported:{ default:ControllerConstructor }) => this.application.register(controller, imported.default))
           .catch((err:unknown) => {
             console.error('Failed to load dynamic controller chunk %O: %O', controller, err);

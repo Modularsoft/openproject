@@ -341,7 +341,7 @@ export class OpCkeditorComponent extends UntilDestroyedMixin implements OnInit, 
     Promise
       .all([
         import('codemirror'),
-        import(/* webpackChunkName: "codemirror-mode" */ `codemirror/mode/${cmMode}/${cmMode}.js`),
+        import(/* webpackChunkName: "codemirror-mode" */ `../../../../../../../node_modules/codemirror/mode/${cmMode}/${cmMode}.js`),
       ])
       .then((imported:any[]) => {
         const CodeMirror = imported[0].default;

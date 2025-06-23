@@ -26,7 +26,7 @@
 // See COPYRIGHT and LICENSE files for more details.
 //++
 
-import * as moment from 'moment';
+import moment, { Moment, Duration } from 'moment';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { EditFieldComponent } from 'core-app/shared/components/fields/edit/edit-field.component';
 import { InjectField } from 'core-app/shared/helpers/angular/inject-field.decorator';
@@ -53,7 +53,7 @@ export class HoursDurationEditFieldComponent extends EditFieldComponent {
 
   inputValue:null|string;
 
-  public parser(value:null|string, input:HTMLInputElement):moment.Duration {
+  public parser(value:null|string, input:HTMLInputElement):Duration {
     // Managing decimal separators in a multi-language app is a complex topic:
     // https://www.ctrl.blog/entry/html5-input-number-localization.html
     // Depending on the locale of the OS, the browser or the app itself,
@@ -84,7 +84,7 @@ export class HoursDurationEditFieldComponent extends EditFieldComponent {
     return Number(moment.duration(value).asHours().toFixed(2));
   }
 
-  protected parseValue(val:moment.Moment | null) {
+  protected parseValue(val:Moment | null) {
     if (val === null || this.inputValue === '') {
       return null;
     }

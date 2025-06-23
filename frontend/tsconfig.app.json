@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/app",
+    "types": []
+  },
+  "files": [
+    "src/main.ts",
+    "src/polyfills.ts",
+    "src/app/core/setup/init-globals.ts",
+    "src/app/core/setup/init-vendors.ts",
+    "src/stimulus/setup.ts",
+    "src/turbo/setup.ts"
+  ],
+  "include": [
+    "src/stimulus/controllers/**/*.ts",
+    "src/**/*.d.ts"
+  ]
+}

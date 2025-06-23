@@ -26,7 +26,7 @@
 // See COPYRIGHT and LICENSE files for more details.
 //++
 
-import * as jQuery from 'jquery';
+import jQuery from 'jquery';
 
 /*jslint white: false, nomen: true, devel: true, on: true, debug: false, evil: true, onevar: false, browser: true, white: false, indent: 2 */
 /*global window, $, $$, Reporting, Element */

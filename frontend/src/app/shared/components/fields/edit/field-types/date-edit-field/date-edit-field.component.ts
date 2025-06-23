@@ -27,7 +27,7 @@
 //++
 
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import * as moment from 'moment';
+import moment from 'moment';
 import { EditFieldComponent } from 'core-app/shared/components/fields/edit/edit-field.component';
 import { InjectField } from 'core-app/shared/helpers/angular/inject-field.decorator';
 import { TimezoneService } from 'core-app/core/datetime/timezone.service';

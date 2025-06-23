@@ -29,7 +29,7 @@
  */
 
 import { Controller } from '@hotwired/stimulus';
-import * as URI from 'urijs';
+import URI from 'urijs';
 
 export default class RepositorySettingsController extends Controller {
   static targets = [

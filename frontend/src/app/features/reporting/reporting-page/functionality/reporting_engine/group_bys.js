@@ -27,7 +27,9 @@
 //++
 
 /*jslint white: false, nomen: true, devel: true, on: true, debug: false, evil: true, onevar: false, browser: true, white: false, indent: 2 */
-/*global _, dragula, I18n, jQuery, Reporting*/
+/*global _, I18n, jQuery, Reporting*/
+
+import dragula from 'dragula';
 
 Reporting.GroupBys = (function($){
   var group_by_container_ids = function() {

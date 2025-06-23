@@ -27,7 +27,7 @@ import { opIconElement } from 'core-app/shared/helpers/op-icon-builder';
 import { ConfirmDialogService } from 'core-app/shared/components/modals/confirm-dialog/confirm-dialog.service';
 import { ConfirmDialogOptions } from '../modals/confirm-dialog/confirm-dialog.modal';
 import { ToastService } from 'core-app/shared/components/toaster/toast.service';
-import * as moment from 'moment-timezone';
+import moment from 'moment-timezone';
 import allLocales from '@fullcalendar/core/locales-all';
 
 

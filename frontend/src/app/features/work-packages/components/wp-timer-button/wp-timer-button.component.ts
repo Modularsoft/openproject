@@ -53,7 +53,7 @@ import {
 } from 'rxjs';
 import { TimeEntryResource } from 'core-app/features/hal/resources/time-entry-resource';
 import { HalResourceEditingService } from 'core-app/shared/components/fields/edit/services/hal-resource-editing.service';
-import * as moment from 'moment';
+import moment from 'moment';
 import { SchemaCacheService } from 'core-app/core/schemas/schema-cache.service';
 import { TimezoneService } from 'core-app/core/datetime/timezone.service';
 import { TimeEntryTimerService } from 'core-app/shared/components/time_entries/services/time-entry-timer.service';

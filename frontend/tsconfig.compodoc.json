@@ -1,8 +1,7 @@
 {
-  "extends": "../tsconfig.base.json",
+  "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "../out-tsc/app",
-    "baseUrl": "./",
+    "outDir": "./out-tsc/app",
     "types": []
   },
   "files": [
@@ -13,10 +12,9 @@
   ],
   "include": [
     "src/**/*.ts",
-    "**/*.d.ts",
+    "src/**/*.d.ts",
   ],
   "exclude": [
-    "**/*.stories.*",
     "stimulus/**/*.ts"
   ]
 }

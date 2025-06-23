@@ -122,7 +122,7 @@ export class CodeBlockMacroModalComponent extends OpModalComponent implements Af
       return this.updateCodeMirrorMode('');
     }
 
-    import(/* webpackChunkName: "codemirror-mode" */ `codemirror/mode/${language}/${language}.js`)
+    import(/* webpackChunkName: "codemirror-mode" */ `../../../../../../../node_modules/codemirror/mode/${language}/${language}.js`)
       .then(() => {
         this.updateCodeMirrorMode(language);
       })

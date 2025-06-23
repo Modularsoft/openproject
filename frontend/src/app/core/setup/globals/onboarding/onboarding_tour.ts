@@ -17,7 +17,7 @@ import {
 import { ganttOnboardingTourSteps } from 'core-app/core/setup/globals/onboarding/tours/gantt_tour';
 import { ConfigurationService } from 'core-app/core/config/configuration.service';
 
-require('core-vendor/enjoyhint');
+import 'core-vendor/enjoyhint';
 
 declare global {
   interface Window {

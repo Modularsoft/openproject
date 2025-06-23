@@ -113,7 +113,7 @@ import {
   addBackgroundEvents,
   removeBackgroundEvents,
 } from 'core-app/features/team-planner/team-planner/planner/background-events';
-import * as moment from 'moment-timezone';
+import moment from 'moment-timezone';
 import allLocales from '@fullcalendar/core/locales-all';
 
 export type TeamPlannerViewOptionKey = 'resourceTimelineWorkWeek'|'resourceTimelineWeek'|'resourceTimelineTwoWeeks'|'resourceTimelineFourWeeks'|'resourceTimelineEightWeeks';

@@ -30,7 +30,7 @@
 
 import * as Turbo from '@hotwired/turbo';
 import { Controller } from '@hotwired/stimulus';
-import { Drake } from 'dragula';
+import dragula, { Drake } from 'dragula';
 import { debugLog } from 'core-app/shared/helpers/debug_output';
 
 interface TargetConfig {

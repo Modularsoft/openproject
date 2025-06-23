@@ -25,7 +25,7 @@
 //
 // See COPYRIGHT and LICENSE files for more details.
 //++
-import * as moment from 'moment';
+import moment from 'moment';
 import flatpickr from 'flatpickr';
 import { Instance } from 'flatpickr/dist/types/instance';
 import { ConfigurationService } from 'core-app/core/config/configuration.service';

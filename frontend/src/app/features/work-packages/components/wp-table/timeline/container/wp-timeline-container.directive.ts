@@ -38,8 +38,7 @@ import {
   ToastService,
 } from 'core-app/shared/components/toaster/toast.service';
 import { WorkPackageResource } from 'core-app/features/hal/resources/work-package-resource';
-import * as moment from 'moment';
-import { Moment } from 'moment';
+import moment, { Moment } from 'moment';
 import {
   filter,
   takeUntil,
@@ -87,7 +86,7 @@ import {
   zoomLevelOrder,
 } from '../wp-timeline';
 import { WeekdayService } from 'core-app/core/days/weekday.service';
-import * as Mousetrap from 'mousetrap';
+import Mousetrap from 'mousetrap';
 import { DayResourceService } from 'core-app/core/state/days/day.service';
 import { IDay } from 'core-app/core/state/days/day.model';
 

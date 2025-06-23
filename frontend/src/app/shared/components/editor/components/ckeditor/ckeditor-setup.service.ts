@@ -142,7 +142,7 @@ export class CKEditorSetupService {
     // untyped module cannot be dynamically imported
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    await import(/* webpackPrefetch: true; webpackChunkName: "ckeditor" */ 'core-vendor/ckeditor/ckeditor');
+    await import(/* webpackChunkName: "ckeditor" */ 'core-vendor/ckeditor/ckeditor');
 
     if (I18n.locale !== 'en') {
       await this.loadLocale();

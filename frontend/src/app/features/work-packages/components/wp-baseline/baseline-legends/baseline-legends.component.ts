@@ -46,10 +46,9 @@ import {
   offsetToUtcString,
 } from 'core-app/features/work-packages/components/wp-baseline/baseline-helpers';
 import { TimezoneService } from 'core-app/core/datetime/timezone.service';
-import * as moment from 'moment-timezone';
+import moment, { Moment } from 'moment-timezone';
 import { ConfigurationService } from 'core-app/core/config/configuration.service';
 import { UntilDestroyedMixin } from 'core-app/shared/helpers/angular/until-destroyed.mixin';
-import { Moment } from 'moment';
 import { filter } from 'rxjs/operators';
 
 @Component({

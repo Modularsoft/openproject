@@ -9,8 +9,7 @@ import {
 import { TimezoneService } from 'core-app/core/datetime/timezone.service';
 import { I18nService } from 'core-app/core/i18n/i18n.service';
 import { IInAppNotificationDetailsAttribute, INotification } from 'core-app/core/state/in-app-notifications/in-app-notification.model';
-import * as moment from 'moment';
-import { Moment } from 'moment';
+import moment, { Moment } from 'moment';
 
 @Component({
   selector: 'op-in-app-notification-date-alert',

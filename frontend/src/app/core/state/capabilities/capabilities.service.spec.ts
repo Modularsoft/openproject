@@ -43,7 +43,7 @@ import {
 } from 'core-app/core/current-user/current-user.store';
 import { CurrentUserService } from 'core-app/core/current-user/current-user.service';
 import { ICapability } from 'core-app/core/state/capabilities/capability.model';
-import * as URI from 'urijs';
+import URI from 'urijs';
 import { ApiV3ListParameters } from 'core-app/core/apiv3/paths/apiv3-list-resource.interface';
 import { CurrentUserQuery } from 'core-app/core/current-user/current-user.query';
 

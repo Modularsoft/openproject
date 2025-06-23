@@ -48,7 +48,7 @@ import { WorkPackageChangeset } from 'core-app/features/work-packages/components
 import { WorkPackageViewFocusService } from 'core-app/features/work-packages/routing/wp-view-base/view-services/wp-view-focus.service';
 import { EditFormComponent } from 'core-app/shared/components/fields/edit/edit-form/edit-form.component';
 import { WorkPackageNotificationService } from 'core-app/features/work-packages/services/notifications/work-package-notification.service';
-import * as URI from 'urijs';
+import URI from 'urijs';
 import { UntilDestroyedMixin } from 'core-app/shared/helpers/angular/until-destroyed.mixin';
 import { splitViewRoute } from 'core-app/features/work-packages/routing/split-view-routes.helper';
 import { ApiV3Service } from 'core-app/core/apiv3/api-v3.service';

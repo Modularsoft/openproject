@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+import moment, { Moment } from 'moment';
 import { WorkPackageResource } from 'core-app/features/hal/resources/work-package-resource';
 import { DisplayFieldRenderer } from 'core-app/shared/components/fields/display/display-field-renderer';
 import { Injector } from '@angular/core';
@@ -20,14 +20,13 @@ import {
   timelineElementCssClass,
   timelineMarkerSelectionStartClass,
 } from '../wp-timeline';
-import Moment = moment.Moment;
 
 export interface CellDateMovement {
   // Target values to move work package to
-  startDate?:moment.Moment;
-  dueDate?:moment.Moment;
+  startDate?:Moment;
+  dueDate?:Moment;
   // Target value to move milestone to
-  date?:moment.Moment;
+  date?:Moment;
 }
 
 export type LabelPosition = 'left'|'right'|'farRight';
@@ -117,8 +116,8 @@ export class TimelineCellRenderer {
     labels:WorkPackageCellLabels,
     dates:CellDateMovement,
   ):void {
-    this.assignDate(change, 'startDate', dates.startDate as moment.Moment);
-    this.assignDate(change, 'dueDate', dates.dueDate as moment.Moment);
+    this.assignDate(change, 'startDate', dates.startDate as Moment);
+    this.assignDate(change, 'dueDate', dates.dueDate as Moment);
 
     this.updateLabels(true, labels, change);
   }
@@ -441,13 +440,13 @@ export class TimelineCellRenderer {
     }
   }
 
-  protected assignDate(change:WorkPackageChangeset, attributeName:string, value:moment.Moment) {
+  protected assignDate(change:WorkPackageChangeset, attributeName:string, value:Moment) {
     if (value) {
       change.projectedResource[attributeName] = value.format('YYYY-MM-DD');
     }
   }
 
-  setElementPositionAndSize(element:HTMLElement, renderInfo:RenderInfo, start:moment.Moment, due:moment.Moment) {
+  setElementPositionAndSize(element:HTMLElement, renderInfo:RenderInfo, start:Moment, due:Moment) {
     const { viewParams } = renderInfo;
     // offset left
     const offsetStart = start.diff(viewParams.dateDisplayStart, 'days');

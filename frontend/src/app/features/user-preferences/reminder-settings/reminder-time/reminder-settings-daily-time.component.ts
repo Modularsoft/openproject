@@ -22,7 +22,7 @@ import {
   FormGroupDirective,
 } from '@angular/forms';
 import { ConfigurationService } from 'core-app/core/config/configuration.service';
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Component({
   selector: 'op-reminder-settings-daily-time',
