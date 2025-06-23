@@ -48,7 +48,8 @@ import { WorkPackageResource } from 'core-app/features/hal/resources/work-packag
 import isNewResource from 'core-app/features/hal/helpers/is-new-resource';
 import { WeekdayService } from 'core-app/core/days/weekday.service';
 import { of } from 'rxjs';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('WorkPackage', () => {
   let halResourceService:HalResourceService;
@@ -70,11 +71,8 @@ describe('WorkPackage', () => {
   beforeEach(waitForAsync(() => {
     // noinspection JSIgnoredPromiseFromCall
     TestBed.configureTestingModule({
-      imports: [
-        OpenprojectHalModule,
-        HttpClientTestingModule,
-      ],
-      providers: [
+    imports: [OpenprojectHalModule],
+    providers: [
         HalResourceService,
         States,
         TimezoneService,
@@ -90,8 +88,10 @@ describe('WorkPackage', () => {
         { provide: WorkPackageCreateService, useValue: {} },
         { provide: StateService, useValue: {} },
         { provide: SchemaCacheService, useValue: {} },
-      ],
-    })
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+    ]
+})
       .compileComponents()
       .then(() => {
         halResourceService = TestBed.inject(HalResourceService);

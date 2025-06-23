@@ -27,11 +27,7 @@
 //++
 
 import { Injectable } from '@angular/core';
-import {
-  HttpErrorResponse,
-  HttpEvent,
-  HttpHeaders,
-} from '@angular/common/http';
+import { HttpErrorResponse, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { applyTransaction } from '@datorama/akita';
 import { Observable } from 'rxjs';
 import {

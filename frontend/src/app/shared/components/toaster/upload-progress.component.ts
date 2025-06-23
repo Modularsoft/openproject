@@ -37,12 +37,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import {
-  HttpErrorResponse,
-  HttpEvent,
-  HttpEventType,
-  HttpProgressEvent,
-} from '@angular/common/http';
+import { HttpErrorResponse, HttpEvent, HttpEventType, HttpProgressEvent } from '@angular/common/http';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 
 import { debugLog } from 'core-app/shared/helpers/debug_output';

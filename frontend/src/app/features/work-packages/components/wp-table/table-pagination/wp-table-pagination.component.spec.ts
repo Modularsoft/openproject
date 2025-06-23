@@ -26,7 +26,7 @@
 // See COPYRIGHT and LICENSE files for more details.
 //++
 
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { IsolatedQuerySpace } from 'core-app/features/work-packages/directives/query-space/isolated-query-space';
 import { inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { States } from 'core-app/core/states/states.service';
@@ -76,14 +76,12 @@ describe('wpTablePagination Directive', () => {
 
     // noinspection JSIgnoredPromiseFromCall
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientModule,
-      ],
-      declarations: [
+    declarations: [
         WorkPackageTablePaginationComponent,
         OpIconComponent,
-      ],
-      providers: [
+    ],
+    imports: [],
+    providers: [
         States,
         PaginationService,
         WorkPackageViewSortByService,
@@ -94,8 +92,9 @@ describe('wpTablePagination Directive', () => {
         ConfigurationService,
         IsolatedQuerySpace,
         I18nService,
-      ],
-    }).compileComponents();
+        provideHttpClient(withInterceptorsFromDi()),
+    ]
+}).compileComponents();
   }));
 
   describe('page ranges and links', () => {

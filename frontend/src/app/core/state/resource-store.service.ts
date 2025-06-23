@@ -55,10 +55,7 @@ import {
   listParamsString,
 } from 'core-app/core/apiv3/paths/apiv3-list-resource.interface';
 import { IHALCollection } from 'core-app/core/apiv3/types/hal-collection.type';
-import {
-  HttpClient,
-  HttpErrorResponse,
-} from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import {
   Injectable,
   Injector,
