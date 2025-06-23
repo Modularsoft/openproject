@@ -12,11 +12,12 @@ import { IInAppNotificationDetailsAttribute, INotification } from 'core-app/core
 import moment, { Moment } from 'moment';
 
 @Component({
-  selector: 'op-in-app-notification-date-alert',
-  templateUrl: './in-app-notification-date-alert.component.html',
-  styleUrls: ['./in-app-notification-date-alert.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
+    selector: 'op-in-app-notification-date-alert',
+    templateUrl: './in-app-notification-date-alert.component.html',
+    styleUrls: ['./in-app-notification-date-alert.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class InAppNotificationDateAlertComponent implements OnInit {
   @Input() aggregatedNotifications:INotification[];

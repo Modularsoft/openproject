@@ -45,8 +45,9 @@ import { ApiV3Service } from 'core-app/core/apiv3/api-v3.service';
 import { FormResource } from 'core-app/features/hal/resources/form-resource';
 
 @Component({
-  templateUrl: './wp-button-macro.modal.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './wp-button-macro.modal.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class WpButtonMacroModalComponent extends OpModalComponent implements AfterViewInit {
   public changed = false;

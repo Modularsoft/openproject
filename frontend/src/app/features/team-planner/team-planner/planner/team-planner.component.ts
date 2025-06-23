@@ -120,10 +120,11 @@ export type TeamPlannerViewOptionKey = 'resourceTimelineWorkWeek'|'resourceTimel
 export type TeamPlannerViewOptions = { [K in TeamPlannerViewOptionKey]:RawOptionsFromRefiners<Required<ViewOptionRefiners>> };
 
 @Component({
-  selector: 'op-team-planner',
-  templateUrl: './team-planner.component.html',
-  styleUrls: ['./team-planner.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-team-planner',
+    templateUrl: './team-planner.component.html',
+    styleUrls: ['./team-planner.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class TeamPlannerComponent extends UntilDestroyedMixin implements OnInit, OnDestroy {
   @ViewChild(FullCalendarComponent) ucCalendar:FullCalendarComponent;

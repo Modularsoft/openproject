@@ -14,10 +14,11 @@ import { imagePath } from 'core-app/shared/helpers/images/path-helper';
 import { PrincipalType } from '../invite-user.component';
 
 @Component({
-  selector: 'op-ium-success',
-  templateUrl: './success.component.html',
-  styleUrls: ['./success.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-ium-success',
+    templateUrl: './success.component.html',
+    styleUrls: ['./success.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class SuccessComponent {
   @Input() principal:HalResource;

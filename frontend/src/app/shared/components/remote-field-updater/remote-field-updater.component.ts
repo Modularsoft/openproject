@@ -32,9 +32,10 @@ import { HttpClient } from '@angular/common/http';
 export const remoteFieldUpdaterSelector = 'remote-field-updater';
 
 @Component({
-  selector: remoteFieldUpdaterSelector,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '',
+    selector: remoteFieldUpdaterSelector,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    template: '',
+    standalone: false
 })
 export class RemoteFieldUpdaterComponent implements OnInit, OnDestroy {
   constructor(

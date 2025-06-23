@@ -20,10 +20,11 @@ import { ResourceChangeset } from 'core-app/shared/components/fields/changeset/r
 import { SchemaResource } from 'core-app/features/hal/resources/schema-resource';
 
 @Component({
-  templateUrl: './form.component.html',
-  selector: 'te-form',
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './form.component.html',
+    selector: 'te-form',
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class TimeEntryFormComponent extends UntilDestroyedMixin implements OnInit, OnDestroy {
   @Input() changeset:ResourceChangeset<TimeEntryResource>;

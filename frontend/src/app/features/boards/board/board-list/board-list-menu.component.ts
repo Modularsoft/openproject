@@ -40,8 +40,9 @@ import { BoardService } from 'core-app/features/boards/board/board.service';
 import { BoardActionService } from 'core-app/features/boards/board/board-actions/board-action.service';
 
 @Component({
-  selector: 'board-list-menu',
-  templateUrl: './board-list-menu.component.html',
+    selector: 'board-list-menu',
+    templateUrl: './board-list-menu.component.html',
+    standalone: false
 })
 export class BoardListMenuComponent {
   @Input() board:Board;

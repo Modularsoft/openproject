@@ -42,8 +42,8 @@ import { WorkPackageTableConfiguration } from 'core-app/features/work-packages/c
 import { WorkPackageViewOutputs } from 'core-app/features/work-packages/routing/wp-view-base/event-handling/event-handler-registry';
 
 @Component({
-  selector: 'wp-grid',
-  template: `
+    selector: 'wp-grid',
+    template: `
     <wp-card-view [dragOutOfHandler]="canDragOutOf"
                   [dragInto]="dragInto"
                   [cardsRemovable]="false"
@@ -65,11 +65,12 @@ import { WorkPackageViewOutputs } from 'core-app/features/work-packages/routing/
                   [localStorageKey]="resizerStorageKey"></wp-resizer>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    DragAndDropService,
-    WorkPackageCardDragAndDropService,
-  ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        DragAndDropService,
+        WorkPackageCardDragAndDropService,
+    ],
+    standalone: false
 })
 export class WorkPackagesGridComponent implements WorkPackageViewOutputs {
   @Input() public configuration:WorkPackageTableConfiguration;

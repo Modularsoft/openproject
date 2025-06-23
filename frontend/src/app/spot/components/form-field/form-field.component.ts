@@ -6,8 +6,9 @@ import { I18nService } from 'core-app/core/i18n/i18n.service';
 
 /* eslint-disable-next-line change-detection-strategy/on-push */
 @Component({
-  selector: 'spot-form-field',
-  templateUrl: './form-field.component.html',
+    selector: 'spot-form-field',
+    templateUrl: './form-field.component.html',
+    standalone: false
 })
 export class SpotFormFieldComponent {
   @HostBinding('class.spot-form-field') className = true;

@@ -9,16 +9,17 @@ import {
 import { IOPFormlyTemplateOptions } from 'core-app/shared/components/dynamic-forms/typings';
 
 @Component({
-  selector: 'op-formattable-control',
-  templateUrl: './formattable-control.component.html',
-  styleUrls: ['./formattable-control.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => FormattableControlComponent),
-      multi: true,
-    },
-  ],
+    selector: 'op-formattable-control',
+    templateUrl: './formattable-control.component.html',
+    styleUrls: ['./formattable-control.component.scss'],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => FormattableControlComponent),
+            multi: true,
+        },
+    ],
+    standalone: false
 })
 export class FormattableControlComponent implements ControlValueAccessor, OnInit {
   @Input() templateOptions:IOPFormlyTemplateOptions;

@@ -3,8 +3,9 @@ import { FieldType } from '@ngx-formly/core';
 import { projectStatusCodeCssClass } from 'core-app/shared/components/fields/helpers/project-status-helper';
 
 @Component({
-  selector: 'op-select-project-status-input',
-  templateUrl: './select-project-status-input.component.html',
+    selector: 'op-select-project-status-input',
+    templateUrl: './select-project-status-input.component.html',
+    standalone: false
 })
 export class SelectProjectStatusInputComponent extends FieldType {
   cssClass(item:any) {

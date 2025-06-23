@@ -57,10 +57,11 @@ import { FloatingAction } from 'core-app/shared/components/storages/file-link-li
 import SpotDropAlignmentOption from 'core-app/spot/drop-alignment-options';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: '[op-file-link-list-item]',
-  templateUrl: './file-link-list-item.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: '[op-file-link-list-item]',
+    templateUrl: './file-link-list-item.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class FileLinkListItemComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() public fileLink:IFileLink;

@@ -35,8 +35,8 @@ import { fromEvent } from 'rxjs';
 import { MainMenuToggleService } from 'core-app/core/main-menu/main-menu-toggle.service';
 
 @Component({
-  selector: 'wp-resizer',
-  template: `
+    selector: 'wp-resizer',
+    template: `
     <op-resizer [customHandler]="false"
              [resizerClass]="resizerClass"
              cursorClass="col-resize"
@@ -45,7 +45,8 @@ import { MainMenuToggleService } from 'core-app/core/main-menu/main-menu-toggle.
              (move)="resizeMove($event)">
     </op-resizer>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 
 export class WpResizerDirective extends UntilDestroyedMixin implements OnInit, AfterViewInit {

@@ -31,9 +31,10 @@ import { I18nService } from 'core-app/core/i18n/i18n.service';
 import { PathHelperService } from 'core-app/core/path-helper/path-helper.service';
 
 @Component({
-  templateUrl: './version-board-header.html',
-  styleUrls: ['./version-board-header.sass'],
-  host: { class: 'title-container -small' },
+    templateUrl: './version-board-header.html',
+    styleUrls: ['./version-board-header.sass'],
+    host: { class: 'title-container -small' },
+    standalone: false
 })
 export class VersionBoardHeaderComponent {
   @Input('resource') public version:VersionResource;

@@ -12,10 +12,11 @@ import moment from 'moment';
 import { I18nService } from 'core-app/core/i18n/i18n.service';
 
 @Component({
-  selector: 'op-workdays-settings',
-  templateUrl: './workdays-settings.component.html',
-  styleUrls: ['./workdays-settings.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-workdays-settings',
+    templateUrl: './workdays-settings.component.html',
+    styleUrls: ['./workdays-settings.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class WorkdaysSettingsComponent implements OnInit {
   control:UntypedFormArray;

@@ -42,7 +42,7 @@ import { ToastService } from 'core-app/shared/components/toaster/toast.service';
 import { JobStatusModalService } from 'core-app/features/job-status/job-status-modal.service';
 
 @Component({
-  template: `
+    template: `
     <a [title]="text.export_hover"
        class="button export-bcf-button"
        [attr.href]="exportLink"
@@ -51,7 +51,8 @@ import { JobStatusModalService } from 'core-app/features/job-status/job-status-m
       <span class="button--text"> {{text.export}} </span>
     </a>
   `,
-  selector: 'bcf-export-button',
+    selector: 'bcf-export-button',
+    standalone: false
 })
 export class BcfExportButtonComponent extends UntilDestroyedMixin implements OnInit, OnDestroy {
   public text = {

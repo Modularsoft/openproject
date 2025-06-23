@@ -36,8 +36,9 @@ import {
 } from 'core-app/shared/components/autocompleter/time-entries-work-package-autocompleter/time-entries-work-package-autocompleter.component';
 
 @Component({
-  templateUrl: './time-entries-work-package-autocompleter-template.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './time-entries-work-package-autocompleter-template.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class TimeEntriesWorkPackageAutocompleterTemplateComponent implements IAutocompleterTemplateComponent {
   @Input() public mode:string|undefined;

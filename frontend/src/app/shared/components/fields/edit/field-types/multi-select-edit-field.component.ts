@@ -37,8 +37,9 @@ import { InjectField } from 'core-app/shared/helpers/angular/inject-field.decora
 import { PathHelperService } from 'core-app/core/path-helper/path-helper.service';
 
 @Component({
-  templateUrl: './multi-select-edit-field.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './multi-select-edit-field.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class MultiSelectEditFieldComponent extends EditFieldComponent implements OnInit {
   @ViewChild(NgSelectComponent, { static: true }) public ngSelectComponent:NgSelectComponent;

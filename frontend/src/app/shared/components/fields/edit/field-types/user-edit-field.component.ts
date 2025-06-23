@@ -55,8 +55,9 @@ import { IUserAutocompleteItem } from 'core-app/shared/components/autocompleter/
 import { CallableHalLink } from 'core-app/features/hal/hal-link/hal-link';
 
 @Component({
-  templateUrl: './user-edit-field.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './user-edit-field.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class UserEditFieldComponent extends EditFieldComponent implements OnInit {
   isNew = isNewResource(this.resource);

@@ -85,16 +85,17 @@ export interface DisabledButtonPlaceholder {
 }
 
 @Component({
-  selector: 'board-list',
-  templateUrl: './board-list.component.html',
-  styleUrls: ['./board-list.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  hostDirectives: [WorkPackageIsolatedQuerySpaceDirective],
-  providers: [
-    { provide: WorkPackageInlineCreateService, useClass: BoardInlineCreateService },
-    BoardListMenuComponent,
-    WorkPackageCardDragAndDropService,
-  ],
+    selector: 'board-list',
+    templateUrl: './board-list.component.html',
+    styleUrls: ['./board-list.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    hostDirectives: [WorkPackageIsolatedQuerySpaceDirective],
+    providers: [
+        { provide: WorkPackageInlineCreateService, useClass: BoardInlineCreateService },
+        BoardListMenuComponent,
+        WorkPackageCardDragAndDropService,
+    ],
+    standalone: false
 })
 export class BoardListComponent extends AbstractWidgetComponent implements OnInit, OnDestroy {
   /** Output fired upon query removal */

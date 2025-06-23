@@ -28,8 +28,9 @@ import { firstValueFrom } from 'rxjs';
 import { QueryRequestParams } from 'core-app/features/work-packages/components/wp-query/url-params-helper';
 
 @Component({
-  selector: 'wp-embedded-table',
-  templateUrl: './wp-embedded-table.html',
+    selector: 'wp-embedded-table',
+    templateUrl: './wp-embedded-table.html',
+    standalone: false
 })
 export class WorkPackageEmbeddedTableComponent extends WorkPackageEmbeddedBaseComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input('queryId') public queryId?:string;

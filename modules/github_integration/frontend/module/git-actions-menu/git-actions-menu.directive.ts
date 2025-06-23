@@ -34,7 +34,8 @@ import { WorkPackageResource } from "core-app/features/hal/resources/work-packag
 import { GitActionsMenuComponent } from './git-actions-menu.component';
 
 @Directive({
-  selector: '[gitActionsCopyDropdown]'
+    selector: '[gitActionsCopyDropdown]',
+    standalone: false
 })
 export class GitActionsMenuDirective extends OpContextMenuTrigger {
   @Input('gitActionsCopyDropdown-workPackage') public workPackage:WorkPackageResource;

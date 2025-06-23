@@ -3,10 +3,11 @@ import { GRID_PROVIDERS } from 'core-app/shared/components/grids/grid/grid.compo
 import { GridPageComponent } from 'core-app/shared/components/grids/grid/page/grid-page.component';
 
 @Component({
-  templateUrl: '../../shared/components/grids/grid/page/grid-page.component.html',
-  styleUrls: ['../../shared/components/grids/grid/page/grid-page.component.sass'],
-  providers: GRID_PROVIDERS,
-  encapsulation: ViewEncapsulation.None,
+    templateUrl: '../../shared/components/grids/grid/page/grid-page.component.html',
+    styleUrls: ['../../shared/components/grids/grid/page/grid-page.component.sass'],
+    providers: GRID_PROVIDERS,
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class MyPageComponent extends GridPageComponent {
   showToolbar = false;

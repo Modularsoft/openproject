@@ -22,7 +22,8 @@ export interface SortColumn {
 export type SortingMode = 'automatic'|'manual';
 
 @Component({
-  templateUrl: './sort-by-tab.component.html',
+    templateUrl: './sort-by-tab.component.html',
+    standalone: false
 })
 export class WpTableConfigurationSortByTabComponent implements TabComponent {
   public text = {

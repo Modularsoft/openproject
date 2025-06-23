@@ -33,7 +33,7 @@ import { InjectField } from 'core-app/shared/helpers/angular/inject-field.decora
 import { TimezoneService } from 'core-app/core/datetime/timezone.service';
 
 @Component({
-  template: `
+    template: `
     <op-basic-single-date-picker
       [(ngModel)]="value"
       (keydown.escape)="onCancel()"
@@ -46,7 +46,8 @@ import { TimezoneService } from 'core-app/core/datetime/timezone.service';
       [opAutofocus]="autofocus"
     ></op-basic-single-date-picker>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class DateEditFieldComponent extends EditFieldComponent implements OnInit {
   @InjectField() readonly timezoneService:TimezoneService;

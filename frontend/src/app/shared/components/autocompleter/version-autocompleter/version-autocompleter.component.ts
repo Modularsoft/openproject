@@ -46,9 +46,10 @@ import { PathHelperService } from 'core-app/core/path-helper/path-helper.service
 import { firstValueFrom } from 'rxjs';
 
 @Component({
-  templateUrl: '../create-autocompleter/create-autocompleter.component.html',
-  selector: 'version-autocompleter',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: '../create-autocompleter/create-autocompleter.component.html',
+    selector: 'version-autocompleter',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class VersionAutocompleterComponent extends CreateAutocompleterComponent implements AfterViewInit {
   @Output() public onCreate = new EventEmitter<VersionResource>();

@@ -91,8 +91,9 @@ import { DayResourceService } from 'core-app/core/state/days/day.service';
 import { IDay } from 'core-app/core/state/days/day.model';
 
 @Component({
-  selector: 'wp-timeline-container',
-  templateUrl: './wp-timeline-container.html',
+    selector: 'wp-timeline-container',
+    templateUrl: './wp-timeline-container.html',
+    standalone: false
 })
 export class WorkPackageTimelineTableController extends UntilDestroyedMixin implements AfterViewInit {
   private $element:JQuery;

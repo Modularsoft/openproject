@@ -1,7 +1,8 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: '[op-autocompleter-option-tmp]',
+    selector: '[op-autocompleter-option-tmp]',
+    standalone: false
 })
 // A Directive to be used on the option template of
 //  ng-select (what will be shown in each row of drop down)

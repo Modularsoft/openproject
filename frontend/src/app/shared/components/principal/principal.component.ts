@@ -54,11 +54,12 @@ export interface PrincipalInput {
 }
 
 @Component({
-  template: '',
-  selector: principalSelector,
-  styleUrls: ['./principal.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
+    template: '',
+    selector: principalSelector,
+    styleUrls: ['./principal.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class OpPrincipalComponent implements OnInit {
   @Input() principal:PrincipalLike;

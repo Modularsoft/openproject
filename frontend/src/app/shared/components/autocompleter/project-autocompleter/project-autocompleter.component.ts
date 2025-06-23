@@ -67,16 +67,17 @@ export interface IProjectAutocompleterData {
 }
 
 @Component({
-  templateUrl: '../op-autocompleter/op-autocompleter.component.html',
-  styleUrls: ['./project-autocompleter.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  selector: projectsAutocompleterSelector,
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => ProjectAutocompleterComponent),
-    multi: true,
-  }],
+    templateUrl: '../op-autocompleter/op-autocompleter.component.html',
+    styleUrls: ['./project-autocompleter.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    selector: projectsAutocompleterSelector,
+    providers: [{
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => ProjectAutocompleterComponent),
+            multi: true,
+        }],
+    standalone: false
 })
 export class ProjectAutocompleterComponent extends OpAutocompleterComponent<IProjectAutocompleterData> implements OnInit, ControlValueAccessor {
   @HostBinding('class.op-project-autocompleter') public className = true;

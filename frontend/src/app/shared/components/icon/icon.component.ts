@@ -29,9 +29,9 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'op-icon',
-  host: { class: 'op-icon--wrapper' },
-  template: `
+    selector: 'op-icon',
+    host: { class: 'op-icon--wrapper' },
+    template: `
       <i [ngClass]="iconClasses"
          [attr.title]="iconTitle || undefined"
          aria-hidden="true"></i>
@@ -40,6 +40,7 @@ import { Component, Input } from '@angular/core';
         [textContent]="iconTitle"
         *ngIf="iconTitle"></span>
     `,
+    standalone: false
 })
 export class OpIconComponent {
   @Input('icon-classes') iconClasses:string;

@@ -5,8 +5,9 @@ import { OPContextMenuService } from 'core-app/shared/components/op-context-menu
 import { WpTableConfigurationModalComponent } from 'core-app/features/work-packages/components/wp-table/configuration-modal/wp-table-configuration.modal';
 
 @Component({
-  templateUrl: './config-menu.template.html',
-  selector: 'wp-table-config-menu',
+    templateUrl: './config-menu.template.html',
+    selector: 'wp-table-config-menu',
+    standalone: false
 })
 export class WorkPackagesTableConfigMenuComponent {
   public text = {

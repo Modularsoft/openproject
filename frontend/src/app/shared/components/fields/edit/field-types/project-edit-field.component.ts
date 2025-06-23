@@ -59,10 +59,11 @@ import { IAPIFilter } from 'core-app/shared/components/autocompleter/op-autocomp
 import { FilterOperator } from 'core-app/shared/helpers/api-v3/api-v3-filter-builder';
 
 @Component({
-  templateUrl: './project-edit-field.component.html',
-  styleUrls: ['./project-edit-field.component.sass'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './project-edit-field.component.html',
+    styleUrls: ['./project-edit-field.component.sass'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ProjectEditFieldComponent extends EditFieldComponent implements OnInit {
   isNew = isNewResource(this.resource);

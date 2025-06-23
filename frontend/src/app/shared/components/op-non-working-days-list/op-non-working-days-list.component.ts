@@ -39,11 +39,12 @@ export interface INonWorkingDay {
 }
 
 @Component({
-  selector: 'opce-non-working-days-list',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./op-non-working-days-list.component.sass'],
-  templateUrl: './op-non-working-days-list.component.html',
+    selector: 'opce-non-working-days-list',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    styleUrls: ['./op-non-working-days-list.component.sass'],
+    templateUrl: './op-non-working-days-list.component.html',
+    standalone: false
 })
 export class OpNonWorkingDaysListComponent implements OnInit, AfterViewInit {
   @ViewChild(FullCalendarComponent) ucCalendar:FullCalendarComponent;

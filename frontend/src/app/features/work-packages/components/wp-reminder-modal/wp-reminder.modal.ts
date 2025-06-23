@@ -22,9 +22,10 @@ import { ApiV3Service } from 'core-app/core/apiv3/api-v3.service';
 import { CollectionResource } from 'core-app/features/hal/resources/collection-resource';
 
 @Component({
-  templateUrl: './wp-reminder.modal.html',
-  styleUrls: ['./wp-reminder.modal.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './wp-reminder.modal.html',
+    styleUrls: ['./wp-reminder.modal.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class WorkPackageReminderModalComponent extends OpModalComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('frameElement') frameElement:ElementRef<HTMLIFrameElement>;

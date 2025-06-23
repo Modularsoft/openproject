@@ -6,9 +6,10 @@ import {
 import { FieldType } from '@ngx-formly/core';
 
 @Component({
-  selector: 'op-user-input',
-  templateUrl: './user-input.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-user-input',
+    templateUrl: './user-input.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class UserInputComponent extends FieldType implements OnInit {
   projectId:string|undefined;

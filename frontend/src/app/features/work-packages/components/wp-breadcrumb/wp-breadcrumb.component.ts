@@ -31,9 +31,10 @@ import { I18nService } from 'core-app/core/i18n/i18n.service';
 import { WorkPackageResource } from 'core-app/features/hal/resources/work-package-resource';
 
 @Component({
-  templateUrl: './wp-breadcrumb.html',
-  styleUrls: ['./wp-breadcrumb.sass'],
-  selector: 'wp-breadcrumb',
+    templateUrl: './wp-breadcrumb.html',
+    styleUrls: ['./wp-breadcrumb.sass'],
+    selector: 'wp-breadcrumb',
+    standalone: false
 })
 export class WorkPackageBreadcrumbComponent {
   @Input('workPackage') workPackage:WorkPackageResource;

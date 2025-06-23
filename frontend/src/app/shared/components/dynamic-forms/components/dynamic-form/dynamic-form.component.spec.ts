@@ -45,9 +45,10 @@ import { IOPDynamicFormSettings } from 'core-app/shared/components/dynamic-forms
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 @Component({
-  template: `
+    template: `
     <op-dynamic-form [formControl]="control"></op-dynamic-form>`,
-  providers: [],
+    providers: [],
+    standalone: false
 })
 class DynamicFormsTestingComponent {
   control = new UntypedFormControl('');

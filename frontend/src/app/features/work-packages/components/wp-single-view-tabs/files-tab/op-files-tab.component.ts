@@ -45,9 +45,10 @@ import { TurboRequestsService } from 'core-app/core/turbo/turbo-requests.service
 import { PathHelperService } from 'core-app/core/path-helper/path-helper.service';
 
 @Component({
-  selector: 'op-files-tab',
-  templateUrl: './op-files-tab.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-files-tab',
+    templateUrl: './op-files-tab.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class WorkPackageFilesTabComponent implements OnInit {
   @Input() workPackage:WorkPackageResource;

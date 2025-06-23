@@ -18,14 +18,15 @@ export interface IOpOptionListOption<T> {
 export type IOpOptionListValue<T> = T|null;
 
 @Component({
-  // Style is imported globally
-  templateUrl: './option-list.component.html',
-  selector: 'op-option-list',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => OpOptionListComponent),
-    multi: true,
-  }],
+    // Style is imported globally
+    templateUrl: './option-list.component.html',
+    selector: 'op-option-list',
+    providers: [{
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => OpOptionListComponent),
+            multi: true,
+        }],
+    standalone: false
 })
 export class OpOptionListComponent<T> implements ControlValueAccessor {
   @HostBinding('class.op-option-list') className = true;

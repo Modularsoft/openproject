@@ -19,9 +19,10 @@ export interface QueryConfigurationLocals {
 }
 
 @Component({
-  templateUrl: './external-query-configuration.template.html',
-  hostDirectives: [WorkPackageIsolatedQuerySpaceDirective],
-  providers: [[{ provide: WpTableConfigurationService, useClass: RestrictedWpTableConfigurationService }]],
+    templateUrl: './external-query-configuration.template.html',
+    hostDirectives: [WorkPackageIsolatedQuerySpaceDirective],
+    providers: [[{ provide: WpTableConfigurationService, useClass: RestrictedWpTableConfigurationService }]],
+    standalone: false
 })
 export class ExternalQueryConfigurationComponent implements OnInit, AfterViewInit {
   @ViewChild('embeddedTableForConfiguration', { static: true }) private embeddedTable:WorkPackageEmbeddedTableComponent;

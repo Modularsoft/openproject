@@ -33,8 +33,9 @@ import { I18nService } from "core-app/core/i18n/i18n.service";
 import { PathHelperService } from "core-app/core/path-helper/path-helper.service";
 
 @Component({
-  selector: 'github-tab',
-  templateUrl: './github-tab.template.html'
+    selector: 'github-tab',
+    templateUrl: './github-tab.template.html',
+    standalone: false
 })
 export class GitHubTabComponent implements TabComponent {
   @Input() public workPackage:WorkPackageResource;

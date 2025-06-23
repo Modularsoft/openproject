@@ -45,11 +45,12 @@ import {
 } from 'core-app/shared/components/searchable-project-list/searchable-project-list.service';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: '[op-project-include-list]',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './project-include-list.component.html',
-  styleUrls: ['./project-include-list.component.sass'],
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: '[op-project-include-list]',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './project-include-list.component.html',
+    styleUrls: ['./project-include-list.component.sass'],
+    standalone: false
 })
 export class OpProjectIncludeListComponent {
   @HostBinding('class.spot-list') classNameList = true;

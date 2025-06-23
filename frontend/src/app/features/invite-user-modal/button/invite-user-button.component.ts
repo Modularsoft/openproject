@@ -10,9 +10,10 @@ import { OpInviteUserModalService } from 'core-app/features/invite-user-modal/in
 import { OpAutocompleterComponent } from 'core-app/shared/components/autocompleter/op-autocompleter/op-autocompleter.component';
 
 @Component({
-  selector: 'op-invite-user-button',
-  templateUrl: './invite-user-button.component.html',
-  styleUrls: ['./invite-user-button.component.sass'],
+    selector: 'op-invite-user-button',
+    templateUrl: './invite-user-button.component.html',
+    styleUrls: ['./invite-user-button.component.sass'],
+    standalone: false
 })
 export class InviteUserButtonComponent {
   @Input() projectId:string|null;

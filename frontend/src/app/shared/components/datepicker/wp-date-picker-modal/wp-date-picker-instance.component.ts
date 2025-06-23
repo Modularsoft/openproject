@@ -54,14 +54,15 @@ import _ from 'lodash';
 export type DateMode = 'single'|'range';
 
 @Component({
-  selector: 'op-wp-date-picker-instance',
-  template: `
+    selector: 'op-wp-date-picker-instance',
+    template: `
     <input
       id="flatpickr-input"
       #flatpickrTarget
       hidden>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class OpWpDatePickerInstanceComponent extends UntilDestroyedMixin implements AfterViewInit {
   @Input() public ignoreNonWorkingDays:boolean;

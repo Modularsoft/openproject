@@ -34,9 +34,10 @@ import { ScrollableTabsComponent } from 'core-app/shared/components/tabs/scrolla
 import { TabDefinition } from 'core-app/shared/components/tabs/tab.interface';
 
 @Component({
-  selector: 'opce-global-search-tabs',
-  templateUrl: '../../../shared/components/tabs/scrollable-tabs/scrollable-tabs.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'opce-global-search-tabs',
+    templateUrl: '../../../shared/components/tabs/scrollable-tabs/scrollable-tabs.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 
 export class GlobalSearchTabsComponent extends ScrollableTabsComponent implements OnInit, OnDestroy {

@@ -70,8 +70,9 @@ import {
 } from 'core-app/shared/components/fields/edit/services/hal-resource-editing.service';
 
 @Component({
-  selector: '[wpInlineCreate]',
-  templateUrl: './wp-inline-create.component.html',
+    selector: '[wpInlineCreate]',
+    templateUrl: './wp-inline-create.component.html',
+    standalone: false
 })
 export class WorkPackageInlineCreateComponent extends UntilDestroyedMixin implements OnInit, AfterViewInit {
   @Input() colspan:number;

@@ -29,9 +29,10 @@ interface IReminderSettingsFormValue {
 }
 
 @Component({
-  templateUrl: './reminder-settings-page.component.html',
-  styleUrls: ['./reminder-settings-page.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './reminder-settings-page.component.html',
+    styleUrls: ['./reminder-settings-page.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ReminderSettingsPageComponent extends UntilDestroyedMixin implements OnInit {
   @Input() userId:string;

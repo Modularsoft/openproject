@@ -12,11 +12,12 @@ import { Observable, timer } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 
 @Component({
-  selector: 'op-in-app-notification-relative-time',
-  templateUrl: './in-app-notification-relative-time.component.html',
-  styleUrls: ['./in-app-notification-relative-time.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
+    selector: 'op-in-app-notification-relative-time',
+    templateUrl: './in-app-notification-relative-time.component.html',
+    styleUrls: ['./in-app-notification-relative-time.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class InAppNotificationRelativeTimeComponent implements OnInit {
   @Input() notification:INotification;

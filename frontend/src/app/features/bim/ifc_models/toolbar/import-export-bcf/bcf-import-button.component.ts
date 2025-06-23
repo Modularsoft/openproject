@@ -32,7 +32,7 @@ import { CurrentProjectService } from 'core-app/core/current-project/current-pro
 import { BcfPathHelperService } from 'core-app/features/bim/bcf/helper/bcf-path-helper.service';
 
 @Component({
-  template: `
+    template: `
     <a [title]="text.import_hover"
       (click)="handleClick()"
       class="button import-bcf-button">
@@ -40,7 +40,8 @@ import { BcfPathHelperService } from 'core-app/features/bim/bcf/helper/bcf-path-
       <span class="button--text"> {{text.import}} </span>
     </a>
   `,
-  selector: 'bcf-import-button',
+    selector: 'bcf-import-button',
+    standalone: false
 })
 export class BcfImportButtonComponent {
   public text = {

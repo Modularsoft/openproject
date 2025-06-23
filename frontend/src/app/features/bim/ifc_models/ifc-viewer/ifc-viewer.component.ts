@@ -49,10 +49,11 @@ import {
 import { filter, take } from 'rxjs/operators';
 
 @Component({
-  selector: 'op-ifc-viewer',
-  templateUrl: './ifc-viewer.component.html',
-  styleUrls: ['./ifc-viewer.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-ifc-viewer',
+    templateUrl: './ifc-viewer.component.html',
+    styleUrls: ['./ifc-viewer.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class IFCViewerComponent implements OnInit, OnDestroy, AfterViewInit {
   private viewInitialized$ = new Subject<void>();

@@ -9,14 +9,15 @@ import {
 export const wpTableEntrySelector = 'wp-embedded-table-entry';
 
 @Component({
-  selector: wpTableEntrySelector,
-  hostDirectives: [WorkPackageIsolatedQuerySpaceDirective],
-  template: `
+    selector: wpTableEntrySelector,
+    hostDirectives: [WorkPackageIsolatedQuerySpaceDirective],
+    template: `
       <wp-embedded-table [queryProps]="queryProps"
                          [initialLoadingIndicator]="initialLoadingIndicator"
                          [configuration]="configuration">
       </wp-embedded-table>
   `,
+    standalone: false
 })
 export class WorkPackageEmbeddedTableEntryComponent {
   @Input() public queryProps:unknown;

@@ -56,13 +56,14 @@ import {
 import { TabComponent } from 'core-app/features/work-packages/components/wp-tabs/components/wp-tab-wrapper/tab';
 
 @Component({
-  templateUrl: './wp-split-view.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'op-wp-split-view',
-  providers: [
-    WpSingleViewService,
-    { provide: HalResourceNotificationService, useClass: WorkPackageNotificationService },
-  ],
+    templateUrl: './wp-split-view.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-wp-split-view',
+    providers: [
+        WpSingleViewService,
+        { provide: HalResourceNotificationService, useClass: WorkPackageNotificationService },
+    ],
+    standalone: false
 })
 export class WorkPackageSplitViewComponent extends WorkPackageSingleViewBase implements OnInit {
   hasState:boolean = !!this.$state.current;

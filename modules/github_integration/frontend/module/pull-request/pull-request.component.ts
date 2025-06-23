@@ -40,13 +40,14 @@ import {
 } from 'core-app/features/plugins/linked/openproject-github_integration/state/github-pull-request.model';
 
 @Component({
-  selector: 'op-github-pull-request',
-  templateUrl: './pull-request.component.html',
-  styleUrls: [
-    './pull-request.component.sass',
-    './pr-check.component.sass',
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-github-pull-request',
+    templateUrl: './pull-request.component.html',
+    styleUrls: [
+        './pull-request.component.sass',
+        './pr-check.component.sass',
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 
 export class PullRequestComponent {

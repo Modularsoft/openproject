@@ -65,14 +65,15 @@ export interface ToolbarButtonComponentDefinition extends DynamicComponentDefini
 export type ViewPartitionState = '-split'|'-left-only'|'-right-only';
 
 @Component({
-  templateUrl: './partitioned-query-space-page.component.html',
-  styleUrls: ['./partitioned-query-space-page.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    /** We need to provide the wpNotification service here to get correct save notifications for WP resources */
-    { provide: HalResourceNotificationService, useClass: WorkPackageNotificationService },
-    QueryParamListenerService,
-  ],
+    templateUrl: './partitioned-query-space-page.component.html',
+    styleUrls: ['./partitioned-query-space-page.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        /** We need to provide the wpNotification service here to get correct save notifications for WP resources */
+        { provide: HalResourceNotificationService, useClass: WorkPackageNotificationService },
+        QueryParamListenerService,
+    ],
+    standalone: false
 })
 export class PartitionedQuerySpacePageComponent extends WorkPackagesViewBase implements OnInit, OnDestroy {
   @InjectField() I18n!:I18nService;

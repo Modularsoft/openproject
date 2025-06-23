@@ -46,11 +46,12 @@ import idFromLink from 'core-app/features/hal/helpers/id-from-link';
 import { WorkPackageRelationsService } from 'core-app/features/work-packages/components/wp-relations/wp-relations.service';
 
 @Component({
-  selector: 'wp-children-query',
-  templateUrl: '../wp-relation-query.html',
-  providers: [
-    { provide: WorkPackageInlineCreateService, useClass: WpChildrenInlineCreateService },
-  ],
+    selector: 'wp-children-query',
+    templateUrl: '../wp-relation-query.html',
+    providers: [
+        { provide: WorkPackageInlineCreateService, useClass: WpChildrenInlineCreateService },
+    ],
+    standalone: false
 })
 export class WorkPackageChildrenQueryComponent extends WorkPackageRelationQueryBase implements OnInit {
   @Input() public workPackage:WorkPackageResource;

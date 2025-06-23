@@ -3,10 +3,11 @@ import { FieldWrapper } from '@ngx-formly/core';
 import { DynamicFormComponent } from 'core-app/shared/components/dynamic-forms/components/dynamic-form/dynamic-form.component';
 
 @Component({
-  selector: 'op-dynamic-field-wrapper',
-  templateUrl: './dynamic-field-wrapper.component.html',
-  styleUrls: ['./dynamic-field-wrapper.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-dynamic-field-wrapper',
+    templateUrl: './dynamic-field-wrapper.component.html',
+    styleUrls: ['./dynamic-field-wrapper.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class DynamicFieldWrapperComponent extends FieldWrapper {
   constructor(

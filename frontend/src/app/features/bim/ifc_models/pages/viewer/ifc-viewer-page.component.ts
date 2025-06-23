@@ -79,18 +79,19 @@ import {
 } from 'core-app/features/work-packages/components/wp-buttons/wp-settings-button/wp-settings-button.component';
 
 @Component({
-  templateUrl: '../../../../work-packages/routing/partitioned-query-space-page/partitioned-query-space-page.component.html',
-  styleUrls: [
-    '../../../../work-packages/routing/partitioned-query-space-page/partitioned-query-space-page.component.sass',
-    './styles/generic.sass',
-  ],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    BcfViewService,
-    QueryParamListenerService,
-  ],
-  selector: 'op-ifc-viewer-page',
+    templateUrl: '../../../../work-packages/routing/partitioned-query-space-page/partitioned-query-space-page.component.html',
+    styleUrls: [
+        '../../../../work-packages/routing/partitioned-query-space-page/partitioned-query-space-page.component.sass',
+        './styles/generic.sass',
+    ],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        BcfViewService,
+        QueryParamListenerService,
+    ],
+    selector: 'op-ifc-viewer-page',
+    standalone: false
 })
 export class IFCViewerPageComponent extends PartitionedQuerySpacePageComponent implements UntilDestroyedMixin, OnInit {
   text = {

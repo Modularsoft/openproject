@@ -29,7 +29,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  template: `
+    template: `
     <button class="button"
             id="wp-fold-toggle-button"
             wpGroupToggleDropdown>
@@ -38,8 +38,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
       <op-icon icon-classes="button--icon icon-small icon-pulldown"></op-icon>
     </button>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'wp-fold-toggle-view-button',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'wp-fold-toggle-view-button',
+    standalone: false
 })
 export class WorkPackageFoldToggleButtonComponent {
 }

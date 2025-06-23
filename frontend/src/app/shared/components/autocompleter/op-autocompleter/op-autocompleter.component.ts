@@ -72,18 +72,19 @@ export interface IAutocompleterTemplateComponent {
 }
 
 @Component({
-  selector: 'op-autocompleter',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  templateUrl: './op-autocompleter.component.html',
-  styleUrls: ['./op-autocompleter.component.sass'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => OpAutocompleterComponent),
-      multi: true,
-    },
-  ],
+    selector: 'op-autocompleter',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    templateUrl: './op-autocompleter.component.html',
+    styleUrls: ['./op-autocompleter.component.sass'],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => OpAutocompleterComponent),
+            multi: true,
+        },
+    ],
+    standalone: false
 })
 // It is component that you can use whenever you need an autocompleter
 // it has all inputs and outputs of ng-select

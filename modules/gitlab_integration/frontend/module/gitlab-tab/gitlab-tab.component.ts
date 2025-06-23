@@ -34,11 +34,12 @@ import { I18nService } from "core-app/core/i18n/i18n.service";
 import { PathHelperService } from "core-app/core/path-helper/path-helper.service";
 
 @Component({
-  selector: 'gitlab-tab',
-  templateUrl: './gitlab-tab.template.html',
-  styleUrls: [
-    './gitlab-tab.component.sass',
-  ]
+    selector: 'gitlab-tab',
+    templateUrl: './gitlab-tab.template.html',
+    styleUrls: [
+        './gitlab-tab.component.sass',
+    ],
+    standalone: false
 })
 export class GitlabTabComponent implements TabComponent {
   @Input() public workPackage:WorkPackageResource;

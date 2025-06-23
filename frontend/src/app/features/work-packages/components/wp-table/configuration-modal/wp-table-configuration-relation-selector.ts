@@ -13,8 +13,9 @@ import { HalResource } from 'core-app/features/hal/resources/hal-resource';
 import { SchemaCacheService } from 'core-app/core/schemas/schema-cache.service';
 
 @Component({
-  templateUrl: './wp-table-configuration-relation-selector.html',
-  selector: 'wp-table-configuration-relation-selector',
+    templateUrl: './wp-table-configuration-relation-selector.html',
+    selector: 'wp-table-configuration-relation-selector',
+    standalone: false
 })
 export class WpTableConfigurationRelationSelectorComponent implements OnInit {
   private relationFilterIds:string[] = [

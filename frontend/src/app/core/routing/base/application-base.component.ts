@@ -31,12 +31,13 @@ import { Component } from '@angular/core';
 export const appBaseSelector = 'openproject-base';
 
 @Component({
-  selector: appBaseSelector,
-  template: `
+    selector: appBaseSelector,
+    template: `
     <div class="openproject-base--ui-view">
       <ui-view></ui-view>
     </div>
   `,
+    standalone: false
 })
 export class ApplicationBaseComponent {
 }

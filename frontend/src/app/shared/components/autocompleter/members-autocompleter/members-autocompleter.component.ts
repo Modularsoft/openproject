@@ -10,7 +10,8 @@ import {
 import { URLParamsEncoder } from 'core-app/features/hal/services/url-params-encoder';
 
 @Component({
-  templateUrl: '../op-autocompleter/op-autocompleter.component.html',
+    templateUrl: '../op-autocompleter/op-autocompleter.component.html',
+    standalone: false
 })
 export class MembersAutocompleterComponent extends UserAutocompleterComponent {
   @InjectField() pathHelper:PathHelperService;

@@ -46,9 +46,10 @@ import { I18nService } from 'core-app/core/i18n/i18n.service';
 import { IToast, ToastService, ToastType } from 'core-app/shared/components/toaster/toast.service';
 
 @Component({
-  templateUrl: './toast.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'op-toast',
+    templateUrl: './toast.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-toast',
+    standalone: false
 })
 export class ToastComponent implements OnInit {
   @Input() public toast:IToast;

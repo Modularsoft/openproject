@@ -21,10 +21,11 @@ import { ConfigurationService } from 'core-app/core/config/configuration.service
 import { CurrentProjectService } from 'core-app/core/current-project/current-project.service';
 
 @Component({
-  selector: '[op-header-project-select-list]',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './header-project-select-list.component.html',
-  styleUrls: ['./header-project-select-list.component.sass'],
+    selector: '[op-header-project-select-list]',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './header-project-select-list.component.html',
+    styleUrls: ['./header-project-select-list.component.sass'],
+    standalone: false
 })
 export class OpHeaderProjectSelectListComponent implements OnInit, OnChanges {
   @HostBinding('class.spot-list') classNameList = true;

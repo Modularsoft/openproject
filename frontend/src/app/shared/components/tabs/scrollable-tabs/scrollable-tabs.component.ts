@@ -25,10 +25,11 @@ import { UntilDestroyedMixin } from 'core-app/shared/helpers/angular/until-destr
 import { InjectField } from 'core-app/shared/helpers/angular/inject-field.decorator';
 
 @Component({
-  templateUrl: 'scrollable-tabs.component.html',
-  selector: 'op-scrollable-tabs',
-  styleUrls: ['./scrollable-tabs.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: 'scrollable-tabs.component.html',
+    selector: 'op-scrollable-tabs',
+    styleUrls: ['./scrollable-tabs.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 
 export class ScrollableTabsComponent extends UntilDestroyedMixin implements AfterViewInit, OnChanges {

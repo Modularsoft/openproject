@@ -76,11 +76,12 @@ export interface WorkPackageFocusContext {
 }
 
 @Component({
-  templateUrl: './wp-table.component.html',
-  styleUrls: ['./wp-table.component.sass'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'wp-table',
+    templateUrl: './wp-table.component.html',
+    styleUrls: ['./wp-table.component.sass'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'wp-table',
+    standalone: false
 })
 export class WorkPackagesTableComponent extends UntilDestroyedMixin implements OnInit, TableEventComponent {
   @Input() projectIdentifier:string;

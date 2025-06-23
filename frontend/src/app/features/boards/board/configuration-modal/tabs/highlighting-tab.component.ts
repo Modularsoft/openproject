@@ -7,7 +7,8 @@ import { Board } from 'core-app/features/boards/board/board';
 import { CardHighlightingMode } from 'core-app/features/work-packages/components/wp-fast-table/builders/highlighting/highlighting-mode.const';
 
 @Component({
-  templateUrl: './highlighting-tab.component.html',
+    templateUrl: './highlighting-tab.component.html',
+    standalone: false
 })
 export class BoardHighlightingTabComponent implements TabComponent {
   // Highlighting mode

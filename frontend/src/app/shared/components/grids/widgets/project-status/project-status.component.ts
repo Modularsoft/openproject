@@ -46,13 +46,14 @@ import { HalResourceEditingService } from 'core-app/shared/components/fields/edi
 import { ApiV3Service } from 'core-app/core/apiv3/api-v3.service';
 
 @Component({
-  templateUrl: './project-status.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    WorkPackageViewHighlightingService,
-    IsolatedQuerySpace,
-    HalResourceEditingService,
-  ],
+    templateUrl: './project-status.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        WorkPackageViewHighlightingService,
+        IsolatedQuerySpace,
+        HalResourceEditingService,
+    ],
+    standalone: false
 })
 export class WidgetProjectStatusComponent extends AbstractWidgetComponent implements OnInit {
   @ViewChild('contentContainer', { static: true }) readonly contentContainer:ElementRef;

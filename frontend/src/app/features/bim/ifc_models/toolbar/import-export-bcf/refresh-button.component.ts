@@ -31,15 +31,16 @@ import { I18nService } from 'core-app/core/i18n/i18n.service';
 import { StateService } from '@uirouter/core';
 
 @Component({
-  template: `
+    template: `
     <a [title]="text.refresh_hover"
        class="button refresh-button"
        (click)="refresh()">
       <op-icon icon-classes="button--icon icon-workflow"></op-icon>
     </a>
   `,
-  selector: 'op-refresh-button',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-refresh-button',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 
 export class RefreshButtonComponent {

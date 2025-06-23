@@ -52,11 +52,12 @@ import { UntilDestroyedMixin } from 'core-app/shared/helpers/angular/until-destr
 import { filter } from 'rxjs/operators';
 
 @Component({
-  templateUrl: './baseline-legends.component.html',
-  styleUrls: ['./baseline-legends.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'op-baseline-legends',
-  encapsulation: ViewEncapsulation.None,
+    templateUrl: './baseline-legends.component.html',
+    styleUrls: ['./baseline-legends.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-baseline-legends',
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class OpBaselineLegendsComponent extends UntilDestroyedMixin implements OnInit {
   @HostBinding('class.op-baseline-legends') className = true;

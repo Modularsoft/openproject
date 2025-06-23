@@ -33,13 +33,14 @@ import { I18nService } from 'core-app/core/i18n/i18n.service';
 import {IGitlabMergeRequestResource} from 'core-app/features/plugins/linked/openproject-gitlab_integration/typings';
 
 @Component({
-  selector: 'gitlab-merge-request',
-  templateUrl: './merge-request.component.html',
-  styleUrls: [
-    './merge-request.component.sass',
-    './mr-pipeline.component.sass',
-  ],
-  host: { class: 'op-merge-request' }
+    selector: 'gitlab-merge-request',
+    templateUrl: './merge-request.component.html',
+    styleUrls: [
+        './merge-request.component.sass',
+        './mr-pipeline.component.sass',
+    ],
+    host: { class: 'op-merge-request' },
+    standalone: false
 })
 
 export class MergeRequestComponent {

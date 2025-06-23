@@ -53,7 +53,8 @@ import { IAPIFilter } from 'core-app/shared/components/autocompleter/op-autocomp
 import { FilterOperator } from 'core-app/shared/helpers/api-v3/api-v3-filter-builder';
 
 @Component({
-  templateUrl: './wp-relation-inline-add-existing.component.html',
+    templateUrl: './wp-relation-inline-add-existing.component.html',
+    standalone: false
 })
 export class WpRelationInlineAddExistingComponent {
   public selectedWpId:string;

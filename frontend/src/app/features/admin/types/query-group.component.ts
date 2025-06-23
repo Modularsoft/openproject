@@ -5,9 +5,10 @@ import { I18nService } from 'core-app/core/i18n/i18n.service';
 import { TypeGroup } from 'core-app/features/admin/types/type-form-configuration.component';
 
 @Component({
-  selector: 'op-type-form-query-group',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './query-group.component.html',
+    selector: 'op-type-form-query-group',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './query-group.component.html',
+    standalone: false
 })
 export class TypeFormQueryGroupComponent {
   text = {

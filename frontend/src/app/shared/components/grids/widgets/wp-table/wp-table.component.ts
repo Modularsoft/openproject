@@ -26,11 +26,12 @@ import {
 } from 'core-app/features/work-packages/directives/query-space/wp-isolated-query-space.directive';
 
 @Component({
-  selector: 'widget-wp-table',
-  templateUrl: './wp-table.component.html',
-  styleUrls: ['./wp-table.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  hostDirectives: [WorkPackageIsolatedQuerySpaceDirective],
+    selector: 'widget-wp-table',
+    templateUrl: './wp-table.component.html',
+    styleUrls: ['./wp-table.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    hostDirectives: [WorkPackageIsolatedQuerySpaceDirective],
+    standalone: false
 })
 export class WidgetWpTableComponent extends AbstractWidgetComponent implements OnInit {
   public queryId:string|null;

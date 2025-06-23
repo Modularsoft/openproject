@@ -34,8 +34,9 @@ import { UntilDestroyedMixin } from 'core-app/shared/helpers/angular/until-destr
 import { ApiV3Service } from 'core-app/core/apiv3/api-v3.service';
 
 @Component({
-  selector: 'wp-subject',
-  templateUrl: './wp-subject.html',
+    selector: 'wp-subject',
+    templateUrl: './wp-subject.html',
+    standalone: false
 })
 export class WorkPackageSubjectComponent extends UntilDestroyedMixin implements OnInit {
   @Input('workPackage') workPackage:WorkPackageResource;

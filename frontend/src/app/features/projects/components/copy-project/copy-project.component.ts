@@ -40,8 +40,9 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { JobStatusModalService } from 'core-app/features/job-status/job-status-modal.service';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './copy-project.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './copy-project.component.html',
+    standalone: false
 })
 export class CopyProjectComponent extends UntilDestroyedMixin implements OnInit {
   dynamicFieldsSettingsPipe = this.fieldSettingsPipe.bind(this);

@@ -34,9 +34,10 @@ import {
 } from 'core-app/features/work-packages/components/wp-single-view-tabs/activity-panel/activity-base.controller';
 
 @Component({
-  templateUrl: './activity-tab.html',
-  selector: 'wp-activity-tab',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './activity-tab.html',
+    selector: 'wp-activity-tab',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class WorkPackageActivityTabComponent extends ActivityPanelBaseController {
   @Input() public workPackage:WorkPackageResource;

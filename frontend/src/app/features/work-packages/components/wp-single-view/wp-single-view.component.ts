@@ -93,9 +93,10 @@ export interface ResourceContextChange {
 export const overflowingContainerAttribute = 'overflowingIdentifier';
 
 @Component({
-  templateUrl: './wp-single-view.component.html',
-  selector: 'wp-single-view',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './wp-single-view.component.html',
+    selector: 'wp-single-view',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class WorkPackageSingleViewComponent extends UntilDestroyedMixin implements OnInit {
   @Input() public workPackage:WorkPackageResource;

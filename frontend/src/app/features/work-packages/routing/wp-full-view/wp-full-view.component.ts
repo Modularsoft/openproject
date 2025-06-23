@@ -47,15 +47,16 @@ import { WorkPackageNotificationService } from 'core-app/features/work-packages/
 import { Observable, of } from 'rxjs';
 
 @Component({
-  templateUrl: './wp-full-view.html',
-  selector: 'wp-full-view-entry',
-  // Required class to support inner scrolling on page
-  host: { class: 'work-packages-page--ui-view' },
-  providers: [
-    WpSingleViewService,
-    { provide: HalResourceNotificationService, useExisting: WorkPackageNotificationService },
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './wp-full-view.html',
+    selector: 'wp-full-view-entry',
+    // Required class to support inner scrolling on page
+    host: { class: 'work-packages-page--ui-view' },
+    providers: [
+        WpSingleViewService,
+        { provide: HalResourceNotificationService, useExisting: WorkPackageNotificationService },
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class WorkPackagesFullViewComponent extends WorkPackageSingleViewBase implements OnInit {
   // Watcher properties

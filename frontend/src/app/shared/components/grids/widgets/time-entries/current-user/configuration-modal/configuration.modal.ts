@@ -11,8 +11,9 @@ import { WorkPackageNotificationService } from 'core-app/features/work-packages/
 import { TimeEntriesCurrentUserConfigurationModalService } from 'core-app/shared/components/grids/widgets/time-entries/current-user/configuration-modal/services/configuration-modal/configuration-modal.service';
 
 @Component({
-  templateUrl: './configuration.modal.html',
-  providers: [TimeEntriesCurrentUserConfigurationModalService],
+    templateUrl: './configuration.modal.html',
+    providers: [TimeEntriesCurrentUserConfigurationModalService],
+    standalone: false
 })
 export class TimeEntriesCurrentUserConfigurationModalComponent extends OpModalComponent implements OnInit {
   public text = {

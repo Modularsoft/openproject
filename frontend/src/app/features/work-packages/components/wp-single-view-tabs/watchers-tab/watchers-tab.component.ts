@@ -45,9 +45,10 @@ import { ApiV3Service } from 'core-app/core/apiv3/api-v3.service';
 import { TurboRequestsService } from 'core-app/core/turbo/turbo-requests.service';
 
 @Component({
-  templateUrl: './watchers-tab.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'wp-watchers-tab',
+    templateUrl: './watchers-tab.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'wp-watchers-tab',
+    standalone: false
 })
 export class WorkPackageWatchersTabComponent extends UntilDestroyedMixin implements OnInit {
   @Input() public workPackage:WorkPackageResource;

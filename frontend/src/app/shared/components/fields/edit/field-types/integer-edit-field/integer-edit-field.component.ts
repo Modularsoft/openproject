@@ -29,7 +29,7 @@ import { Component } from '@angular/core';
 import { EditFieldComponent } from 'core-app/shared/components/fields/edit/edit-field.component';
 
 @Component({
-  template: `
+    template: `
     <input type="number"
            class="inline-edit--field op-input"
            [attr.aria-required]="required"
@@ -40,6 +40,7 @@ import { EditFieldComponent } from 'core-app/shared/components/fields/edit/edit-
            (keydown)="handler.handleUserKeydown($event)"
            [id]="handler.htmlId" />
   `,
+    standalone: false
 })
 export class IntegerEditFieldComponent extends EditFieldComponent {
   public locale = I18n.locale;

@@ -33,12 +33,13 @@ import { I18nService } from 'core-app/core/i18n/i18n.service';
 import {IGitlabIssueResource} from 'core-app/features/plugins/linked/openproject-gitlab_integration/typings';
 
 @Component({
-  selector: 'gitlab-issue',
-  templateUrl: './issue.component.html',
-  styleUrls: [
-    './issue.component.sass',
-  ],
-  host: { class: 'op-issue' }
+    selector: 'gitlab-issue',
+    templateUrl: './issue.component.html',
+    styleUrls: [
+        './issue.component.sass',
+    ],
+    host: { class: 'op-issue' },
+    standalone: false
 })
 
 export class IssueComponent {

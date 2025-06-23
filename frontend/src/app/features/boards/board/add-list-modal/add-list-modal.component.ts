@@ -51,7 +51,8 @@ import { OpAutocompleterComponent } from 'core-app/shared/components/autocomplet
 import { HalResource } from 'core-app/features/hal/resources/hal-resource';
 
 @Component({
-  templateUrl: './add-list-modal.html',
+    templateUrl: './add-list-modal.html',
+    standalone: false
 })
 export class AddListModalComponent extends OpModalComponent implements OnInit {
   @ViewChild(OpAutocompleterComponent, { static: true }) public ngSelectComponent:OpAutocompleterComponent;

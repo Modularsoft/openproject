@@ -66,13 +66,14 @@ import { recursiveSort } from './recursive-sort';
 import { calculatePositions } from 'core-app/shared/components/project-include/calculate-positions';
 
 @Component({
-  selector: 'op-project-include',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './project-include.component.html',
-  styleUrls: ['./project-include.component.sass'],
-  providers: [
-    SearchableProjectListService,
-  ],
+    selector: 'op-project-include',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './project-include.component.html',
+    styleUrls: ['./project-include.component.sass'],
+    providers: [
+        SearchableProjectListService,
+    ],
+    standalone: false
 })
 export class OpProjectIncludeComponent extends UntilDestroyedMixin implements OnInit {
   @HostBinding('class.op-project-include') className = true;

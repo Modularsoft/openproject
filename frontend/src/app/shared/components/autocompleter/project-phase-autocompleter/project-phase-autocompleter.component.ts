@@ -37,8 +37,9 @@ import { InjectField } from 'core-app/shared/helpers/angular/inject-field.decora
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
-  templateUrl: './project-phase-autocompleter.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './project-phase-autocompleter.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 // It would have been cleaner to extend the OpAutocompleter component as there is no intention to create a
 // Project phase here. But the OpAutocompleter does not satisfy the interface the template of the

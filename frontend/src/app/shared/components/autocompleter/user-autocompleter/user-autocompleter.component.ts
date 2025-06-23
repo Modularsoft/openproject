@@ -68,21 +68,22 @@ export interface IUserAutocompleteItem {
 }
 
 @Component({
-  templateUrl: '../op-autocompleter/op-autocompleter.component.html',
-  selector: usersAutocompleterSelector,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => UserAutocompleterComponent),
-      multi: true,
-    },
-    // Provide a new version of the modal invite service,
-    // as otherwise the close event will be shared across all instances
-    OpInviteUserModalService,
-  ],
-  styleUrls: ['./user-autocompleter.component.sass'],
-  encapsulation: ViewEncapsulation.None,
+    templateUrl: '../op-autocompleter/op-autocompleter.component.html',
+    selector: usersAutocompleterSelector,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => UserAutocompleterComponent),
+            multi: true,
+        },
+        // Provide a new version of the modal invite service,
+        // as otherwise the close event will be shared across all instances
+        OpInviteUserModalService,
+    ],
+    styleUrls: ['./user-autocompleter.component.sass'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class UserAutocompleterComponent extends OpAutocompleterComponent<IUserAutocompleteItem> implements OnInit, ControlValueAccessor {
   @Input() public inviteUserToProject:string|undefined;

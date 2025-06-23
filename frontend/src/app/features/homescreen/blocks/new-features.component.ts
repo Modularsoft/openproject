@@ -45,7 +45,7 @@ const OpReleaseURL = 'https://www.openproject.org/docs/release-notes';
 const featureTeaserImage = `${OpVersionImage}_features.svg`;
 
 @Component({
-  template: `
+    template: `
     <div class="op-new-features">
       <p class="widget-box--additional-info">
         {{ text.descriptionNewFeatures }}
@@ -61,9 +61,10 @@ const featureTeaserImage = `${OpVersionImage}_features.svg`;
       <a [href]="teaserWebsiteUrl" target="_blank">{{ text.learnAbout }}</a>
     </div>
   `,
-  selector: 'opce-homescreen-new-features-block',
-  styleUrls: ['./new-features.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'opce-homescreen-new-features-block',
+    styleUrls: ['./new-features.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 
 /**

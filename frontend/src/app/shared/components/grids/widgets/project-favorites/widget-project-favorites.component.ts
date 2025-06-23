@@ -19,10 +19,11 @@ import { ApiV3FilterBuilder } from 'core-app/shared/helpers/api-v3/api-v3-filter
 import { Observable } from 'rxjs';
 
 @Component({
-  templateUrl: './widget-project-favorites.component.html',
-  styleUrls: ['./widget-project-favorites.component.sass'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './widget-project-favorites.component.html',
+    styleUrls: ['./widget-project-favorites.component.sass'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class WidgetProjectFavoritesComponent extends AbstractWidgetComponent implements OnInit {
   @HostBinding('class.op-widget-project-favorites') className = true;

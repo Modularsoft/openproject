@@ -58,16 +58,17 @@ import { WorkPackageViewBaselineService } from '../wp-view-base/view-services/wp
 import { combineLatest } from 'rxjs';
 
 @Component({
-  selector: 'wp-list-view',
-  templateUrl: './wp-list-view.component.html',
-  styleUrls: ['./wp-list-view.component.sass'],
-  host: { class: 'op-wp-list-view work-packages-split-view--tabletimeline-side' },
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    { provide: HalResourceNotificationService, useClass: WorkPackageNotificationService },
-    DragAndDropService,
-    CausedUpdatesService,
-  ],
+    selector: 'wp-list-view',
+    templateUrl: './wp-list-view.component.html',
+    styleUrls: ['./wp-list-view.component.sass'],
+    host: { class: 'op-wp-list-view work-packages-split-view--tabletimeline-side' },
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        { provide: HalResourceNotificationService, useClass: WorkPackageNotificationService },
+        DragAndDropService,
+        CausedUpdatesService,
+    ],
+    standalone: false
 })
 export class WorkPackageListViewComponent extends UntilDestroyedMixin implements OnInit {
   text = {

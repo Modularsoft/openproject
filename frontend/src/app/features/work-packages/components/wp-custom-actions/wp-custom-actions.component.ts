@@ -37,9 +37,10 @@ import { trackByHref } from 'core-app/shared/helpers/angular/tracking-functions'
 import { BannersService } from 'core-app/core/enterprise/banners.service';
 
 @Component({
-  selector: 'wp-custom-actions',
-  templateUrl: './wp-custom-actions.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'wp-custom-actions',
+    templateUrl: './wp-custom-actions.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class WpCustomActionsComponent extends UntilDestroyedMixin implements OnInit {
   @Input() workPackage:WorkPackageResource;

@@ -37,10 +37,11 @@ import { AvatarUploadFile, AvatarUploadService } from '../avatar-upload.service'
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'opce-avatar-upload-form',
-  templateUrl: './avatar-upload-form.html',
-  providers: [{ provide: OpUploadService, useClass: AvatarUploadService }],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'opce-avatar-upload-form',
+    templateUrl: './avatar-upload-form.html',
+    providers: [{ provide: OpUploadService, useClass: AvatarUploadService }],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AvatarUploadFormComponent implements OnInit {
   public form:any;

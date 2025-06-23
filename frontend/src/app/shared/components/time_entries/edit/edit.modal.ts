@@ -8,8 +8,9 @@ import { HalResource } from 'core-app/features/hal/resources/hal-resource';
 import { TimeEntryBaseModal } from 'core-app/shared/components/time_entries/shared/modal/base.modal';
 
 @Component({
-  templateUrl: '../shared/modal/base.modal.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: '../shared/modal/base.modal.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class TimeEntryEditModalComponent extends TimeEntryBaseModal implements OnInit {
   public modifiedEntry:TimeEntryResource;

@@ -13,7 +13,8 @@ import { TimelineLabels, TimelineZoomLevel } from 'core-app/features/hal/resourc
 import { StateService } from '@uirouter/angular';
 
 @Component({
-  templateUrl: './timelines-tab.component.html',
+    templateUrl: './timelines-tab.component.html',
+    standalone: false
 })
 export class WpTableConfigurationTimelinesTabComponent implements TabComponent, OnInit {
   public timelineVisible = false;

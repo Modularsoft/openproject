@@ -48,9 +48,10 @@ import { ApiV3Service } from 'core-app/core/apiv3/api-v3.service';
 import { WorkPackageViewFiltersService } from 'core-app/features/work-packages/routing/wp-view-base/view-services/wp-view-filters.service';
 
 @Component({
-  templateUrl: './add-assignee.component.html',
-  selector: 'op-tp-add-assignee',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './add-assignee.component.html',
+    selector: 'op-tp-add-assignee',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AddAssigneeComponent {
   @Output() public selectAssignee = new EventEmitter<HalResource>();

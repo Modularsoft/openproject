@@ -51,13 +51,14 @@ import { DayElement } from 'flatpickr/dist/types/instance';
 import { DeviceService } from 'core-app/core/browser/device.service';
 
 @Component({
-  selector: 'op-datepicker-sheet',
-  templateUrl: './date-picker-sheet.component.html',
-  styleUrls: [
-    './date-picker-sheet.component.sass',
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
+    selector: 'op-datepicker-sheet',
+    templateUrl: './date-picker-sheet.component.html',
+    styleUrls: [
+        './date-picker-sheet.component.sass',
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class OpDatePickerSheetComponent implements AfterViewInit, OnChanges {
   @HostBinding('class.op-datepicker-sheet') className = true;

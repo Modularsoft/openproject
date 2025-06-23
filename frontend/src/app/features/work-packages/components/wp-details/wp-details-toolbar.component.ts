@@ -38,9 +38,10 @@ import {
 import { Observable, of } from 'rxjs';
 
 @Component({
-  selector: 'wp-details-toolbar',
-  templateUrl: './wp-details-toolbar.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'wp-details-toolbar',
+    templateUrl: './wp-details-toolbar.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class WorkPackageSplitViewToolbarComponent implements OnInit {
   @Input() workPackage:WorkPackageResource;

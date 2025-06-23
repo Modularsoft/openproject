@@ -50,12 +50,13 @@ import {
 import { PathHelperService } from 'core-app/core/path-helper/path-helper.service';
 
 @Component({
-  templateUrl: './work-package-quickinfo-macro.html',
-  styleUrls: ['./work-package-quickinfo-macro.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    HalResourceEditingService,
-  ],
+    templateUrl: './work-package-quickinfo-macro.html',
+    styleUrls: ['./work-package-quickinfo-macro.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        HalResourceEditingService,
+    ],
+    standalone: false
 })
 export class WorkPackageQuickinfoMacroComponent {
   // Whether the value could not be loaded

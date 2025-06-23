@@ -41,9 +41,10 @@ import { PaginationInstance } from 'core-app/shared/components/table-pagination/
 import { PaginationService } from 'core-app/shared/components/table-pagination/pagination-service';
 
 @Component({
-  selector: '[tablePagination]',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './table-pagination.component.html',
+    selector: '[tablePagination]',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './table-pagination.component.html',
+    standalone: false
 })
 export class TablePaginationComponent extends UntilDestroyedMixin implements OnInit {
   @Input() totalEntries:string;

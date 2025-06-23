@@ -5,11 +5,12 @@ import { INotification } from 'core-app/core/state/in-app-notifications/in-app-n
 import { PrincipalLike } from 'core-app/shared/components/principal/principal-types';
 
 @Component({
-  selector: 'op-in-app-notification-actors-line',
-  templateUrl: './in-app-notification-actors-line.component.html',
-  styleUrls: ['./in-app-notification-actors-line.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
+    selector: 'op-in-app-notification-actors-line',
+    templateUrl: './in-app-notification-actors-line.component.html',
+    styleUrls: ['./in-app-notification-actors-line.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class InAppNotificationActorsLineComponent implements OnInit {
   @HostBinding('class.op-ian-actors') className = true;

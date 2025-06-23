@@ -30,8 +30,9 @@ import { WorkPackageResource } from 'core-app/features/hal/resources/work-packag
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'wp-type-status',
-  templateUrl: './wp-type-status.html',
+    selector: 'wp-type-status',
+    templateUrl: './wp-type-status.html',
+    standalone: false
 })
 export class WorkPackageTypeStatusComponent {
   @Input('workPackage') workPackage:WorkPackageResource;

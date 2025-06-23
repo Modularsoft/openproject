@@ -5,11 +5,12 @@ import { HalResource } from 'core-app/features/hal/resources/hal-resource';
 import { TimeEntryBaseModal } from '../shared/modal/base.modal';
 
 @Component({
-  templateUrl: '../shared/modal/base.modal.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    HalResourceEditingService,
-  ],
+    templateUrl: '../shared/modal/base.modal.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        HalResourceEditingService,
+    ],
+    standalone: false
 })
 export class TimeEntryCreateModalComponent extends TimeEntryBaseModal {
   public createdEntry:TimeEntryResource;

@@ -42,7 +42,8 @@ import {
 import { TypeResource } from 'core-app/features/hal/resources/type-resource';
 
 @Directive({
-  selector: '[opTypesCreateDropdown]',
+    selector: '[opTypesCreateDropdown]',
+    standalone: false
 })
 export class OpTypesContextMenuDirective extends OpContextMenuTrigger {
   @Input('projectIdentifier') public projectIdentifier:string|null|undefined;

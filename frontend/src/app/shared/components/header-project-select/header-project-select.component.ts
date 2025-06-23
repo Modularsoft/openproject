@@ -48,14 +48,15 @@ import { ConfigurationService } from 'core-app/core/config/configuration.service
 
 
 @Component({
-  selector: 'opce-header-project-select',
-  templateUrl: './header-project-select.component.html',
-  styleUrls: ['./header-project-select.component.sass'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    SearchableProjectListService,
-  ],
+    selector: 'opce-header-project-select',
+    templateUrl: './header-project-select.component.html',
+    styleUrls: ['./header-project-select.component.sass'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        SearchableProjectListService,
+    ],
+    standalone: false
 })
 export class OpHeaderProjectSelectComponent extends UntilDestroyedMixin implements OnInit {
   @HostBinding('class.op-header-project-select') className = true;

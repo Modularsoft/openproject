@@ -20,9 +20,10 @@ import { Observable } from 'rxjs';
 const DISPLAYED_MEMBERS_LIMIT = 100;
 
 @Component({
-  templateUrl: './members.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./members.component.sass'],
+    templateUrl: './members.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    styleUrls: ['./members.component.sass'],
+    standalone: false
 })
 export class WidgetMembersComponent extends AbstractWidgetComponent implements OnInit {
   public text = {

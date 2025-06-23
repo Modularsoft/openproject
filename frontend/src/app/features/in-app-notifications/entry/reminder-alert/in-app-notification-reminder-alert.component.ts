@@ -10,11 +10,12 @@ import { I18nService } from 'core-app/core/i18n/i18n.service';
 import { IInAppNotificationDetailsResource, INotification } from 'core-app/core/state/in-app-notifications/in-app-notification.model';
 
 @Component({
-  selector: 'op-in-app-notification-reminder-alert',
-  templateUrl: './in-app-notification-reminder-alert.component.html',
-  styleUrls: ['./in-app-notification-reminder-alert.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
+    selector: 'op-in-app-notification-reminder-alert',
+    templateUrl: './in-app-notification-reminder-alert.component.html',
+    styleUrls: ['./in-app-notification-reminder-alert.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class InAppNotificationReminderAlertComponent implements OnInit {
   @Input() aggregatedNotifications:INotification[];

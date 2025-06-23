@@ -40,8 +40,9 @@ import { OpModalComponent } from 'core-app/shared/components/modal/modal.compone
 import { OpModalLocalsToken } from 'core-app/shared/components/modal/modal.service';
 
 @Component({
-  templateUrl: 'upload-conflict-modal.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: 'upload-conflict-modal.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class UploadConflictModalComponent extends OpModalComponent {
   public overwrite:boolean|null = null;

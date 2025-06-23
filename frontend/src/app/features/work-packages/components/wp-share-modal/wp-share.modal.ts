@@ -17,9 +17,10 @@ import { ActionsService } from 'core-app/core/state/actions/actions.service';
 import { shareModalUpdated } from 'core-app/features/work-packages/components/wp-share-modal/sharing.actions';
 
 @Component({
-  templateUrl: './wp-share.modal.html',
-  styleUrls: ['./wp-share.modal.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './wp-share.modal.html',
+    styleUrls: ['./wp-share.modal.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class WorkPackageShareModalComponent extends OpModalComponent implements OnInit {
   @ViewChild('frameElement') frameElement:ElementRef<HTMLIFrameElement>|undefined;

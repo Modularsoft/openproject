@@ -64,20 +64,21 @@ export const rangeSeparator = '-';
 export const opBasicRangeDatePickerSelector = 'op-basic-range-date-picker';
 
 @Component({
-  selector: opBasicRangeDatePickerSelector,
-  templateUrl: './basic-range-date-picker.component.html',
-  styleUrls: [
-    './basic-range-date-picker.component.sass',
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => OpBasicRangeDatePickerComponent),
-      multi: true,
-    },
-  ],
+    selector: opBasicRangeDatePickerSelector,
+    templateUrl: './basic-range-date-picker.component.html',
+    styleUrls: [
+        './basic-range-date-picker.component.sass',
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => OpBasicRangeDatePickerComponent),
+            multi: true,
+        },
+    ],
+    standalone: false
 })
 export class OpBasicRangeDatePickerComponent implements OnInit, ControlValueAccessor, AfterViewInit {
   @HostBinding('class.op-basic-range-datepicker') className = true;

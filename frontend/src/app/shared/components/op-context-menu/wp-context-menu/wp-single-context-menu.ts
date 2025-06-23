@@ -18,7 +18,8 @@ import { TurboRequestsService } from 'core-app/core/turbo/turbo-requests.service
 import { ApiV3Service } from 'core-app/core/apiv3/api-v3.service';
 
 @Directive({
-  selector: '[wpSingleContextMenu]',
+    selector: '[wpSingleContextMenu]',
+    standalone: false
 })
 export class WorkPackageSingleContextMenuDirective extends OpContextMenuTrigger implements AfterViewInit, OnDestroy {
   @Input('wpSingleContextMenu-workPackage') public workPackage:WorkPackageResource;

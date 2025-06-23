@@ -10,8 +10,9 @@ import { RelationResource } from 'core-app/features/hal/resources/relation-resou
 import { WorkPackageRelationsService } from '../wp-relations.service';
 
 @Component({
-  selector: 'wp-relations-create',
-  templateUrl: './wp-relation-create.template.html',
+    selector: 'wp-relations-create',
+    templateUrl: './wp-relation-create.template.html',
+    standalone: false
 })
 export class WorkPackageRelationsCreateComponent {
   @Input() readonly workPackage:WorkPackageResource;

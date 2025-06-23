@@ -41,11 +41,12 @@ import { I18nService } from "core-app/core/i18n/i18n.service";
 
 
 @Component({
-  selector: 'op-git-actions-menu',
-  templateUrl: './git-actions-menu.template.html',
-  styleUrls: [
-    './styles/git-actions-menu.sass'
-  ]
+    selector: 'op-git-actions-menu',
+    templateUrl: './git-actions-menu.template.html',
+    styleUrls: [
+        './styles/git-actions-menu.sass'
+    ],
+    standalone: false
 })
 export class GitActionsMenuComponent extends OPContextMenuComponent {
   @Input() public workPackage:WorkPackageResource;

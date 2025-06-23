@@ -17,10 +17,11 @@ import { ProjectResource } from 'core-app/features/hal/resources/project-resourc
 import { PrincipalType } from '../invite-user.component';
 
 @Component({
-  selector: 'op-ium-summary',
-  templateUrl: './summary.component.html',
-  styleUrls: ['./summary.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-ium-summary',
+    templateUrl: './summary.component.html',
+    styleUrls: ['./summary.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class SummaryComponent {
   @Input() type:PrincipalType;

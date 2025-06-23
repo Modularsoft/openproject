@@ -37,9 +37,10 @@ import { States } from 'core-app/core/states/states.service';
 import { KeepTabService } from '../../wp-single-view-tabs/keep-tab/keep-tab.service';
 
 @Component({
-  templateUrl: '../wp-button.template.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'wp-details-view-button',
+    templateUrl: '../wp-button.template.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'wp-details-view-button',
+    standalone: false
 })
 export class WorkPackageDetailsViewButtonComponent extends AbstractWorkPackageButtonComponent implements OnDestroy {
   public projectIdentifier:string;

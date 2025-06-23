@@ -12,8 +12,9 @@ import { TimezoneService } from 'core-app/core/datetime/timezone.service';
 import idFromLink from 'core-app/features/hal/helpers/id-from-link';
 
 @Component({
-  templateUrl: './news.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './news.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class WidgetNewsComponent extends AbstractWidgetComponent implements OnInit {
   public text = {

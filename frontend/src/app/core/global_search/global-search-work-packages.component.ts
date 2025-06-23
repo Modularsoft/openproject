@@ -57,15 +57,16 @@ import {
 } from 'core-app/features/work-packages/directives/query-space/wp-isolated-query-space.directive';
 
 @Component({
-  selector: 'opce-global-search-work-packages',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  hostDirectives: [WorkPackageIsolatedQuerySpaceDirective],
-  template: `
+    selector: 'opce-global-search-work-packages',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    hostDirectives: [WorkPackageIsolatedQuerySpaceDirective],
+    template: `
     <wp-embedded-table *ngIf="!resultsHidden"
                        [queryProps]="queryProps"
                        [configuration]="tableConfiguration">
     </wp-embedded-table>
   `,
+    standalone: false
 })
 
 export class GlobalSearchWorkPackagesComponent extends UntilDestroyedMixin implements OnInit, OnDestroy, AfterViewInit {

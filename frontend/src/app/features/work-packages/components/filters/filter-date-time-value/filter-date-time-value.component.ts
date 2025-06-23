@@ -43,8 +43,9 @@ import { QueryFilterInstanceResource } from 'core-app/features/hal/resources/que
 import { AbstractDateTimeValueController } from '../abstract-filter-date-time-value/abstract-filter-date-time-value.controller';
 
 @Component({
-  selector: 'op-filter-date-time-value',
-  templateUrl: './filter-date-time-value.component.html',
+    selector: 'op-filter-date-time-value',
+    templateUrl: './filter-date-time-value.component.html',
+    standalone: false
 })
 export class FilterDateTimeValueComponent extends AbstractDateTimeValueController implements OnInit {
   @HostBinding('id') get id() {

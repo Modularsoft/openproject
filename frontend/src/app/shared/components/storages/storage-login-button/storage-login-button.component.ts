@@ -37,9 +37,10 @@ import { populateInputsFromDataset } from 'core-app/shared/components/dataset-in
 
 
 @Component({
-  selector: 'op-storage-login-button',
-  templateUrl: 'storage-login-button.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-storage-login-button',
+    templateUrl: 'storage-login-button.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class StorageLoginButtonComponent implements OnInit {
   @Input() input:IStorageLoginInput;

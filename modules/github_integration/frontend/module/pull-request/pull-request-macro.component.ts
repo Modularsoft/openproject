@@ -39,12 +39,13 @@ import { I18nService } from 'core-app/core/i18n/i18n.service';
 import { PullRequestState } from './pull-request-state.component';
 
 @Component({
-  templateUrl: './pull-request-macro.component.html',
-  styleUrls: ['./pull-request-macro.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    HalResourceEditingService,
-  ],
+    templateUrl: './pull-request-macro.component.html',
+    styleUrls: ['./pull-request-macro.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        HalResourceEditingService,
+    ],
+    standalone: false
 })
 export class PullRequestMacroComponent implements OnInit {
   @Input() pullRequestId:string;

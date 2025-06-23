@@ -35,7 +35,8 @@ import { OpModalLocalsMap } from 'core-app/shared/components/modal/modal.types';
 import { I18nService } from 'core-app/core/i18n/i18n.service';
 
 @Component({
-  templateUrl: './wiki-include-page-macro.modal.html',
+    templateUrl: './wiki-include-page-macro.modal.html',
+    standalone: false
 })
 export class WikiIncludePageMacroModalComponent extends OpModalComponent implements AfterViewInit {
   public changed = false;

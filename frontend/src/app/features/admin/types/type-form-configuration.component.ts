@@ -31,11 +31,12 @@ export interface TypeGroup {
 export const emptyTypeGroup = '__empty';
 
 @Component({
-  selector: 'opce-admin-type-form-configuration',
-  templateUrl: './type-form-configuration.html',
-  providers: [
-    TypeBannerService,
-  ],
+    selector: 'opce-admin-type-form-configuration',
+    templateUrl: './type-form-configuration.html',
+    providers: [
+        TypeBannerService,
+    ],
+    standalone: false
 })
 export class TypeFormConfigurationComponent extends UntilDestroyedMixin implements OnInit, AfterViewInit, OnDestroy {
   public text = {

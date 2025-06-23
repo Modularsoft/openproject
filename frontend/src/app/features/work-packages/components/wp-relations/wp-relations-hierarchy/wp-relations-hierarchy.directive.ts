@@ -39,9 +39,10 @@ import {
 import { SchemaCacheService } from 'core-app/core/schemas/schema-cache.service';
 
 @Component({
-  selector: 'wp-relations-hierarchy',
-  templateUrl: './wp-relations-hierarchy.template.html',
-  hostDirectives: [WorkPackageIsolatedQuerySpaceDirective],
+    selector: 'wp-relations-hierarchy',
+    templateUrl: './wp-relations-hierarchy.template.html',
+    hostDirectives: [WorkPackageIsolatedQuerySpaceDirective],
+    standalone: false
 })
 export class WorkPackageRelationsHierarchyComponent extends UntilDestroyedMixin implements OnInit {
   @Input() public workPackage:WorkPackageResource;

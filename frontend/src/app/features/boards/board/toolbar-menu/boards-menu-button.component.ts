@@ -4,7 +4,7 @@ import { Board } from 'core-app/features/boards/board/board';
 import { Observable } from 'rxjs';
 
 @Component({
-  template: `
+    template: `
     <button title="{{ text.button_more }}"
             class="button last board--settings-dropdown toolbar-icon"
             boardsToolbarMenu
@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
       <op-icon icon-classes="button--icon icon-show-more"></op-icon>
     </button>
   `,
+    standalone: false
 })
 export class BoardsMenuButtonComponent {
   @Input() board$:Observable<Board>;

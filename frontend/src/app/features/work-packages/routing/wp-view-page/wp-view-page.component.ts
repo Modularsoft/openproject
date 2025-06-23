@@ -47,18 +47,19 @@ import { OpProjectIncludeComponent } from 'core-app/shared/components/project-in
 import { OpBaselineModalComponent } from 'core-app/features/work-packages/components/wp-baseline/baseline-modal/baseline-modal.component';
 
 @Component({
-  selector: 'wp-view-page',
-  templateUrl: '../partitioned-query-space-page/partitioned-query-space-page.component.html',
-  styleUrls: [
-    // Absolute paths do not work for styleURLs :-(
-    '../partitioned-query-space-page/partitioned-query-space-page.component.sass',
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    /** We need to provide the wpNotification service here to get correct save notifications for WP resources */
-    { provide: HalResourceNotificationService, useClass: WorkPackageNotificationService },
-    QueryParamListenerService,
-  ],
+    selector: 'wp-view-page',
+    templateUrl: '../partitioned-query-space-page/partitioned-query-space-page.component.html',
+    styleUrls: [
+        // Absolute paths do not work for styleURLs :-(
+        '../partitioned-query-space-page/partitioned-query-space-page.component.sass',
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        /** We need to provide the wpNotification service here to get correct save notifications for WP resources */
+        { provide: HalResourceNotificationService, useClass: WorkPackageNotificationService },
+        QueryParamListenerService,
+    ],
+    standalone: false
 })
 export class WorkPackageViewPageComponent extends PartitionedQuerySpacePageComponent implements OnInit {
   toolbarButtonComponents:ToolbarButtonComponentDefinition[] = [

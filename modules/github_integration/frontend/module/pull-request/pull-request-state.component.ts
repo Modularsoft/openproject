@@ -38,12 +38,13 @@ import { I18nService } from 'core-app/core/i18n/i18n.service';
 export type PullRequestState = 'opened'|'closed'|'referenced'|'ready_for_review'|'merged'|'draft'|'deployed';
 
 @Component({
-  selector: 'op-github-pull-request-state',
-  templateUrl: './pull-request-state.component.html',
-  styleUrls: [
-    './pull-request-state.component.sass',
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-github-pull-request-state',
+    templateUrl: './pull-request-state.component.html',
+    styleUrls: [
+        './pull-request-state.component.sass',
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class PullRequestStateComponent implements OnInit {
   @Input() state:PullRequestState;

@@ -39,7 +39,8 @@ import { WorkPackageInlineCreateService } from 'core-app/features/work-packages/
 import { BoardListComponent } from 'core-app/features/boards/board/board-list/board-list.component';
 
 @Directive({
-  selector: '[op-addCardDropdown]',
+    selector: '[op-addCardDropdown]',
+    standalone: false
 })
 export class AddCardDropdownMenuDirective extends OpContextMenuTrigger {
   constructor(readonly elementRef:ElementRef,

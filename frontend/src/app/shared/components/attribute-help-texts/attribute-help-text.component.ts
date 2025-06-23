@@ -44,9 +44,10 @@ import { AttributeHelpTextModalComponent } from './attribute-help-text.modal';
 export const attributeHelpTextSelector = 'attribute-help-text';
 
 @Component({
-  selector: attributeHelpTextSelector,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './attribute-help-text.component.html',
+    selector: attributeHelpTextSelector,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './attribute-help-text.component.html',
+    standalone: false
 })
 export class AttributeHelpTextComponent implements OnInit {
   // Attribute to show help text for

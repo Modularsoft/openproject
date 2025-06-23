@@ -31,7 +31,7 @@ import { I18nService } from 'core-app/core/i18n/i18n.service';
 import { BcfViewService } from 'core-app/features/bim/ifc_models/pages/viewer/bcf-view.service';
 
 @Component({
-  template: `
+    template: `
     <ng-container *ngIf="(view$ | async) as current">
       <button class="button"
               id="bcf-view-toggle-button"
@@ -45,8 +45,9 @@ import { BcfViewService } from 'core-app/features/bim/ifc_models/pages/viewer/bc
       </button>
     </ng-container>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'op-bcf-view-toggle-button',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-bcf-view-toggle-button',
+    standalone: false
 })
 export class BcfViewToggleButtonComponent {
   view$ = this.bcfView.live$();

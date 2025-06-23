@@ -13,8 +13,9 @@ import { IGithubPullRequest } from '../state/github-pull-request.model';
 import { PullRequestStateComponent } from '../pull-request/pull-request-state.component';
 
 @Component({
-  selector: 'op-date-time',
-  template: '<p>OpDateTimeComponent </p>'
+    selector: 'op-date-time',
+    template: '<p>OpDateTimeComponent </p>',
+    standalone: false
 })
 class OpDateTimeComponent {
   @Input()

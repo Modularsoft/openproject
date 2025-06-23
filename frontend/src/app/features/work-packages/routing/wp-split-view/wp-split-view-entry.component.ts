@@ -37,8 +37,8 @@ import { populateInputsFromDataset } from 'core-app/shared/components/dataset-in
  * for the work package split view
  */
 @Component({
-  hostDirectives: [WorkPackageIsolatedQuerySpaceDirective],
-  template: `
+    hostDirectives: [WorkPackageIsolatedQuerySpaceDirective],
+    template: `
     <op-wp-split-view
       [workPackageId]="workPackageId"
       [activeTab]="activeTab"
@@ -46,7 +46,8 @@ import { populateInputsFromDataset } from 'core-app/shared/components/dataset-in
       [resizerClass]="resizerClass"
     ></op-wp-split-view>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class WorkPackageSplitViewEntryComponent {
   @Input() workPackageId:string;

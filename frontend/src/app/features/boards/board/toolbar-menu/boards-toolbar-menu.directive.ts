@@ -42,7 +42,8 @@ import { ToastService } from 'core-app/shared/components/toaster/toast.service';
 import { triggerEditingEvent } from 'core-app/shared/components/editable-toolbar-title/editable-toolbar-title.component';
 
 @Directive({
-  selector: '[boardsToolbarMenu]',
+    selector: '[boardsToolbarMenu]',
+    standalone: false
 })
 export class BoardsToolbarMenuDirective extends OpContextMenuTrigger {
   @Input('boardsToolbarMenu-resource') public board:Board;

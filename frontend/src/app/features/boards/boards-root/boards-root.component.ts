@@ -12,18 +12,19 @@ import {
 } from 'core-app/features/work-packages/directives/query-space/wp-isolated-query-space.directive';
 
 @Component({
-  selector: 'boards-entry',
-  hostDirectives: [WorkPackageIsolatedQuerySpaceDirective],
-  template: '<ui-view></ui-view>',
-  providers: [
-    BoardConfigurationService,
-    BoardStatusActionService,
-    BoardVersionActionService,
-    BoardAssigneeActionService,
-    BoardSubprojectActionService,
-    BoardSubtasksActionService,
-    QueryUpdatedService,
-  ],
+    selector: 'boards-entry',
+    hostDirectives: [WorkPackageIsolatedQuerySpaceDirective],
+    template: '<ui-view></ui-view>',
+    providers: [
+        BoardConfigurationService,
+        BoardStatusActionService,
+        BoardVersionActionService,
+        BoardAssigneeActionService,
+        BoardSubprojectActionService,
+        BoardSubtasksActionService,
+        QueryUpdatedService,
+    ],
+    standalone: false
 })
 export class BoardsRootComponent {
   constructor(readonly injector:Injector) {

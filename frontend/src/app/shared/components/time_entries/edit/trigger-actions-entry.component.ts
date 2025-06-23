@@ -12,8 +12,8 @@ import { PathHelperService } from 'core-app/core/path-helper/path-helper.service
 import { TurboRequestsService } from 'core-app/core/turbo/turbo-requests.service';
 
 @Component({
-  selector: 'opce-time-entry-trigger-actions',
-  template: `
+    selector: 'opce-time-entry-trigger-actions',
+    template: `
     <a (click)="editTimeEntry()"
        [title]="text.edit"
        class="no-decoration-on-hover">
@@ -25,12 +25,13 @@ import { TurboRequestsService } from 'core-app/core/turbo/turbo-requests.service
       <op-icon icon-classes="icon-context icon-delete"></op-icon>
     </a>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    HalResourceEditingService,
-    PathHelperService,
-    TurboRequestsService,
-  ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        HalResourceEditingService,
+        PathHelperService,
+        TurboRequestsService,
+    ],
+    standalone: false
 })
 export class TriggerActionsEntryComponent {
   @InjectField() readonly apiv3Service:ApiV3Service;

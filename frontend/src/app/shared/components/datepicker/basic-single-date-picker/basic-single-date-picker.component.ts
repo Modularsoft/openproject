@@ -53,17 +53,18 @@ import { populateInputsFromDataset } from '../../dataset-inputs';
 import { DeviceService } from 'core-app/core/browser/device.service';
 
 @Component({
-  selector: 'op-basic-single-date-picker',
-  templateUrl: './basic-single-date-picker.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => OpBasicSingleDatePickerComponent),
-      multi: true,
-    },
-  ],
+    selector: 'op-basic-single-date-picker',
+    templateUrl: './basic-single-date-picker.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => OpBasicSingleDatePickerComponent),
+            multi: true,
+        },
+    ],
+    standalone: false
 })
 export class OpBasicSingleDatePickerComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy {
   @Output() valueChange = new EventEmitter();

@@ -30,8 +30,9 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 
 
 @Component({
-  selector: 'opce-persistent-toggle',
-  template: '',
+    selector: 'opce-persistent-toggle',
+    template: '',
+    standalone: false
 })
 export class PersistentToggleComponent implements OnInit {
   /** Unique identifier of the toggle */

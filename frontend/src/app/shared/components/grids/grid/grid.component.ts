@@ -31,8 +31,9 @@ export const GRID_PROVIDERS = [
 ];
 
 @Component({
-  templateUrl: './grid.component.html',
-  selector: 'grid',
+    templateUrl: './grid.component.html',
+    selector: 'grid',
+    standalone: false
 })
 export class GridComponent implements OnDestroy, OnInit {
   public uiWidgets:ComponentRef<any>[] = [];

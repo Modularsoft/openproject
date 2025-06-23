@@ -41,10 +41,11 @@ import { OpCalendarService } from 'core-app/features/calendar/op-calendar.servic
 import { OpWorkPackagesCalendarService } from 'core-app/features/calendar/op-work-packages-calendar.service';
 
 @Component({
-  selector: 'op-add-existing-pane',
-  templateUrl: './add-existing-pane.component.html',
-  styleUrls: ['./add-existing-pane.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-add-existing-pane',
+    templateUrl: './add-existing-pane.component.html',
+    styleUrls: ['./add-existing-pane.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AddExistingPaneComponent extends UntilDestroyedMixin implements OnInit, OnDestroy {
   @HostBinding('class.op-add-existing-pane') className = true;

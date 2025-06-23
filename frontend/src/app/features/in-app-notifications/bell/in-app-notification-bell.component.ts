@@ -9,10 +9,11 @@ import { populateInputsFromDataset } from 'core-app/shared/components/dataset-in
 
 
 @Component({
-  selector: 'opce-in-app-notification-bell',
-  templateUrl: './in-app-notification-bell.component.html',
-  styleUrls: ['./in-app-notification-bell.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'opce-in-app-notification-bell',
+    templateUrl: './in-app-notification-bell.component.html',
+    styleUrls: ['./in-app-notification-bell.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class InAppNotificationBellComponent implements OnInit {
   @Input() interval = 50000;

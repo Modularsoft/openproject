@@ -43,8 +43,9 @@ import { AbstractDateTimeValueController } from '../abstract-filter-date-time-va
 import { validDate } from 'core-app/shared/components/datepicker/helpers/date-modal.helpers';
 
 @Component({
-  selector: 'op-filter-date-times-value',
-  templateUrl: './filter-date-times-value.component.html',
+    selector: 'op-filter-date-times-value',
+    templateUrl: './filter-date-times-value.component.html',
+    standalone: false
 })
 export class FilterDateTimesValueComponent extends AbstractDateTimeValueController implements OnInit {
   @HostBinding('id') get id() {

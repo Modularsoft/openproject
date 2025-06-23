@@ -43,9 +43,10 @@ import { UntilDestroyedMixin } from 'core-app/shared/helpers/angular/until-destr
 declare module 'codemirror';
 
 @Component({
-  selector: 'op-ckeditor',
-  templateUrl: './op-ckeditor.html',
-  styleUrls: ['./op-ckeditor.sass'],
+    selector: 'op-ckeditor',
+    templateUrl: './op-ckeditor.html',
+    styleUrls: ['./op-ckeditor.sass'],
+    standalone: false
 })
 export class OpCkeditorComponent extends UntilDestroyedMixin implements OnInit, OnDestroy {
   @Input() context:ICKEditorContext;

@@ -35,13 +35,14 @@ import { TurboRequestsService } from 'core-app/core/turbo/turbo-requests.service
 export const timerAccountSelector = 'op-timer-account-menu';
 
 @Component({
-  selector: timerAccountSelector,
-  templateUrl: './timer-account-menu.component.html',
-  styleUrls: ['./timer-account-menu.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  providers: [TimeEntryEditService,
-    HalResourceEditingService],
+    selector: timerAccountSelector,
+    templateUrl: './timer-account-menu.component.html',
+    styleUrls: ['./timer-account-menu.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    providers: [TimeEntryEditService,
+        HalResourceEditingService],
+    standalone: false
 })
 export class TimerAccountMenuComponent extends UntilDestroyedMixin implements OnInit {
   @HostBinding('class.op-timer-account-menu') className = true;

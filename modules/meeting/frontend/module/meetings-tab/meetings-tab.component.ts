@@ -33,9 +33,10 @@ import { I18nService } from 'core-app/core/i18n/i18n.service';
 import { PathHelperService } from 'core-app/core/path-helper/path-helper.service';
 
 @Component({
-  selector: 'op-meetings-tab',
-  templateUrl: './meetings-tab.template.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-meetings-tab',
+    templateUrl: './meetings-tab.template.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class MeetingsTabComponent implements OnInit, TabComponent {
   @Input() public workPackage:WorkPackageResource;

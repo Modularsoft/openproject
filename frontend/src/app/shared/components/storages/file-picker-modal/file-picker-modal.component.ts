@@ -53,8 +53,9 @@ import {
 } from 'core-app/shared/components/storages/file-picker-base-modal/file-picker-base-modal.component';
 
 @Component({
-  templateUrl: 'file-picker-modal.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: 'file-picker-modal.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class FilePickerModalComponent extends FilePickerBaseModalComponent {
   public readonly text = {

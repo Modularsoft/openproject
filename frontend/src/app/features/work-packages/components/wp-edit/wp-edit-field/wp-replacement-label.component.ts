@@ -32,8 +32,9 @@ import {
 import { EditFormComponent } from 'core-app/shared/components/fields/edit/edit-form/edit-form.component';
 
 @Component({
-  selector: 'wp-replacement-label',
-  templateUrl: './wp-replacement-label.html',
+    selector: 'wp-replacement-label',
+    templateUrl: './wp-replacement-label.html',
+    standalone: false
 })
 export class WorkPackageReplacementLabelComponent implements OnInit {
   @Input('fieldName') public fieldName:string;

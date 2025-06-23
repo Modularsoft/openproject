@@ -45,10 +45,11 @@ import {
 } from 'core-app/shared/components/fields/display/field-types/combined-date-display.field';
 
 @Component({
-  selector: 'wp-single-card',
-  styleUrls: ['./wp-single-card.component.sass'],
-  templateUrl: './wp-single-card.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'wp-single-card',
+    styleUrls: ['./wp-single-card.component.sass'],
+    templateUrl: './wp-single-card.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class WorkPackageSingleCardComponent extends UntilDestroyedMixin implements OnInit {
   @Input() public workPackage:WorkPackageResource;

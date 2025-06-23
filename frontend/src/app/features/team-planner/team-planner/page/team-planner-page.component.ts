@@ -31,17 +31,18 @@ import { OpWorkPackagesCalendarService } from 'core-app/features/calendar/op-wor
 import { OpCalendarService } from 'core-app/features/calendar/op-calendar.service';
 
 @Component({
-  templateUrl: '../../../work-packages/routing/partitioned-query-space-page/partitioned-query-space-page.component.html',
-  styleUrls: [
-    '../../../work-packages/routing/partitioned-query-space-page/partitioned-query-space-page.component.sass',
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    QueryParamListenerService,
-    OpWorkPackagesCalendarService,
-    OpCalendarService,
-    CalendarDragDropService,
-  ],
+    templateUrl: '../../../work-packages/routing/partitioned-query-space-page/partitioned-query-space-page.component.html',
+    styleUrls: [
+        '../../../work-packages/routing/partitioned-query-space-page/partitioned-query-space-page.component.sass',
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        QueryParamListenerService,
+        OpWorkPackagesCalendarService,
+        OpCalendarService,
+        CalendarDragDropService,
+    ],
+    standalone: false
 })
 export class TeamPlannerPageComponent extends PartitionedQuerySpacePageComponent implements OnInit {
   @InjectField() actions$:ActionsService;

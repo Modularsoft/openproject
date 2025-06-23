@@ -39,7 +39,7 @@ interface ColorItem {
 }
 
 @Component({
-  template: `
+    template: `
     <ng-select [items]="options"
                [virtualScroll]="true"
                bindLabel="name"
@@ -57,8 +57,9 @@ interface ColorItem {
       </ng-template>
     </ng-select>
   `,
-  selector: 'opce-colors-autocompleter',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'opce-colors-autocompleter',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ColorsAutocompleterComponent implements OnInit {
   public options:ColorItem[];

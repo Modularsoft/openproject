@@ -38,11 +38,12 @@ import { HalResourceEditingService } from 'core-app/shared/components/fields/edi
 import { ApiV3Service } from 'core-app/core/apiv3/api-v3.service';
 
 @Component({
-  templateUrl: './project-description.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    HalResourceEditingService,
-  ],
+    templateUrl: './project-description.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        HalResourceEditingService,
+    ],
+    standalone: false
 })
 export class WidgetProjectDescriptionComponent extends AbstractWidgetComponent implements OnInit {
   public project$:Observable<ProjectResource>;

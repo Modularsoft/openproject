@@ -33,9 +33,10 @@ import {
 } from '@angular/core';
 
 @Component({
-  templateUrl: './loading-file-list.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'op-loading-file-list',
-  encapsulation: ViewEncapsulation.None,
+    templateUrl: './loading-file-list.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-loading-file-list',
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class LoadingFileListComponent { }

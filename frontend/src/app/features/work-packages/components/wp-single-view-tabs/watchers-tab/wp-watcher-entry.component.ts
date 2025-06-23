@@ -37,10 +37,11 @@ import { UserResource } from 'core-app/features/hal/resources/user-resource';
 import { WorkPackageWatchersTabComponent } from './watchers-tab.component';
 
 @Component({
-  templateUrl: './wp-watcher-entry.component.html',
-  styleUrls: ['./wp-watcher-entry.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'op-wp-watcher-entry',
+    templateUrl: './wp-watcher-entry.component.html',
+    styleUrls: ['./wp-watcher-entry.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-wp-watcher-entry',
+    standalone: false
 })
 export class WorkPackageWatcherEntryComponent implements OnInit {
   @Input() public watcher:UserResource;

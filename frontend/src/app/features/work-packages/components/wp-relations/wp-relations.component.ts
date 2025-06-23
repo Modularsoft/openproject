@@ -47,9 +47,10 @@ import { renderStreamMessage } from '@hotwired/turbo';
 import { HalEventsService } from 'core-app/features/hal/services/hal-events.service';
 
 @Component({
-  selector: 'wp-relations',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './wp-relations.template.html',
+    selector: 'wp-relations',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './wp-relations.template.html',
+    standalone: false
 })
 export class WorkPackageRelationsComponent extends UntilDestroyedMixin implements OnInit, AfterViewInit, OnDestroy {
   @Input() public workPackage:WorkPackageResource;

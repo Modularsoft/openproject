@@ -11,10 +11,11 @@ import {
 import { WorkPackageResource } from 'core-app/features/hal/resources/work-package-resource';
 
 @Component({
-  selector: 'op-wp-tabs',
-  templateUrl: './wp-tabs.component.html',
-  styleUrls: ['./wp-tabs.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-wp-tabs',
+    templateUrl: './wp-tabs.component.html',
+    styleUrls: ['./wp-tabs.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class WpTabsComponent implements OnInit {
   @Input() workPackage:WorkPackageResource;

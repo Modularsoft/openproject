@@ -49,9 +49,10 @@ import { HalResourceService } from 'core-app/features/hal/services/hal-resource.
 import { compareByHref } from 'core-app/shared/helpers/angular/tracking-functions';
 
 @Component({
-  selector: 'op-filter-toggled-multiselect-value',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './filter-toggled-multiselect-value.component.html',
+    selector: 'op-filter-toggled-multiselect-value',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './filter-toggled-multiselect-value.component.html',
+    standalone: false
 })
 export class FilterToggledMultiselectValueComponent implements OnInit, AfterViewInit {
   @Input() public shouldFocus = false;

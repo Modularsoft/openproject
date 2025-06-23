@@ -12,10 +12,11 @@ import {
 import { QueryFilterInstanceResource } from 'core-app/features/hal/resources/query-filter-instance-resource';
 
 @Component({
-  templateUrl: './filters-tab.component.html',
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'wp-table-config-filters-tab',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './filters-tab.component.html',
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: 'wp-table-config-filters-tab',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class WpTableConfigurationFiltersTabComponent implements TabComponent, OnInit {
   public filters:QueryFilterInstanceResource[] = [];

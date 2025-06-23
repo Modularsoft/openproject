@@ -34,9 +34,10 @@ import {
 } from 'core-app/shared/components/storages/storage-information/storage-information-box';
 
 @Component({
-  selector: 'op-storage-information',
-  templateUrl: './storage-information.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-storage-information',
+    templateUrl: './storage-information.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class StorageInformationComponent {
   @Input() content:StorageInformationBox;

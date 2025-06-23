@@ -45,7 +45,8 @@ import { QUERY_SORT_BY_ASC, QUERY_SORT_BY_DESC } from 'core-app/features/hal/res
 import { ConfirmDialogService } from 'core-app/shared/components/modals/confirm-dialog/confirm-dialog.service';
 
 @Directive({
-  selector: '[opColumnsContextMenu]',
+    selector: '[opColumnsContextMenu]',
+    standalone: false
 })
 export class OpColumnsContextMenu extends OpContextMenuTrigger {
   @Input('opColumnsContextMenu-column') public column:QueryColumn;

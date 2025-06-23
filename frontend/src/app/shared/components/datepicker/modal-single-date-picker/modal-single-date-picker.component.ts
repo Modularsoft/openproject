@@ -55,17 +55,18 @@ import {
 
 // eslint-disable-next-line change-detection-strategy/on-push
 @Component({
-  selector: 'op-modal-single-date-picker',
-  templateUrl: './modal-single-date-picker.component.html',
-  styleUrls: ['./modal-single-date-picker.component.sass'],
-  encapsulation: ViewEncapsulation.None,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => OpModalSingleDatePickerComponent),
-      multi: true,
-    },
-  ],
+    selector: 'op-modal-single-date-picker',
+    templateUrl: './modal-single-date-picker.component.html',
+    styleUrls: ['./modal-single-date-picker.component.sass'],
+    encapsulation: ViewEncapsulation.None,
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => OpModalSingleDatePickerComponent),
+            multi: true,
+        },
+    ],
+    standalone: false
 })
 export class OpModalSingleDatePickerComponent implements ControlValueAccessor, OnInit, AfterContentInit {
   @Output('closed') closed = new EventEmitter();

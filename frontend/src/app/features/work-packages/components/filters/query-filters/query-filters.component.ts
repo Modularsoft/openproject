@@ -54,9 +54,10 @@ import { AlternativeSearchService } from 'core-app/shared/components/work-packag
 const ADD_FILTER_SELECT_INDEX = -1;
 
 @Component({
-  selector: 'op-query-filters',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './query-filters.component.html',
+    selector: 'op-query-filters',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './query-filters.component.html',
+    standalone: false
 })
 export class QueryFiltersComponent extends UntilDestroyedMixin implements OnInit, OnChanges {
   @ViewChild(NgSelectComponent) public ngSelectComponent:NgSelectComponent;

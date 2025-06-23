@@ -35,9 +35,9 @@ import { MainMenuToggleService } from 'core-app/core/main-menu/main-menu-toggle.
 
 
 @Component({
-  selector: 'opce-main-menu-resizer',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
+    selector: 'opce-main-menu-resizer',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    template: `
     <op-resizer class="main-menu--resizer"
                 [customHandler]="true"
                 [cursorClass]="'col-resize'"
@@ -56,6 +56,7 @@ import { MainMenuToggleService } from 'core-app/core/main-menu/main-menu-toggle.
       </button>
     </op-resizer>
   `,
+    standalone: false
 })
 
 export class MainMenuResizerComponent extends UntilDestroyedMixin implements OnInit {

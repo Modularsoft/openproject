@@ -33,9 +33,10 @@ import {
 } from '@angular/core';
 
 @Component({
-  templateUrl: './baseline-loading.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'op-baseline-loading',
-  encapsulation: ViewEncapsulation.None,
+    templateUrl: './baseline-loading.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-baseline-loading',
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class OpBaselineLoadingComponent { }

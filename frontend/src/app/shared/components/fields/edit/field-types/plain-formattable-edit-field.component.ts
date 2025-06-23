@@ -30,7 +30,8 @@ import { Component } from '@angular/core';
 import { EditFieldComponent } from 'core-app/shared/components/fields/edit/edit-field.component';
 
 @Component({
-  templateUrl: './text-edit-field.component.html',
+    templateUrl: './text-edit-field.component.html',
+    standalone: false
 })
 export class PlainFormattableEditFieldComponent extends EditFieldComponent {
   // only exists because the template is reused and the property is required there.

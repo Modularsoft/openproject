@@ -33,7 +33,7 @@ import { InjectField } from 'core-app/shared/helpers/angular/inject-field.decora
 import { TimezoneService } from 'core-app/core/datetime/timezone.service';
 
 @Component({
-  template: `
+    template: `
     <input type="number"
            step="any"
            class="inline-edit--field op-input"
@@ -46,7 +46,8 @@ import { TimezoneService } from 'core-app/core/datetime/timezone.service';
            [disabled]="inFlight"
            [id]="handler.htmlId" />
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class HoursDurationEditFieldComponent extends EditFieldComponent {
   @InjectField() TimezoneService:TimezoneService;

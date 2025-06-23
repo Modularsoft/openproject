@@ -98,17 +98,18 @@ const ADD_ICON_CLASS_NAME = 'te-calendar--add-icon';
 const ADD_ENTRY_PROHIBITED_CLASS_NAME = '-prohibited';
 
 @Component({
-  templateUrl: './te-calendar.template.html',
-  styleUrls: ['./te-calendar.component.sass'],
-  selector: 'op-time-entries-calendar',
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    OpCalendarService,
-    HalResourceEditingService,
-    TurboRequestsService,
-    PathHelperService,
-  ],
+    templateUrl: './te-calendar.template.html',
+    styleUrls: ['./te-calendar.component.sass'],
+    selector: 'op-time-entries-calendar',
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        OpCalendarService,
+        HalResourceEditingService,
+        TurboRequestsService,
+        PathHelperService,
+    ],
+    standalone: false
 })
 export class TimeEntryCalendarComponent implements AfterViewInit, OnDestroy {
   @ViewChild(FullCalendarComponent) ucCalendar:FullCalendarComponent;

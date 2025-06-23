@@ -37,8 +37,9 @@ import {
 import { ConfirmDialogModalComponent } from 'core-app/shared/components/modals/confirm-dialog/confirm-dialog.modal';
 
 @Component({
-  templateUrl: './password-confirmation.modal.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './password-confirmation.modal.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class PasswordConfirmationModalComponent extends ConfirmDialogModalComponent implements OnInit {
   public password_confirmation:string|null = null;

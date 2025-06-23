@@ -41,8 +41,9 @@ import { OpModalComponent } from 'core-app/shared/components/modal/modal.compone
 import { I18nService } from 'core-app/core/i18n/i18n.service';
 
 @Component({
-  templateUrl: './dynamic-content.modal.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './dynamic-content.modal.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class DynamicContentModalComponent extends OpModalComponent implements OnInit, OnDestroy {
   constructor(

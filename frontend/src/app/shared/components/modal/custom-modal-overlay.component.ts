@@ -38,9 +38,10 @@ import { PortalOutletTarget } from 'core-app/shared/components/modal/portal-outl
 export const opCustomModalOverlaySelector = 'op-custom-modal-overlay';
 
 @Component({
-  selector: opCustomModalOverlaySelector,
-  templateUrl: './modal-overlay.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: opCustomModalOverlaySelector,
+    templateUrl: './modal-overlay.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class OpCustomModalOverlayComponent extends OpModalOverlayComponent {
   protected isDefaultTarget(modalData:ModalData | null):boolean {

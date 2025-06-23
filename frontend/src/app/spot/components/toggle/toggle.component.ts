@@ -16,14 +16,15 @@ export interface SpotToggleOption<T> {
 };
 
 @Component({
-  selector: 'spot-toggle',
-  templateUrl: './toggle.component.html',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => SpotToggleComponent),
-    multi: true,
-  }],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'spot-toggle',
+    templateUrl: './toggle.component.html',
+    providers: [{
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => SpotToggleComponent),
+            multi: true,
+        }],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class SpotToggleComponent<T> implements ControlValueAccessor {
   // TODO: These old styles will need to be replaced

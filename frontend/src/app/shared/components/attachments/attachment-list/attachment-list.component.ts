@@ -38,9 +38,10 @@ import { UntilDestroyedMixin } from 'core-app/shared/helpers/angular/until-destr
 import { AttachmentsResourceService } from 'core-app/core/state/attachments/attachments.service';
 
 @Component({
-  selector: 'op-attachment-list',
-  templateUrl: './attachment-list.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-attachment-list',
+    templateUrl: './attachment-list.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class OpAttachmentListComponent extends UntilDestroyedMixin {
   @Input() public attachments:IAttachment[] = [];

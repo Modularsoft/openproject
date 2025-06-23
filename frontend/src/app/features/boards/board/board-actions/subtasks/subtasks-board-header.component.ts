@@ -33,9 +33,10 @@ import { Highlighting } from 'core-app/features/work-packages/components/wp-fast
 import idFromLink from 'core-app/features/hal/helpers/id-from-link';
 
 @Component({
-  templateUrl: './subtasks-board-header.html',
-  styleUrls: ['./subtasks-board-header.sass'],
-  host: { class: 'title-container -small' },
+    templateUrl: './subtasks-board-header.html',
+    styleUrls: ['./subtasks-board-header.sass'],
+    host: { class: 'title-container -small' },
+    standalone: false
 })
 export class SubtasksBoardHeaderComponent implements OnInit {
   @Input() public resource:WorkPackageResource;

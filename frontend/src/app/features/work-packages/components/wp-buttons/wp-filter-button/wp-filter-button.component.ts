@@ -36,9 +36,10 @@ import { componentDestroyed } from '@w11k/ngx-componentdestroyed';
 import { WorkPackageFiltersService } from 'core-app/features/work-packages/components/filters/wp-filters/wp-filters.service';
 
 @Component({
-  selector: 'wp-filter-button',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './wp-filter-button.html',
+    selector: 'wp-filter-button',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './wp-filter-button.html',
+    standalone: false
 })
 export class WorkPackageFilterButtonComponent extends AbstractWorkPackageButtonComponent implements OnInit {
   public count:number;

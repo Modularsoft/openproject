@@ -36,8 +36,9 @@ import { CurrentUserService } from 'core-app/core/current-user/current-user.serv
 import { firstValueFrom } from 'rxjs';
 
 @Component({
-  selector: 'widget-wp-table-menu',
-  templateUrl: '../menu/widget-menu.component.html',
+    selector: 'widget-wp-table-menu',
+    templateUrl: '../menu/widget-menu.component.html',
+    standalone: false
 })
 export class WidgetWpTableMenuComponent extends WidgetWpSetMenuComponent {
   @InjectField() currentUser:CurrentUserService;

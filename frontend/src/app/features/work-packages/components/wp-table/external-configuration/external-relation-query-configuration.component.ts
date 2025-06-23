@@ -8,13 +8,14 @@ import { WpTableConfigurationModalPrependToken } from 'core-app/features/work-pa
 import { ExternalQueryConfigurationComponent } from 'core-app/features/work-packages/components/wp-table/external-configuration/external-query-configuration.component';
 
 @Component({
-  templateUrl: './external-query-configuration.template.html',
-  providers: [
-    [
-      { provide: WpTableConfigurationService, useClass: RestrictedWpTableConfigurationService },
+    templateUrl: './external-query-configuration.template.html',
+    providers: [
+        [
+            { provide: WpTableConfigurationService, useClass: RestrictedWpTableConfigurationService },
+        ],
+        { provide: WpTableConfigurationModalPrependToken, useValue: WpTableConfigurationRelationSelectorComponent },
     ],
-    { provide: WpTableConfigurationModalPrependToken, useValue: WpTableConfigurationRelationSelectorComponent },
-  ],
+    standalone: false
 })
 export class ExternalRelationQueryConfigurationComponent extends ExternalQueryConfigurationComponent {
 }

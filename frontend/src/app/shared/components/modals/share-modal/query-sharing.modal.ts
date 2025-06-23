@@ -42,7 +42,8 @@ import { I18nService } from 'core-app/core/i18n/i18n.service';
 import { IsolatedQuerySpace } from 'core-app/features/work-packages/directives/query-space/isolated-query-space';
 
 @Component({
-  templateUrl: './query-sharing.modal.html',
+    templateUrl: './query-sharing.modal.html',
+    standalone: false
 })
 export class QuerySharingModalComponent extends OpModalComponent implements OnInit {
   public query:QueryResource;

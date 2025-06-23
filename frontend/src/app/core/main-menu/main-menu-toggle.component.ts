@@ -35,13 +35,14 @@ import { MainMenuToggleService } from './main-menu-toggle.service';
 import { TopMenuService } from 'core-app/core/top-menu/top-menu.service';
 
 @Component({
-  selector: 'opce-main-menu-toggle',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
-  host: {
-    class: 'op-app-menu op-main-menu-toggle',
-  },
-  templateUrl: './main-menu-toggle.component.html',
+    selector: 'opce-main-menu-toggle',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+    host: {
+        class: 'op-app-menu op-main-menu-toggle',
+    },
+    templateUrl: './main-menu-toggle.component.html',
+    standalone: false
 })
 export class MainMenuToggleComponent extends UntilDestroyedMixin implements OnInit {
   toggleTitle = '';

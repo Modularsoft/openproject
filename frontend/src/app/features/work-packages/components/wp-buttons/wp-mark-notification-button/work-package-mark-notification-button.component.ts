@@ -4,9 +4,10 @@ import { WorkPackageResource } from 'core-app/features/hal/resources/work-packag
 import { WpSingleViewService } from 'core-app/features/work-packages/routing/wp-view-base/state/wp-single-view.service';
 
 @Component({
-  selector: 'op-work-package-mark-notification-button',
-  templateUrl: './work-package-mark-notification-button.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-work-package-mark-notification-button',
+    templateUrl: './work-package-mark-notification-button.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class WorkPackageMarkNotificationButtonComponent {
   @Input() public workPackage:WorkPackageResource;

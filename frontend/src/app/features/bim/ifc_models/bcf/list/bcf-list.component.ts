@@ -53,15 +53,16 @@ import {
 } from 'core-app/features/work-packages/services/notifications/work-package-notification.service';
 
 @Component({
-  templateUrl: './bcf-list.component.html',
-  styleUrls: ['./bcf-list.component.sass'],
-  providers: [
-    { provide: HalResourceNotificationService, useClass: WorkPackageNotificationService },
-    DragAndDropService,
-    CausedUpdatesService,
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'op-bcf-list',
+    templateUrl: './bcf-list.component.html',
+    styleUrls: ['./bcf-list.component.sass'],
+    providers: [
+        { provide: HalResourceNotificationService, useClass: WorkPackageNotificationService },
+        DragAndDropService,
+        CausedUpdatesService,
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-bcf-list',
+    standalone: false
 })
 export class BcfListComponent extends WorkPackageListViewComponent implements UntilDestroyedMixin, OnInit {
   @Input() showResizer = false;

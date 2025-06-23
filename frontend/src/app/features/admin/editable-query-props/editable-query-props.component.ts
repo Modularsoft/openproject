@@ -5,9 +5,10 @@ import {
 } from 'core-app/features/work-packages/components/wp-table/external-configuration/external-query-configuration.service';
 
 @Component({
-  selector: 'opce-editable-query-props',
-  templateUrl: './editable-query-props.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'opce-editable-query-props',
+    templateUrl: './editable-query-props.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class EditableQueryPropsComponent implements OnInit {
   id:string|null;

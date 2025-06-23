@@ -45,7 +45,8 @@ import { I18nService } from 'core-app/core/i18n/i18n.service';
 import { ResourceChangeset } from 'core-app/shared/components/fields/changeset/resource-changeset';
 
 @Directive({
-  selector: '[opModalWithTurboContent]',
+    selector: '[opModalWithTurboContent]',
+    standalone: false
 })
 export class ModalWithTurboContentDirective implements AfterViewInit, OnDestroy {
   @Input() resource:HalResource;

@@ -33,9 +33,10 @@ import {
 } from '@angular/core';
 
 @Component({
-  templateUrl: './loading-project-list.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'op-loading-project-list',
-  encapsulation: ViewEncapsulation.None,
+    templateUrl: './loading-project-list.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-loading-project-list',
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class OpLoadingProjectListComponent { }

@@ -49,9 +49,10 @@ import {
 import { WorkPackagesListService } from 'core-app/features/work-packages/components/wp-list/wp-list.service';
 
 @Component({
-  templateUrl: './filter-container.directive.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'op-filter-container',
+    templateUrl: './filter-container.directive.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-filter-container',
+    standalone: false
 })
 export class WorkPackageFilterContainerComponent extends UntilDestroyedMixin implements OnInit, OnDestroy {
   @Input('showFilterButton') showFilterButton = false;

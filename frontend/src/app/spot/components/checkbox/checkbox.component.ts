@@ -18,14 +18,15 @@ import {
 export type SpotCheckboxState = true|false|null;
 
 @Component({
-  selector: 'spot-checkbox',
-  templateUrl: './checkbox.component.html',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => SpotCheckboxComponent),
-    multi: true,
-  }],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'spot-checkbox',
+    templateUrl: './checkbox.component.html',
+    providers: [{
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => SpotCheckboxComponent),
+            multi: true,
+        }],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class SpotCheckboxComponent implements ControlValueAccessor {
   @HostBinding('class.spot-checkbox') public className = true;

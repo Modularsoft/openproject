@@ -35,8 +35,9 @@ import {
 import isNewResource from 'core-app/features/hal/helpers/is-new-resource';
 
 @Component({
-  templateUrl: './formattable-edit-field.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './formattable-edit-field.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class FormattableEditFieldComponent extends EditFieldComponent implements OnInit, OnDestroy {
   public readonly field = this;

@@ -20,9 +20,10 @@ import { debounce } from 'lodash';
 import { autoUpdate, computePosition, flip, limitShift, Placement, shift } from '@floating-ui/dom';
 
 @Component({
-  selector: 'spot-drop-modal',
-  templateUrl: './drop-modal.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'spot-drop-modal',
+    templateUrl: './drop-modal.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class SpotDropModalComponent implements OnDestroy {
   @HostBinding('class.spot-drop-modal') public className = true;

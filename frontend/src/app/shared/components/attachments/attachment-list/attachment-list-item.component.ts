@@ -53,10 +53,11 @@ import { getIconForMimeType } from 'core-app/shared/components/storages/function
 import { IFileIcon } from 'core-app/shared/components/storages/icons.mapping';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: '[op-attachment-list-item]',
-  templateUrl: './attachment-list-item.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: '[op-attachment-list-item]',
+    templateUrl: './attachment-list-item.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class OpAttachmentListItemComponent extends UntilDestroyedMixin implements OnInit, AfterViewInit {
   @Input() public attachment:IAttachment;

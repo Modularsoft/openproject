@@ -35,9 +35,10 @@ import { BcfViewpointItem } from 'core-app/features/bim/bcf/api/viewpoints/bcf-v
 import isNewResource from 'core-app/features/hal/helpers/is-new-resource';
 
 @Component({
-  templateUrl: './bcf-wp-attribute-group.component.html',
-  styleUrls: ['./bcf-wp-attribute-group.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './bcf-wp-attribute-group.component.html',
+    styleUrls: ['./bcf-wp-attribute-group.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class BcfNewWpAttributeGroupComponent extends BcfWpAttributeGroupComponent implements AfterViewInit {
   galleryViewpoints:BcfViewpointItem[] = [];

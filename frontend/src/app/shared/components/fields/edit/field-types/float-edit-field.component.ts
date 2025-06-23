@@ -29,7 +29,7 @@ import { Component } from '@angular/core';
 import { EditFieldComponent } from 'core-app/shared/components/fields/edit/edit-field.component';
 
 @Component({
-  template: `
+    template: `
     <input type="number"
            step="any"
            class="inline-edit--field op-input"
@@ -41,6 +41,7 @@ import { EditFieldComponent } from 'core-app/shared/components/fields/edit/edit-
            [attr.lang]="locale"
            [id]="handler.htmlId" />
   `,
+    standalone: false
 })
 export class FloatEditFieldComponent extends EditFieldComponent {
   public locale = I18n.locale;

@@ -22,11 +22,12 @@ import { GridAreaService } from 'core-app/shared/components/grids/grid/area.serv
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
-  templateUrl: './custom-text.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    CustomTextEditFieldService,
-  ],
+    templateUrl: './custom-text.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        CustomTextEditFieldService,
+    ],
+    standalone: false
 })
 export class WidgetCustomTextComponent extends AbstractWidgetComponent implements OnInit, OnChanges, OnDestroy {
   protected currentRawText:string;

@@ -35,8 +35,9 @@ import { I18nService } from 'core-app/core/i18n/i18n.service';
 import { WorkPackageNotificationService } from 'core-app/features/work-packages/services/notifications/work-package-notification.service';
 
 @Component({
-  templateUrl: './wp-breadcrumb-parent.html',
-  selector: 'wp-breadcrumb-parent',
+    templateUrl: './wp-breadcrumb-parent.html',
+    selector: 'wp-breadcrumb-parent',
+    standalone: false
 })
 export class WorkPackageBreadcrumbParentComponent {
   @Input('workPackage') workPackage:WorkPackageResource;

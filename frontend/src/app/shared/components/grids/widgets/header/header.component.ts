@@ -32,10 +32,11 @@ import {
 import { GridAreaService } from 'core-app/shared/components/grids/grid/area.service';
 
 @Component({
-  selector: 'widget-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'widget-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class WidgetHeaderComponent {
   @Input() name:string;

@@ -37,9 +37,10 @@ import { take } from 'rxjs/operators';
 import { CurrentUserService } from 'core-app/core/current-user/current-user.service';
 
 @Component({
-  selector: 'wp-create-button',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './wp-create-button.html',
+    selector: 'wp-create-button',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './wp-create-button.html',
+    standalone: false
 })
 export class WorkPackageCreateButtonComponent extends UntilDestroyedMixin implements OnInit, OnDestroy {
   @Input('allowed') allowedWhen:string[];

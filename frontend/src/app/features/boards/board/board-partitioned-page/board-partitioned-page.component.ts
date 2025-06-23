@@ -42,16 +42,17 @@ export function boardCardViewHandlerFactory(injector:Injector) {
 }
 
 @Component({
-  templateUrl: '../../../work-packages/routing/partitioned-query-space-page/partitioned-query-space-page.component.html',
-  styleUrls: [
-    '../../../work-packages/routing/partitioned-query-space-page/partitioned-query-space-page.component.sass',
-    './board-partitioned-page.component.sass',
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    DragAndDropService,
-    BoardFiltersService,
-  ],
+    templateUrl: '../../../work-packages/routing/partitioned-query-space-page/partitioned-query-space-page.component.html',
+    styleUrls: [
+        '../../../work-packages/routing/partitioned-query-space-page/partitioned-query-space-page.component.sass',
+        './board-partitioned-page.component.sass',
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        DragAndDropService,
+        BoardFiltersService,
+    ],
+    standalone: false
 })
 export class BoardPartitionedPageComponent extends UntilDestroyedMixin {
   text = {

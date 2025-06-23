@@ -44,7 +44,8 @@ import { WorkPackageFiltersService } from 'core-app/features/work-packages/compo
 import { OpContextMenuItem } from 'core-app/shared/components/op-context-menu/op-context-menu.types';
 
 @Directive({
-  selector: '[opBcfViewDropdown]',
+    selector: '[opBcfViewDropdown]',
+    standalone: false
 })
 export class BcfViewToggleDropdownDirective extends OpContextMenuTrigger {
   constructor(readonly elementRef:ElementRef,

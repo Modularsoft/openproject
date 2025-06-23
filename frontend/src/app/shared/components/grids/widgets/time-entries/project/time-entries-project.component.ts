@@ -15,11 +15,12 @@ import { TimeEntryEditService } from 'core-app/shared/components/time_entries/ed
 import { HalResourceEditingService } from 'core-app/shared/components/fields/edit/services/hal-resource-editing.service';
 
 @Component({
-  templateUrl: '../list/time-entries-list.component.html',
-  providers: [
-    HalResourceEditingService,
-    TimeEntryEditService,
-  ],
+    templateUrl: '../list/time-entries-list.component.html',
+    providers: [
+        HalResourceEditingService,
+        TimeEntryEditService,
+    ],
+    standalone: false
 })
 export class WidgetTimeEntriesProjectComponent extends WidgetTimeEntriesListComponent implements OnInit {
   constructor(readonly injector:Injector,

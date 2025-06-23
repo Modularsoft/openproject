@@ -33,7 +33,8 @@ import { I18nService } from 'core-app/core/i18n/i18n.service';
 import { WorkPackageViewCollapsedGroupsService } from 'core-app/features/work-packages/routing/wp-view-base/view-services/wp-view-collapsed-groups.service';
 
 @Directive({
-  selector: '[wpGroupToggleDropdown]',
+    selector: '[wpGroupToggleDropdown]',
+    standalone: false
 })
 export class WorkPackageGroupToggleDropdownMenuDirective extends OpContextMenuTrigger {
   constructor(readonly elementRef:ElementRef,

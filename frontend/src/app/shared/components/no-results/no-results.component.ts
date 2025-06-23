@@ -31,9 +31,10 @@ import { populateInputsFromDataset } from 'core-app/shared/components/dataset-in
 
 
 @Component({
-  templateUrl: './no-results.component.html',
-  selector: 'op-no-results',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './no-results.component.html',
+    selector: 'op-no-results',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 
 export class NoResultsComponent {

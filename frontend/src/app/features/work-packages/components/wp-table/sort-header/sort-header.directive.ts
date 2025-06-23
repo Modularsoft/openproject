@@ -53,10 +53,11 @@ import { UntilDestroyedMixin } from 'core-app/shared/helpers/angular/until-destr
 import { WorkPackageViewBaselineService } from 'core-app/features/work-packages/routing/wp-view-base/view-services/wp-view-baseline.service';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'sortHeader',
-  templateUrl: './sort-header.directive.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: 'sortHeader',
+    templateUrl: './sort-header.directive.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class SortHeaderDirective extends UntilDestroyedMixin implements AfterViewInit {

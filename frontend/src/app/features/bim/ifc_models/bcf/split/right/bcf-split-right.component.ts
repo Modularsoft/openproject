@@ -36,9 +36,10 @@ import { BcfViewService } from 'core-app/features/bim/ifc_models/pages/viewer/bc
 import { map } from 'rxjs/operators';
 
 @Component({
-  templateUrl: './bcf-split-right.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'op-bcf-content-right',
+    templateUrl: './bcf-split-right.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-bcf-content-right',
+    standalone: false
 })
 export class BcfSplitRightComponent implements OnInit {
   showWorkPackages$:Observable<boolean>;

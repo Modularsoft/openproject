@@ -35,8 +35,9 @@ import { componentDestroyed } from '@w11k/ngx-componentdestroyed';
 import { QueryFilterInstanceResource } from 'core-app/features/hal/resources/query-filter-instance-resource';
 
 @Component({
-  selector: 'op-filter-string-value',
-  templateUrl: './filter-string-value.component.html',
+    selector: 'op-filter-string-value',
+    templateUrl: './filter-string-value.component.html',
+    standalone: false
 })
 export class FilterStringValueComponent extends UntilDestroyedMixin {
   @Input() public shouldFocus = false;

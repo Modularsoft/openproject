@@ -15,10 +15,11 @@ import {
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'op-pause-reminders',
-  templateUrl: './pause-reminders.component.html',
-  styleUrls: ['./pause-reminders.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-pause-reminders',
+    templateUrl: './pause-reminders.component.html',
+    styleUrls: ['./pause-reminders.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class PauseRemindersComponent implements OnInit {
   form:UntypedFormGroup;

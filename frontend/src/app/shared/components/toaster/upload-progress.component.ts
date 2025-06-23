@@ -44,8 +44,8 @@ import { debugLog } from 'core-app/shared/helpers/debug_output';
 import { UntilDestroyedMixin } from 'core-app/shared/helpers/angular/until-destroyed.mixin';
 
 @Component({
-  selector: 'op-toasters-upload-progress',
-  template: `
+    selector: 'op-toasters-upload-progress',
+    template: `
     <li>
       <span class="filename" [textContent]="fileName"></span>
       <progress max="100" value="0" #progressBar></progress>
@@ -56,7 +56,8 @@ import { UntilDestroyedMixin } from 'core-app/shared/helpers/angular/until-destr
     </span>
     </li>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class UploadProgressComponent extends UntilDestroyedMixin implements OnInit, AfterViewInit {
   @Input() public file:File;

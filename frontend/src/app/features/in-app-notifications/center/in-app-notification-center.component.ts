@@ -46,9 +46,10 @@ import {
 } from 'core-app/shared/components/colors/colors.service';
 
 @Component({
-  templateUrl: './in-app-notification-center.component.html',
-  styleUrls: ['./in-app-notification-center.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './in-app-notification-center.component.html',
+    styleUrls: ['./in-app-notification-center.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class InAppNotificationCenterComponent implements OnInit {
   maxSize = NOTIFICATIONS_MAX_SIZE;

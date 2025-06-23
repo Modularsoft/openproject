@@ -42,7 +42,8 @@ import { WorkPackagesListService } from 'core-app/features/work-packages/compone
 import { States } from 'core-app/core/states/states.service';
 
 @Component({
-  templateUrl: './save-query.modal.html',
+    templateUrl: './save-query.modal.html',
+    standalone: false
 })
 export class SaveQueryModalComponent extends OpModalComponent {
   public queryName = '';

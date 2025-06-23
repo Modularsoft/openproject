@@ -60,9 +60,10 @@ import { EditFieldHandler } from 'core-app/shared/components/fields/edit/editing
 import { SchemaResource } from 'core-app/features/hal/resources/schema-resource';
 
 @Component({
-  selector: 'op-editable-attribute-field',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './editable-attribute-field.component.html',
+    selector: 'op-editable-attribute-field',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './editable-attribute-field.component.html',
+    standalone: false
 })
 export class EditableAttributeFieldComponent extends UntilDestroyedMixin implements OnInit, OnDestroy {
   @Input() public fieldName:string;

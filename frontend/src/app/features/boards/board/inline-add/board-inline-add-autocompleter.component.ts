@@ -53,12 +53,12 @@ import { WorkPackageResource } from 'core-app/features/hal/resources/work-packag
 import { HalResourceService } from 'core-app/features/hal/services/hal-resource.service';
 
 @Component({
-  selector: 'board-inline-add-autocompleter',
-  templateUrl: './board-inline-add-autocompleter.html',
-
-  // Allow styling the embedded ng-select
-  encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./board-inline-add-autocompleter.sass'],
+    selector: 'board-inline-add-autocompleter',
+    templateUrl: './board-inline-add-autocompleter.html',
+    // Allow styling the embedded ng-select
+    encapsulation: ViewEncapsulation.None,
+    styleUrls: ['./board-inline-add-autocompleter.sass'],
+    standalone: false
 })
 
 export class BoardInlineAddAutocompleterComponent implements AfterViewInit {

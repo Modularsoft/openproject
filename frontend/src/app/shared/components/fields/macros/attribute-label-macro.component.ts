@@ -50,12 +50,13 @@ import { capitalize } from 'core-app/shared/helpers/string-helpers';
 import { firstValueFrom } from 'rxjs';
 
 @Component({
-  templateUrl: './attribute-label-macro.html',
-  styleUrls: ['./attribute-macro.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    HalResourceEditingService,
-  ],
+    templateUrl: './attribute-label-macro.html',
+    styleUrls: ['./attribute-macro.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        HalResourceEditingService,
+    ],
+    standalone: false
 })
 export class AttributeLabelMacroComponent implements OnInit {
   // Whether the value could not be loaded

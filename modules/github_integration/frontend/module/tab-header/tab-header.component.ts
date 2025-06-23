@@ -31,11 +31,12 @@ import { WorkPackageResource } from "core-app/features/hal/resources/work-packag
 import { I18nService } from "core-app/core/i18n/i18n.service";
 
 @Component({
-  selector: 'tab-header',
-  templateUrl: './tab-header.template.html',
-  styleUrls: [
-    './styles/tab-header.sass'
-  ]
+    selector: 'tab-header',
+    templateUrl: './tab-header.template.html',
+    styleUrls: [
+        './styles/tab-header.sass'
+    ],
+    standalone: false
 })
 export class TabHeaderComponent {
   @Input() public workPackage:WorkPackageResource;

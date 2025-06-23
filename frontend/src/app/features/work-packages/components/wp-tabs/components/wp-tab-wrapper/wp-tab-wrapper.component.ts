@@ -40,8 +40,9 @@ import { WorkPackageTabsService } from 'core-app/features/work-packages/componen
 import { WorkPackageResource } from 'core-app/features/hal/resources/work-package-resource';
 
 @Component({
-  templateUrl: './wp-tab-wrapper.html',
-  selector: 'op-wp-tab',
+    templateUrl: './wp-tab-wrapper.html',
+    selector: 'op-wp-tab',
+    standalone: false
 })
 export class WpTabWrapperComponent implements OnInit {
   workPackage:WorkPackageResource;

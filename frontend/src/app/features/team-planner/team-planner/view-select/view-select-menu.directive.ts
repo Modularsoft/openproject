@@ -42,7 +42,8 @@ import {
 import { OpContextMenuItem } from 'core-app/shared/components/op-context-menu/op-context-menu.types';
 
 @Directive({
-  selector: '[opTeamPlannerViewSelectDropdown]',
+    selector: '[opTeamPlannerViewSelectDropdown]',
+    standalone: false
 })
 export class TeamPlannerViewSelectMenuDirective extends OpContextMenuTrigger {
   @Input() public viewOptions:NonNullable<TeamPlannerViewOptions>;

@@ -32,15 +32,16 @@ import { IToast, ToastService } from './toast.service';
 
 
 @Component({
-  template: `
+    template: `
     <div class="op-toast--wrapper">
       <div class="op-toast--casing">
         <op-toast [toast]="toast" *ngFor="let toast of stack"></op-toast>
       </div>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'opce-toasts-container',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'opce-toasts-container',
+    standalone: false
 })
 export class ToastsContainerComponent extends UntilDestroyedMixin implements OnInit {
   public stack:IToast[] = [];

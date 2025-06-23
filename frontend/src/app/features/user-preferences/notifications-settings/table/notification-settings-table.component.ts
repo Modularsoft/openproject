@@ -11,10 +11,11 @@ import { overDueReminderTimes, reminderAvailableTimeframes } from '../overdue-re
 import { ConfigurationService } from 'core-app/core/config/configuration.service';
 
 @Component({
-  selector: 'op-notification-settings-table',
-  templateUrl: './notification-settings-table.component.html',
-  styleUrls: ['./notification-settings-table.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-notification-settings-table',
+    templateUrl: './notification-settings-table.component.html',
+    styleUrls: ['./notification-settings-table.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NotificationSettingsTableComponent implements OnInit {
   @Input() userId:string;

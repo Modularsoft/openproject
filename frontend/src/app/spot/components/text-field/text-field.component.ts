@@ -16,13 +16,14 @@ import {
 } from '@angular/forms';
 
 @Component({
-  selector: 'spot-text-field',
-  templateUrl: './text-field.component.html',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => SpotTextFieldComponent),
-    multi: true,
-  }],
+    selector: 'spot-text-field',
+    templateUrl: './text-field.component.html',
+    providers: [{
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => SpotTextFieldComponent),
+            multi: true,
+        }],
+    standalone: false
 })
 export class SpotTextFieldComponent implements ControlValueAccessor {
   @HostBinding('class.spot-text-field') public className = true;

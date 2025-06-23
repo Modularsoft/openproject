@@ -31,10 +31,11 @@ import { BackRoutingService } from 'core-app/features/work-packages/components/b
 import { I18nService } from 'core-app/core/i18n/i18n.service';
 
 @Component({
-  templateUrl: './back-button.component.html',
-  styleUrls: ['./back-button.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'op-back-button',
+    templateUrl: './back-button.component.html',
+    styleUrls: ['./back-button.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-back-button',
+    standalone: false
 })
 export class BackButtonComponent {
   @Input() public linkClass:string;

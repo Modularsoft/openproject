@@ -93,15 +93,16 @@ import { MeetingResource } from 'core-app/features/hal/resources/meeting-resourc
 import { TimezoneService } from 'core-app/core/datetime/timezone.service';
 
 @Component({
-  templateUrl: './wp-calendar.template.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./wp-calendar.sass'],
-  selector: 'op-wp-calendar',
-  providers: [
-    OpWorkPackagesCalendarService,
-    OpCalendarService,
-  ],
+    templateUrl: './wp-calendar.template.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    styleUrls: ['./wp-calendar.sass'],
+    selector: 'op-wp-calendar',
+    providers: [
+        OpWorkPackagesCalendarService,
+        OpCalendarService,
+    ],
+    standalone: false
 })
 export class WorkPackagesCalendarComponent extends UntilDestroyedMixin implements OnInit {
   @ViewChild(FullCalendarComponent) ucCalendar:FullCalendarComponent;

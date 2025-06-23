@@ -36,9 +36,10 @@ import {
 import { BreadcrumbsContent } from 'core-app/spot/components/breadcrumbs/breadcrumbs-content';
 
 @Component({
-  selector: 'spot-breadcrumbs',
-  templateUrl: './breadcrumbs.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'spot-breadcrumbs',
+    templateUrl: './breadcrumbs.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class SpotBreadcrumbsComponent {
   @HostBinding('class.spot-breadcrumbs') className = true;

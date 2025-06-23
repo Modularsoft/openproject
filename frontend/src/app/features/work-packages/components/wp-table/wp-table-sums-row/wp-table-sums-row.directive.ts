@@ -44,10 +44,11 @@ import { SchemaResource } from 'core-app/features/hal/resources/schema-resource'
 import { WorkPackageCollectionResource } from 'core-app/features/hal/resources/wp-collection-resource';
 
 @Directive({
-  selector: '[wpTableSumsRow]',
-  host: {
-    '[class.-hidden]': 'isHidden',
-  },
+    selector: '[wpTableSumsRow]',
+    host: {
+        '[class.-hidden]': 'isHidden',
+    },
+    standalone: false
 })
 export class WorkPackageTableSumsRowController implements AfterViewInit {
   @Input('wpTableSumsRow-table') workPackageTable:WorkPackageTable;

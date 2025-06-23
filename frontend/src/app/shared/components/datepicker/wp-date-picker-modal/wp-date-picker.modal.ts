@@ -41,8 +41,9 @@ import { OpModalLocalsMap } from 'core-app/shared/components/modal/modal.types';
 import { PathHelperService } from 'core-app/core/path-helper/path-helper.service';
 
 @Component({
-  templateUrl: './wp-date-picker.modal.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './wp-date-picker.modal.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class OpWpDatePickerModalComponent extends OpModalComponent implements OnInit {
   turboFrameSrc:string;

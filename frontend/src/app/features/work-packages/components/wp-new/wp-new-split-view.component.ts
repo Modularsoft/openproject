@@ -30,9 +30,10 @@ import { WorkPackageCreateComponent } from 'core-app/features/work-packages/comp
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'wp-new-split-view',
-  templateUrl: './wp-new-split-view.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'wp-new-split-view',
+    templateUrl: './wp-new-split-view.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class WorkPackageNewSplitViewComponent extends WorkPackageCreateComponent {
 }

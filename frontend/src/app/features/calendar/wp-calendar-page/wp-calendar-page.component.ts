@@ -50,14 +50,15 @@ import { ActionsService } from 'core-app/core/state/actions/actions.service';
 import { InjectField } from 'core-app/shared/helpers/angular/inject-field.decorator';
 
 @Component({
-  templateUrl: '../../work-packages/routing/partitioned-query-space-page/partitioned-query-space-page.component.html',
-  styleUrls: [
-    '../../work-packages/routing/partitioned-query-space-page/partitioned-query-space-page.component.sass',
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    QueryParamListenerService,
-  ],
+    templateUrl: '../../work-packages/routing/partitioned-query-space-page/partitioned-query-space-page.component.html',
+    styleUrls: [
+        '../../work-packages/routing/partitioned-query-space-page/partitioned-query-space-page.component.sass',
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        QueryParamListenerService,
+    ],
+    standalone: false
 })
 export class WorkPackagesCalendarPageComponent extends PartitionedQuerySpacePageComponent {
   @InjectField(ActionsService) actions$:ActionsService;

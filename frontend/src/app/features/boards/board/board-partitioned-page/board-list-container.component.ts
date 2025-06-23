@@ -43,12 +43,13 @@ import {
 import { enterpriseDocsUrl } from 'core-app/core/setup/globals/constants.const';
 
 @Component({
-  templateUrl: './board-list-container.component.html',
-  styleUrls: ['./board-list-container.component.sass'],
-  providers: [
-    BoardListCrossSelectionService,
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './board-list-container.component.html',
+    styleUrls: ['./board-list-container.component.sass'],
+    providers: [
+        BoardListCrossSelectionService,
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class BoardListContainerComponent extends UntilDestroyedMixin implements OnInit {
   text = {

@@ -37,10 +37,11 @@ import {
 } from 'core-app/features/work-packages/components/wp-single-view/wp-single-view.component';
 
 @Component({
-  selector: 'wp-attribute-group',
-  templateUrl: './wp-attribute-group.template.html',
-  styleUrls: ['./wp-attribute-group.component.sass'],
-  encapsulation: ViewEncapsulation.None,
+    selector: 'wp-attribute-group',
+    templateUrl: './wp-attribute-group.template.html',
+    styleUrls: ['./wp-attribute-group.component.sass'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class WorkPackageFormAttributeGroupComponent extends UntilDestroyedMixin {
   @HostBinding('class.wp-attribute-group') className = true;

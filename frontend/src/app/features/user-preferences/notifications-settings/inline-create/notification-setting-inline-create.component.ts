@@ -13,10 +13,11 @@ export interface NotificationSettingProjectOption {
 }
 
 @Component({
-  selector: 'op-notification-setting-inline-create',
-  templateUrl: './notification-setting-inline-create.component.html',
-  styleUrls: ['./notification-setting-inline-create.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-notification-setting-inline-create',
+    templateUrl: './notification-setting-inline-create.component.html',
+    styleUrls: ['./notification-setting-inline-create.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NotificationSettingInlineCreateComponent {
   @Input() userId:string;

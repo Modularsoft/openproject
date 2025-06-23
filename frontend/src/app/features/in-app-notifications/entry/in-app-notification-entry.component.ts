@@ -13,11 +13,12 @@ import { DeviceService } from 'core-app/core/browser/device.service';
 import { UrlParamsService } from 'core-app/core/navigation/url-params.service';
 
 @Component({
-  selector: 'op-in-app-notification-entry',
-  templateUrl: './in-app-notification-entry.component.html',
-  styleUrls: ['./in-app-notification-entry.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
+    selector: 'op-in-app-notification-entry',
+    templateUrl: './in-app-notification-entry.component.html',
+    styleUrls: ['./in-app-notification-entry.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class InAppNotificationEntryComponent implements OnInit {
   @HostBinding('class.op-ian-item') className = true;

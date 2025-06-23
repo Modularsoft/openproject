@@ -23,13 +23,14 @@ import {
 
 
 @Component({
-  selector: 'opce-wp-overview-graph',
-  templateUrl: './wp-overview-graph.template.html',
-  styleUrls: ['./wp-overview-graph.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    WpGraphConfigurationService,
-  ],
+    selector: 'opce-wp-overview-graph',
+    templateUrl: './wp-overview-graph.template.html',
+    styleUrls: ['./wp-overview-graph.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        WpGraphConfigurationService,
+    ],
+    standalone: false
 })
 
 export class WorkPackageOverviewGraphComponent implements OnInit {

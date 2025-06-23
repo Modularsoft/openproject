@@ -31,7 +31,7 @@ import { I18nService } from 'core-app/core/i18n/i18n.service';
 import { IfcModelsDataService } from 'core-app/features/bim/ifc_models/pages/viewer/ifc-models-data.service';
 
 @Component({
-  template: `
+    template: `
     <a *ngIf="manageAllowed"
        class="button"
        [href]="manageIFCPath">
@@ -42,8 +42,9 @@ import { IfcModelsDataService } from 'core-app/features/bim/ifc_models/pages/vie
     </a>
 
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'op-bcf-manage-ifc-button',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-bcf-manage-ifc-button',
+    standalone: false
 })
 export class BimManageIfcModelsButtonComponent {
   text = {

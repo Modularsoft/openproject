@@ -50,11 +50,12 @@ import { WorkPackageNotificationService } from 'core-app/features/work-packages/
 import { GroupDescriptor } from 'core-app/features/work-packages/components/wp-single-view/wp-single-view.component';
 
 @Component({
-  selector: 'wp-relation-query',
-  templateUrl: '../wp-relation-query.html',
-  providers: [
-    { provide: WorkPackageInlineCreateService, useClass: WpRelationInlineCreateService },
-  ],
+    selector: 'wp-relation-query',
+    templateUrl: '../wp-relation-query.html',
+    providers: [
+        { provide: WorkPackageInlineCreateService, useClass: WpRelationInlineCreateService },
+    ],
+    standalone: false
 })
 export class WorkPackageRelationQueryComponent extends WorkPackageRelationQueryBase implements OnInit {
   @Input() public workPackage:WorkPackageResource;

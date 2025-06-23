@@ -66,10 +66,11 @@ import { PathHelperService } from 'core-app/core/path-helper/path-helper.service
 import { TurboRequestsService } from 'core-app/core/turbo/turbo-requests.service';
 
 @Component({
-  selector: 'op-wp-timer-button',
-  templateUrl: './wp-timer-button.component.html',
-  styleUrls: ['./wp-timer-button.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-wp-timer-button',
+    templateUrl: './wp-timer-button.component.html',
+    styleUrls: ['./wp-timer-button.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class WorkPackageTimerButtonComponent extends UntilDestroyedMixin implements AfterViewInit, OnDestroy {
   @Input() public workPackage:WorkPackageResource;

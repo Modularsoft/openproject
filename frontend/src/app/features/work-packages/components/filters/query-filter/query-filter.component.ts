@@ -49,10 +49,11 @@ import { QueryFilterResource } from 'core-app/features/hal/resources/query-filte
 import { WorkPackageViewBaselineService } from 'core-app/features/work-packages/routing/wp-view-base/view-services/wp-view-baseline.service';
 
 @Component({
-  selector: '[query-filter]',
-  styleUrls: ['./query-filter.component.sass'],
-  templateUrl: './query-filter.component.html',
-  encapsulation: ViewEncapsulation.None,
+    selector: '[query-filter]',
+    styleUrls: ['./query-filter.component.sass'],
+    templateUrl: './query-filter.component.html',
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class QueryFilterComponent implements OnInit {
   @HostBinding('class.op-query-filter') className = true;

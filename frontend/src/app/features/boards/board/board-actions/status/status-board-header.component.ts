@@ -30,9 +30,10 @@ import { I18nService } from 'core-app/core/i18n/i18n.service';
 import { StatusResource } from 'core-app/features/hal/resources/status-resource';
 
 @Component({
-  templateUrl: './status-board-header.html',
-  styleUrls: ['./status-board-header.sass'],
-  host: { class: 'title-container -small' },
+    templateUrl: './status-board-header.html',
+    styleUrls: ['./status-board-header.sass'],
+    host: { class: 'title-container -small' },
+    standalone: false
 })
 export class StatusBoardHeaderComponent {
   @Input('resource') public status:StatusResource;

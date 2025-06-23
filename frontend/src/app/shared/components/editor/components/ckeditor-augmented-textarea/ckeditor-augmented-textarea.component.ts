@@ -61,8 +61,9 @@ import { navigator } from '@hotwired/turbo';
 import { uniqueId } from 'lodash';
 
 @Component({
-  templateUrl: './ckeditor-augmented-textarea.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './ckeditor-augmented-textarea.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class CkeditorAugmentedTextareaComponent extends UntilDestroyedMixin implements OnInit {
   // Track form submission "in-flight" state per form, to prevent multiple

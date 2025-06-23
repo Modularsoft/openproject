@@ -5,9 +5,10 @@ import {
 } from 'core-app/features/work-packages/directives/query-space/wp-isolated-query-space.directive';
 
 @Component({
-  selector: 'op-wp-graph-configuration-settings-tab',
-  templateUrl: './settings-tab.component.html',
-  hostDirectives: [WorkPackageIsolatedQuerySpaceDirective],
+    selector: 'op-wp-graph-configuration-settings-tab',
+    templateUrl: './settings-tab.component.html',
+    hostDirectives: [WorkPackageIsolatedQuerySpaceDirective],
+    standalone: false
 })
 export class WpGraphConfigurationSettingsTabComponent implements TabComponent {
   @ViewChild('tabInner', { static: true })

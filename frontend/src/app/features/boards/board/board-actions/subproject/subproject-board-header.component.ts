@@ -32,9 +32,10 @@ import { HalResource } from 'core-app/features/hal/resources/hal-resource';
 import idFromLink from 'core-app/features/hal/helpers/id-from-link';
 
 @Component({
-  templateUrl: './subproject-board-header.html',
-  styleUrls: ['./subproject-board-header.sass'],
-  host: { class: 'title-container -small' },
+    templateUrl: './subproject-board-header.html',
+    styleUrls: ['./subproject-board-header.sass'],
+    host: { class: 'title-container -small' },
+    standalone: false
 })
 export class SubprojectBoardHeaderComponent {
   @Input() public resource:HalResource;

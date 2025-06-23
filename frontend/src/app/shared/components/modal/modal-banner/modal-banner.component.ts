@@ -35,10 +35,11 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'op-modal-banner',
-  templateUrl: './modal-banner.component.html',
-  styleUrls: ['./modal-banner.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-modal-banner',
+    templateUrl: './modal-banner.component.html',
+    styleUrls: ['./modal-banner.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class OpModalBannerComponent {
   @Input() type:'info'|'warning' = 'info';

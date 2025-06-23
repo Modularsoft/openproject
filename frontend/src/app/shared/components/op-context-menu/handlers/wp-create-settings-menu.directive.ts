@@ -34,7 +34,8 @@ import { States } from 'core-app/core/states/states.service';
 import { FormResource } from 'core-app/features/hal/resources/form-resource';
 
 @Directive({
-  selector: '[wpCreateSettingsMenu]',
+    selector: '[wpCreateSettingsMenu]',
+    standalone: false
 })
 export class WorkPackageCreateSettingsMenuDirective extends OpContextMenuTrigger {
   constructor(readonly elementRef:ElementRef,

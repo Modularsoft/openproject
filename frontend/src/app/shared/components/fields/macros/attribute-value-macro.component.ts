@@ -54,12 +54,13 @@ import { ISchemaProxy } from 'core-app/features/hal/schemas/schema-proxy';
 export const ATTRIBUTE_MACRO_CLASS = 'op-attribute-value-macro';
 
 @Component({
-  templateUrl: './attribute-value-macro.html',
-  styleUrls: ['./attribute-macro.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    HalResourceEditingService,
-  ],
+    templateUrl: './attribute-value-macro.html',
+    styleUrls: ['./attribute-macro.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        HalResourceEditingService,
+    ],
+    standalone: false
 })
 export class AttributeValueMacroComponent implements OnInit {
   @ViewChild('displayContainer') private displayContainer:ElementRef<HTMLSpanElement>;

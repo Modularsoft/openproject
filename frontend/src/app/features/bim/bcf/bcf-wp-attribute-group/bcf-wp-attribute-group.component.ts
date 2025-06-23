@@ -55,10 +55,11 @@ import { BcfViewService } from 'core-app/features/bim/ifc_models/pages/viewer/bc
 import { filter, take } from 'rxjs/operators';
 
 @Component({
-  templateUrl: './bcf-wp-attribute-group.component.html',
-  styleUrls: ['./bcf-wp-attribute-group.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [ViewpointsService],
+    templateUrl: './bcf-wp-attribute-group.component.html',
+    styleUrls: ['./bcf-wp-attribute-group.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [ViewpointsService],
+    standalone: false
 })
 export class BcfWpAttributeGroupComponent extends UntilDestroyedMixin implements AfterViewInit, OnDestroy, OnInit {
   @Input() workPackage:WorkPackageResource;

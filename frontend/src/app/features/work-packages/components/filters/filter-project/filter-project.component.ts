@@ -42,9 +42,10 @@ import { firstValueFrom } from 'rxjs';
 import { IAPIFilter } from 'core-app/shared/components/autocompleter/op-autocompleter/typings';
 
 @Component({
-  selector: 'op-filter-project',
-  templateUrl: './filter-project.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'op-filter-project',
+    templateUrl: './filter-project.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class FilterProjectComponent extends UntilDestroyedMixin implements OnInit {
   @Input() public shouldFocus = false;

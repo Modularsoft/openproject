@@ -35,9 +35,10 @@ import { PrincipalLike } from 'core-app/shared/components/principal/principal-ty
 import { hrefFromPrincipal, typeFromHref } from 'core-app/shared/components/principal/principal-helper';
 
 @Component({
-  templateUrl: './user-autocompleter-template.component.html',
-  styleUrls: ['./user-autocompleter-template.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './user-autocompleter-template.component.html',
+    styleUrls: ['./user-autocompleter-template.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class UserAutocompleterTemplateComponent implements IAutocompleterTemplateComponent {
   @Input() public inviteUserToProject:string|undefined;

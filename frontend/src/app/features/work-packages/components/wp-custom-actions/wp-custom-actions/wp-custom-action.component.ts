@@ -45,9 +45,10 @@ import {
 import { UntilDestroyedMixin } from 'core-app/shared/helpers/angular/until-destroyed.mixin';
 
 @Component({
-  selector: 'wp-custom-action',
-  templateUrl: './wp-custom-action.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'wp-custom-action',
+    templateUrl: './wp-custom-action.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class WpCustomActionComponent extends UntilDestroyedMixin implements OnInit {
   @Input() workPackage:WorkPackageResource;

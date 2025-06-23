@@ -55,10 +55,11 @@ export interface CreateAutocompleterValueOption {
 }
 
 @Component({
-  templateUrl: './create-autocompleter.component.html',
-  selector: 'create-autocompleter',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./create-autocompleter.component.sass'],
+    templateUrl: './create-autocompleter.component.html',
+    selector: 'create-autocompleter',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    styleUrls: ['./create-autocompleter.component.sass'],
+    standalone: false
 })
 export class CreateAutocompleterComponent extends UntilDestroyedMixin implements AfterViewInit {
   @Input() public availableValues:CreateAutocompleterValueOption[];

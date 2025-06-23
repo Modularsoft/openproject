@@ -36,16 +36,17 @@ import {
 export const wpBaseSelector = 'work-packages-base';
 
 @Component({
-  selector: wpBaseSelector,
-  hostDirectives: [WorkPackageIsolatedQuerySpaceDirective],
-  template: `
+    selector: wpBaseSelector,
+    hostDirectives: [WorkPackageIsolatedQuerySpaceDirective],
+    template: `
     <div class="work-packages-page--ui-view">
       <ui-view></ui-view>
     </div>
   `,
-  providers: [
-    { provide: EditFormRoutingService, useClass: WorkPackageEditFormRoutingService },
-  ],
+    providers: [
+        { provide: EditFormRoutingService, useClass: WorkPackageEditFormRoutingService },
+    ],
+    standalone: false
 })
 export class WorkPackagesBaseComponent {
 }

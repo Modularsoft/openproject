@@ -32,8 +32,8 @@ import { I18nService } from 'core-app/core/i18n/i18n.service';
 import { PathHelperService } from 'core-app/core/path-helper/path-helper.service';
 
 @Component({
-  selector: 'op-user-link',
-  template: `
+    selector: 'op-user-link',
+    template: `
     <a *ngIf="href"
        data-hover-card-trigger-target="trigger"
        [attr.data-hover-card-url]="hoverCardUrl"
@@ -45,7 +45,8 @@ import { PathHelperService } from 'core-app/core/path-helper/path-helper.service
       {{ name }}
     <ng-container>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class UserLinkComponent {
   @Input() user:UserResource;

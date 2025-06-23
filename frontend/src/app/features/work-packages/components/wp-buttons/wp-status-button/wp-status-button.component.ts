@@ -38,9 +38,10 @@ import { UntilDestroyedMixin } from 'core-app/shared/helpers/angular/until-destr
 import { SchemaCacheService } from 'core-app/core/schemas/schema-cache.service';
 
 @Component({
-  selector: 'wp-status-button',
-  styleUrls: ['./wp-status-button.component.sass'],
-  templateUrl: './wp-status-button.html',
+    selector: 'wp-status-button',
+    styleUrls: ['./wp-status-button.component.sass'],
+    templateUrl: './wp-status-button.html',
+    standalone: false
 })
 export class WorkPackageStatusButtonComponent extends UntilDestroyedMixin implements OnInit {
   @Input('workPackage') public workPackage:WorkPackageResource;

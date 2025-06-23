@@ -16,15 +16,16 @@ import { populateInputsFromDataset } from 'core-app/shared/components/dataset-in
 export type SpotSwitchState = boolean;
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'spot-switch',
-  templateUrl: './switch.component.html',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => SpotSwitchComponent),
-    multi: true,
-  }],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: 'spot-switch',
+    templateUrl: './switch.component.html',
+    providers: [{
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => SpotSwitchComponent),
+            multi: true,
+        }],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class SpotSwitchComponent implements ControlValueAccessor {
   @HostBinding('class.spot-switch') public className = true;

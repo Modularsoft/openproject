@@ -50,19 +50,20 @@ export type TimeEntryWorkPackageAutocompleterMode = 'all'|'recent';
 const RECENT_TIME_ENTRIES_MAGIC_NUMBER = 30;
 
 @Component({
-  templateUrl: '../op-autocompleter/op-autocompleter.component.html',
-  selector: 'op-time-entries-work-package-autocompleter',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => TimeEntriesWorkPackageAutocompleterComponent),
-      multi: true,
-    },
-    // Provide a new version of the modal invite service,
-    // as otherwise the close event will be shared across all instances
-    OpInviteUserModalService,
-  ],
+    templateUrl: '../op-autocompleter/op-autocompleter.component.html',
+    selector: 'op-time-entries-work-package-autocompleter',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => TimeEntriesWorkPackageAutocompleterComponent),
+            multi: true,
+        },
+        // Provide a new version of the modal invite service,
+        // as otherwise the close event will be shared across all instances
+        OpInviteUserModalService,
+    ],
+    standalone: false
 })
 export class TimeEntriesWorkPackageAutocompleterComponent extends OpAutocompleterComponent implements OnInit, ControlValueAccessor {
   public mode:TimeEntryWorkPackageAutocompleterMode = 'all';

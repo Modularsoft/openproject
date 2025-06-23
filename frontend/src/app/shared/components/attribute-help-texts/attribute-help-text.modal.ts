@@ -36,8 +36,9 @@ import { I18nService } from 'core-app/core/i18n/i18n.service';
 import { HelpTextResource } from 'core-app/features/hal/resources/help-text-resource';
 
 @Component({
-  templateUrl: './help-text.modal.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './help-text.modal.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AttributeHelpTextModalComponent extends OpModalComponent implements OnInit {
   readonly text = {

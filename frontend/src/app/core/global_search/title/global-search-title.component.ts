@@ -43,9 +43,10 @@ import { InjectField } from 'core-app/shared/helpers/angular/inject-field.decora
 import { UntilDestroyedMixin } from 'core-app/shared/helpers/angular/until-destroyed.mixin';
 
 @Component({
-  selector: 'opce-global-search-title',
-  templateUrl: './global-search-title.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'opce-global-search-title',
+    templateUrl: './global-search-title.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class GlobalSearchTitleComponent extends UntilDestroyedMixin implements OnInit {
   @Input() public searchTerm:string;

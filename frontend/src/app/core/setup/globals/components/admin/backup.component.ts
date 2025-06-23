@@ -37,9 +37,10 @@ import { HalError } from 'core-app/features/hal/services/hal-error';
 import { JobStatusModalService } from 'core-app/features/job-status/job-status-modal.service';
 
 @Component({
-  selector: 'opce-backup',
-  templateUrl: './backup.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'opce-backup',
+    templateUrl: './backup.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class BackupComponent implements AfterViewInit {
   public text = {

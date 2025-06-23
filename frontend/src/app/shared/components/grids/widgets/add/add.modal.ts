@@ -16,8 +16,9 @@ import { BehaviorSubject } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 
 @Component({
-  templateUrl: './add.modal.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './add.modal.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AddGridWidgetModalComponent extends OpModalComponent implements OnInit {
   text = {

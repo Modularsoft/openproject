@@ -55,9 +55,10 @@ import { ApiV3Service } from 'core-app/core/apiv3/api-v3.service';
 import { TimezoneService } from 'core-app/core/datetime/timezone.service';
 
 @Component({
-  templateUrl: './progress-popover-edit-field.component.html',
-  styleUrls: ['./progress-popover-edit-field.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './progress-popover-edit-field.component.html',
+    styleUrls: ['./progress-popover-edit-field.component.sass'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ProgressPopoverEditFieldComponent extends ProgressEditFieldComponent implements OnInit {
   text = {
