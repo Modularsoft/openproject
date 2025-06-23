@@ -53,100 +53,102 @@ See COPYRIGHT and LICENSE files for more details.
 
 <% if OpenProject::Configuration.direct_uploads? %>
 
-<%= nonced_javascript_tag do %>
-  jQuery(document).ready(function() {
-    var setDirectUploadFileName = function () {
-      var fileNameField = jQuery('input[type=file]')
-      var fileName = '';
-      if (fileNameField.length > 0 && fileNameField[0].files && fileNameField[0].files[0]) {
-        fileName = fileNameField[0].files[0].name;
-      }
+<%= nonced_javascript_tag defer: true do %>
+  window.addEventListener('turbo:load', () => {
+    jQuery(document).ready(function() {
+      var setDirectUploadFileName = function () {
+        var fileNameField = jQuery('input[type=file]')
+        var fileName = '';
+        if (fileNameField.length > 0 && fileNameField[0].files && fileNameField[0].files[0]) {
+          fileName = fileNameField[0].files[0].name;
+        }
 
-      <%# Reset the form validity %>
-      <%# See: https://developer.mozilla.org/en-US/docs/Web/API/HTMLObjectElement/setCustomValidity %>
-      fileNameField[0].setCustomValidity('');
+        <%# Reset the form validity %>
+        <%# See: https://developer.mozilla.org/en-US/docs/Web/API/HTMLObjectElement/setCustomValidity %>
+        fileNameField[0].setCustomValidity('');
 
-      var titleField = jQuery("#bim_ifc_models_ifc_model_title");
+        var titleField = jQuery("#bim_ifc_models_ifc_model_title");
 
-      <%# When creating a new model, there is no titleField. %>
-      var titleFieldValue = '';
-      if (titleField.length > 0) {
-        titleFieldValue = jQuery("#bim_ifc_models_ifc_model_title").val();
+        <%# When creating a new model, there is no titleField. %>
+        var titleFieldValue = '';
+        if (titleField.length > 0) {
+          titleFieldValue = jQuery("#bim_ifc_models_ifc_model_title").val();
+        };
+
+        var title = '';
+        if (titleFieldValue.length > 0) {
+          title = titleFieldValue;
+        } else {
+          title = fileName;
+        }
+
+        return jQuery.ajax({
+          type: "post",
+          url: "<%= set_direct_upload_file_name_bcf_project_ifc_models_path %>",
+          dataType: "json",
+          xhrFields: {
+            withCredentials: true
+          },
+          data: {
+            title: title,
+            isDefault: jQuery("#bim_ifc_models_ifc_model_is_default").is(":checked") ? 1 : 0,
+            filesize: fileNameField[0].files[0].size
+          },
+          statusCode: {
+            401: function(resp, status, error) {
+              document.location.reload(); // reload to make user login again
+            }
+          },
+          error: function(jqXHR, ajaxOptions, errorThrown) {
+            if (jqXHR.status == 422) {
+              var errorMessage = jqXHR.responseJSON.error;
+              fileNameField[0].setCustomValidity(errorMessage);
+              fileNameField[0].reportValidity();
+            }
+          }
+        });
       };
+      jQuery("#bim_ifc_models_ifc_model_is_default").change(function(e){
+        setDirectUploadFileName();
+      });
+      jQuery("input[type=file]").change(function(e){
+        setDirectUploadFileName();
 
-      var title = '';
-      if (titleFieldValue.length > 0) {
-        title = titleFieldValue;
-      } else {
-        title = fileName;
-      }
+        <%# rebuild form to post to S3 directly %>
+        if (jQuery("input[name=authenticity_token]").length === 1) {
+          jQuery("input[name=authenticity_token]").remove();
+          jQuery("input[name=_method]").remove();
 
-      return jQuery.ajax({
-        type: "post",
-        url: "<%= set_direct_upload_file_name_bcf_project_ifc_models_path %>",
-        dataType: "json",
-        xhrFields: {
-          withCredentials: true
-        },
-        data: {
-          title: title,
-          isDefault: jQuery("#bim_ifc_models_ifc_model_is_default").is(":checked") ? 1 : 0,
-          filesize: fileNameField[0].files[0].size
-        },
-        statusCode: {
-          401: function(resp, status, error) {
-            document.location.reload(); // reload to make user login again
-          }
-        },
-        error: function(jqXHR, ajaxOptions, errorThrown) {
-          if (jqXHR.status == 422) {
-            var errorMessage = jqXHR.responseJSON.error;
-            fileNameField[0].setCustomValidity(errorMessage);
-            fileNameField[0].reportValidity();
-          }
+          var url = jQuery("input[name=uri]").val();
+
+          jQuery("form").attr("action", url);
+          jQuery("form").attr("enctype", "multipart/form-data");
+
+          jQuery("input[name=uri]").remove();
+
+          jQuery("form").submit(function() {
+            jQuery("#bim_ifc_models_ifc_model_title").prop("disabled", "disabled");
+          });
         }
       });
-    };
-    jQuery("#bim_ifc_models_ifc_model_is_default").change(function(e){
-      setDirectUploadFileName();
-    });
-    jQuery("input[type=file]").change(function(e){
-      setDirectUploadFileName();
+      <% unless @ifc_model.new_record? %>
+        <%# The titleField might have changed AFTER selecting a file. Therefore,
+            we need to intercept form submits to first send the file name etc and
+            then submit.
 
-      <%# rebuild form to post to S3 directly %>
-      if (jQuery("input[name=authenticity_token]").length === 1) {
-        jQuery("input[name=authenticity_token]").remove();
-        jQuery("input[name=_method]").remove();
+            Also, we need take care not to end up in a submit loop. So prevent it to
+            be submitted several times. %>
+        var submitted = false;
+        var form = jQuery("form#edit_bim_ifc_models_ifc_model_<%= @ifc_model.id %>")
+        form.submit((e) => {
+          if (submitted) { return };
 
-        var url = jQuery("input[name=uri]").val();
-
-        jQuery("form").attr("action", url);
-        jQuery("form").attr("enctype", "multipart/form-data");
-
-        jQuery("input[name=uri]").remove();
-
-        jQuery("form").submit(function() {
-          jQuery("#bim_ifc_models_ifc_model_title").prop("disabled", "disabled");
+          e.preventDefault();
+          setDirectUploadFileName().always(() => form.submit());
+          submitted = true;
         });
-      }
+      <% end %>
     });
-    <% unless @ifc_model.new_record? %>
-      <%# The titleField might have changed AFTER selecting a file. Therefore,
-          we need to intercept form submits to first send the file name etc and
-          then submit.
-
-          Also, we need take care not to end up in a submit loop. So prevent it to
-          be submitted several times. %>
-      var submitted = false;
-      var form = jQuery("form#edit_bim_ifc_models_ifc_model_<%= @ifc_model.id %>")
-      form.submit((e) => {
-        if (submitted) { return };
-
-        e.preventDefault();
-        setDirectUploadFileName().always(() => form.submit());
-        submitted = true;
-      });
-    <% end %>
   });
 <% end %>
 

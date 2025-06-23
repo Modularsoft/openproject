@@ -45,12 +45,14 @@ See COPYRIGHT and LICENSE files for more details.
                  { label: WikiPage.human_attribute_name(:parent_title), include_blank: false, container_class: "-wide" } %>
   </div>
 
-  <%= nonced_javascript_tag  do -%>
-    jQuery(function() {
-        var parent_select = jQuery('#wiki_page_parent_id');
-        parent_select.attr('size', parent_select.children().length);
-      }
-    ));
+  <%= nonced_javascript_tag defer: true do -%>
+    window.addEventListener('turbo:load', () => {
+      jQuery(function() {
+          var parent_select = jQuery('#wiki_page_parent_id');
+          parent_select.attr('size', parent_select.children().length);
+        }
+      ));
+    });
   <% end -%>
   <%= submit_tag t(:button_save), class: "button -primary" %>
 <% end %>
