@@ -291,7 +291,7 @@ export class HalResourceService {
    */
   protected getResourceClassOfType<T extends HalResource>(type:string):HalResourceClass<T> {
     const config = this.config[type];
-    return (config && config.cls) ? config.cls : this.defaultClass;
+    return (config && config.cls) ? config.cls : this.defaultClass as HalResourceClass<T>;
   }
 
   /**
