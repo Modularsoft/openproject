@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
+import { Injector, NgModule, inject, provideAppInitializer } from '@angular/core';
 import {
   FormsModule,
   ReactiveFormsModule,
@@ -55,9 +55,10 @@ export function initializeServices(injector:Injector) {
   ],
   providers: [
     OpInviteUserModalService,
-    {
-      provide: APP_INITIALIZER, useFactory: initializeServices, deps: [Injector], multi: true,
-    },
+    provideAppInitializer(() => {
+        const initializerFn = (initializeServices)(inject(Injector));
+        return initializerFn();
+      }),
   ],
 })
 export class OpenprojectInviteUserModalModule {
