@@ -91,7 +91,9 @@ export function initializeGlobalListeners():void {
       // This is very likely an invalid selector such as a Google Analytics tag.
       // We can safely ignore this and just not scroll in this case.
       // Still log the error so one can confirm the reason there is no scrolling.
-      console.log(`Could not scroll to given location hash: ${hash} ( ${e.message})`);
+      if (e instanceof Error) {
+        console.log(`Could not scroll to given location hash: ${hash} ( ${e.message})`);
+      }
     }
   }
 

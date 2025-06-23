@@ -68,7 +68,9 @@ export default class TwoFactorAuthenticationController extends Controller {
 
       return true;
     } catch (error) {
-      this.displayError(error);
+      if (error instanceof DOMException) {
+        this.displayError(error);
+      }
       return false;
     }
   }
@@ -102,7 +104,9 @@ export default class TwoFactorAuthenticationController extends Controller {
 
       return true;
     } catch (error) {
-      this.displayError(error);
+      if (error instanceof DOMException) {
+        this.displayError(error);
+      }
       return false;
     }
   }

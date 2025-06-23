@@ -173,16 +173,17 @@ export class OpCkeditorComponent extends UntilDestroyedMixin implements OnInit, 
 
       return this.getRawData();
     } catch (e) {
-      console.error(`Failed to save CKEditor content: ${e}.`);
+      if (e instanceof Error) {
+        console.error(`Failed to save CKEditor content: ${e.message}.`);
 
-      const error = this.I18n.t(
-        'js.editor.error_saving_failed',
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-call
-        { error: e.toString() || this.I18n.t('js.error.internal') },
-      );
+        const error = this.I18n.t(
+          'js.editor.error_saving_failed',
+          { error: e.message },
+        );
 
-      if (notificationOnError) {
-        this.Notifications.addError(error);
+        if (notificationOnError) {
+          this.Notifications.addError(error);
+        }
       }
 
       return this._content;
@@ -203,14 +204,14 @@ export class OpCkeditorComponent extends UntilDestroyedMixin implements OnInit, 
   ngOnInit() {
     try {
       this.initializeEditor();
-    } catch (error:unknown) {
+    } catch (e) {
       // We will run into this error if, among others, the browser does not fully support
       // CKEditor's requirements on ES6.
-
-      const message = (error as Error).toString();
-      console.error('Failed to setup CKEditor instance: %O', error);
-      this.error = message;
-      this.initializationFailed.emit(message);
+      console.error('Failed to setup CKEditor instance: %O', e);
+      if (e instanceof Error) {
+        this.error = e.message;
+        this.initializationFailed.emit(e.message);
+      }
     }
   }
 
