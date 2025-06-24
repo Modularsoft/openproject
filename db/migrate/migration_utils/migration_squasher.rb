@@ -49,7 +49,7 @@ module Migration
           # All migrations that this migration aggregates have already
           # been applied. In this case, remove the information about those
           # migrations from the schema_migrations table and we're done.
-          ActiveRecord::Base.connection.execute <<-SQL + (intersection.map { |version| <<-CONDITIONS }).join(" OR ")
+          ActiveRecord::Base.connection.execute <<-SQL.squish + (intersection.map { |version| <<-CONDITIONS }).join(" OR ")
             DELETE FROM
               #{quoted_schema_migrations_table_name}
             WHERE

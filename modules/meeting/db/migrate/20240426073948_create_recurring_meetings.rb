@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class CreateRecurringMeetings < ActiveRecord::Migration[7.1]
   def change
     create_table :recurring_meetings do |t|
