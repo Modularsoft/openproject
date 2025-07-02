@@ -80,16 +80,14 @@ module CustomFields
       private
 
       def formula_suggestions
-        # TODO: move allowed operators to a constant of the model
-        operators = %w[+ - * / ( )].map { |op| { key: op, label: op } }
+        operators = CustomField::CalculatedValue::OPERATORS.map { |op| { key: op, label: op } }
         custom_fields = ProjectCustomField.where(field_format: %w[int float calculated_value]).map do |cf|
           { key: "cf_#{cf.id}", label: "#{cf.name} (#{helpers.label_for_custom_field_format(cf.field_format)})" }
         end
 
-        # TODO: localize titles
         {
-          custom_fields: { title: "Custom Fields", tokens: custom_fields },
-          operators: { title: "Operators", tokens: operators }
+          custom_fields: { title: I18n.t("label_custom_field_plural"), tokens: custom_fields },
+          operators: { title: I18n.t("label_mathematical_operators"), tokens: operators }
         }
       end
     end

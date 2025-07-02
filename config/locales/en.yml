@@ -3026,6 +3026,7 @@ en:
   label_manage: "Manage"
   label_manage_groups: "Manage groups"
   label_managed_repositories_vendor: "Managed %{vendor} repositories"
+  label_mathematical_operators: "Mathematical operators"
   label_max_size: "Maximum size"
   label_me: "me"
   label_member_new: "New member"

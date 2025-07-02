@@ -33,6 +33,8 @@
 module CustomField::CalculatedValue
   extend ActiveSupport::Concern
 
+  OPERATORS = %w[+ - * / ( )].freeze
+
   included do
     validate :validate_formula
 
@@ -92,14 +94,14 @@ module CustomField::CalculatedValue
 
     def formula_contains_only_allowed_characters?
       # List of allowed characters in a formula. This only performs a very basic validation.
-      # Allowed characters are:
-      # + - / * ( ) whitespace digits and decimal points
+      # The allowed characters are:
+      # Our mathematical operators, whitespace, digits and decimal points
       # Additionally, the formula may contain references to custom fields in the form of `cf_123` or `{{cf_123}}`
       # where 123 is the ID of the custom field.
       # Once this basic validation passes, the formula will be parsed and validated by Dentaku, which builds an AST
       # and ensures that the formula is really valid. A welcome side effect of the basic validation done here is that
       # it prevents built-in functions from being used in the formula, which we do not want to allow.
-      allowed_chars = %w[+ - / * ( )] + [" "]
+      allowed_chars = OPERATORS + [" "]
       allowed_tokens = /\A(cf_\d+|\{\{cf_\d+}}|\d+\.?\d*|\.\d+)\z/
 
       formula_string.split(Regexp.union(allowed_chars)).reject(&:empty?).all? do |token|
