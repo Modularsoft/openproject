@@ -53,9 +53,10 @@ module CustomFields
           end
         end
 
-        details_form.text_field(
+        details_form.pattern_input(
           name: :formula,
           value: model.formula_string,
+          suggestions: formula_suggestions,
           label: I18n.t(:label_formula),
           required: true,
           caption: I18n.t("custom_fields.instructions.formula")
@@ -74,6 +75,22 @@ module CustomFields
         )
 
         details_form.submit(name: :submit, label: I18n.t(:button_save), scheme: :primary)
+      end
+
+      private
+
+      def formula_suggestions
+        # TODO: move allowed operators to a constant of the model
+        operators = %w[+ - * / ( )].map { |op| { key: op, label: op } }
+        custom_fields = ProjectCustomField.where(field_format: %w[int float calculated_value]).map do |cf|
+          { key: "cf_#{cf.id}", label: "#{cf.name} (#{helpers.label_for_custom_field_format(cf.field_format)})" }
+        end
+
+        # TODO: localize titles
+        {
+          operators: { title: "Operators", tokens: operators },
+          custom_fields: { title: "Custom Fields", tokens: custom_fields }
+        }
       end
     end
   end

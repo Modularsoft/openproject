@@ -51,13 +51,15 @@ module CustomField::CalculatedValue
 
       # WP-64348: check for valid (i.e., visible & enabled) custom field references (see #cf_ids_used_in_formula)
 
-      # Dentaku will return nil if the formula is invalid.
-      # TODO WP-64348: add support for referenced custom fields by injecting them as variables,
-      #       e.g. calculator.evaluate(formula_string, cf_123: CustomField.find(123).value)
-      errors.add(:formula, :invalid) unless Dentaku::Calculator.new.evaluate(formula_string)
+      calculation_result = perform_calculation
+      unless calculation_result
+        errors.add(:formula, :invalid)
+        return
+      end
 
       # TODO: consider differentiating between a formula that contains missing variables, invalid
       #       syntax, or mathematical errors.
+      true # return anything to appease RuboCop for now
     end
 
     def formula=(value)
@@ -75,17 +77,30 @@ module CustomField::CalculatedValue
 
     private
 
+    def perform_calculation
+      # Dentaku will return nil if the formula is invalid.
+      # Accept both cf_123 and {{cf_123}} in the formula string
+      formula_for_eval = formula_string.gsub(/\{\{(cf_\d+)}}/, '\1')
+
+      variables = cf_ids_used_in_formula(formula_for_eval).map do |cf_id|
+        # TODO: insert real value here instead of hardcoded number
+        ["cf_#{cf_id}", 1]
+      end
+
+      Dentaku::Calculator.new.evaluate(formula_for_eval, variables.to_h)
+    end
+
     def formula_contains_only_allowed_characters?
       # List of allowed characters in a formula. This only performs a very basic validation.
       # Allowed characters are:
       # + - / * ( ) whitespace digits and decimal points
-      # Additionally, the formula may contain references to custom fields in the form of `cf_123` where 123 is the ID of
-      # the custom field.
+      # Additionally, the formula may contain references to custom fields in the form of `cf_123` or `{{cf_123}}`
+      # where 123 is the ID of the custom field.
       # Once this basic validation passes, the formula will be parsed and validated by Dentaku, which builds an AST
       # and ensures that the formula is really valid. A welcome side effect of the basic validation done here is that
       # it prevents built-in functions from being used in the formula, which we do not want to allow.
       allowed_chars = %w[+ - / * ( )] + [" "]
-      allowed_tokens = /\A(cf_\d+|\d+\.?\d*|\.\d+)\z/
+      allowed_tokens = /\A(cf_\d+|\{\{cf_\d+}}|\d+\.?\d*|\.\d+)\z/
 
       formula_string.split(Regexp.union(allowed_chars)).reject(&:empty?).all? do |token|
         token.match?(allowed_tokens)
@@ -93,9 +108,10 @@ module CustomField::CalculatedValue
     end
 
     # Returns a list of custom field IDs used in the formula.
-    # For a formula like `2 + cf_12 + cf_4` it returns `[12, 4]`.
+    # For a formula like `2 + cf_12 + cf_4` or `2 + {{cf_12}} + {{cf_4}}` it returns `[12, 4]`.
     def cf_ids_used_in_formula(formula_str)
-      formula_str.scan(/\bcf_(\d+)\b/).flatten.map(&:to_i)
+      # Match both cf_123 and {{cf_123}}
+      formula_str.scan(/\b(?:cf_(\d+)|\{\{cf_(\d+)}})\b/).flatten.compact.map(&:to_i)
     end
   end
 end
