@@ -88,8 +88,8 @@ module CustomFields
 
         # TODO: localize titles
         {
-          operators: { title: "Operators", tokens: operators },
-          custom_fields: { title: "Custom Fields", tokens: custom_fields }
+          custom_fields: { title: "Custom Fields", tokens: custom_fields },
+          operators: { title: "Operators", tokens: operators }
         }
       end
     end
