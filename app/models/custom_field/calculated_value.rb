@@ -33,7 +33,11 @@
 module CustomField::CalculatedValue
   extend ActiveSupport::Concern
 
+  # Mathematical operators that are allowed in the formula.
   OPERATORS = %w[+ - * / ( )].freeze
+
+  # Field formats that can be used within a formula.
+  FIELD_FORMATS_FOR_FORMULA = %w[int float calculated_value].freeze
 
   included do
     validate :validate_formula

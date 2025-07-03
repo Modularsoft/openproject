@@ -80,9 +80,14 @@ module CustomFields
       private
 
       def formula_suggestions
-        operators = CustomField::CalculatedValue::OPERATORS.map { |op| { key: op, label: op } }
-        custom_fields = ProjectCustomField.where(field_format: %w[int float calculated_value]).map do |cf|
-          { key: "cf_#{cf.id}", label: "#{cf.name} (#{helpers.label_for_custom_field_format(cf.field_format)})" }
+        # Insert operators as plain text nodes instead of tokens, since displaying them as tokens would result
+        # in too much visual clutter. We still want to offer autocompletion for them.
+        operators = CustomField::CalculatedValue::OPERATORS.map { |op| { key: op, label: op, insert_as_text: true } }
+
+        custom_fields = ProjectCustomField
+                          .where(field_format: CustomField::CalculatedValue::FIELD_FORMATS_FOR_FORMULA)
+                          .map do |cf|
+          { key: "cf_#{cf.id}", label: cf.name }
         end
 
         {

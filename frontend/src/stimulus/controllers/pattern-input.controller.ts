@@ -39,7 +39,7 @@ type FilteredSuggestions = Array<{
 
 type TokenElement = HTMLElement&{ dataset:{ role:'token', prop:string } };
 type ListElement = HTMLElement&{ dataset:{ role:'list_item', prop:string } };
-type AttributeToken = { key:string, label:string, label_with_context:string };
+type AttributeToken = { key:string, label:string, label_with_context:string, insert_as_text?:boolean };
 
 const COMPLETION_CHARACTER = '/';
 const TOKEN_REGEX = /{{([0-9A-Za-z_]+)}}/g;
@@ -179,19 +179,16 @@ export default class PatternInputController extends Controller {
   // Autocomplete events
   suggestions_select(event:PointerEvent):void {
     const target = event.currentTarget as ListElement;
-    const token = this.createToken(target.dataset.prop);
+    const selection = target.dataset.prop;
 
-    if (!this.currentRange) {
-      this.contentTarget.appendChild(token);
-      this.clearSuggestionsFilter();
-      return;
-    }
-
-    const parentNode = this.currentRange.startContainer.parentNode;
-    if (this.isToken(parentNode)) {
-      this.replaceToken(token, parentNode);
+    // Some suggestions are configured to be inserted as text to allow for better readability.
+    // As an example, take the mathematical operators of a calculated values formula.
+    if (this.shouldInsertAsText(selection)) {
+      const textNode = document.createTextNode(selection);
+      this.insertNode(textNode);
     } else {
-      this.insertNodeAtCurrentRange(token);
+      const token = this.createToken(selection);
+      this.insertNode(token);
     }
 
     this.clearSuggestionsFilter();
@@ -201,13 +198,8 @@ export default class PatternInputController extends Controller {
     if (!this.currentRange) { return; }
 
     const target = event.currentTarget as ListElement;
-    const parentNode = this.currentRange.startContainer.parentNode;
     const text = document.createTextNode(target.dataset.prop);
-    if (this.isToken(parentNode)) {
-      this.replaceToken(text, parentNode);
-    } else {
-      this.insertNodeAtCurrentRange(text);
-    }
+    this.insertNodeAtAppropriatePosition(text);
 
     this.clearSuggestionsFilter();
   }
@@ -602,5 +594,32 @@ export default class PatternInputController extends Controller {
     if (!value || value.length !== 1) { return false; }
 
     return new RegExp(`[${CONTROL_SPACE}\\s]`).test(value);
+  }
+
+  private insertNode(node:Node) {
+    if (!this.currentRange) {
+      this.contentTarget.appendChild(node);
+      return;
+    }
+
+    this.insertNodeAtAppropriatePosition(node);
+  }
+
+  private insertNodeAtAppropriatePosition(node:Node) {
+    if (!this.currentRange) { return; }
+
+    const parentNode = this.currentRange.startContainer.parentNode;
+    if (this.isToken(parentNode)) {
+      this.replaceToken(node, parentNode);
+    } else {
+      this.insertNodeAtCurrentRange(node);
+    }
+  }
+
+  private shouldInsertAsText(tokenKey:string):boolean {
+    return Object.values(this.suggestionsInitialValue).some(
+      (group) =>
+        group.tokens.some((token) => token.key === tokenKey && token.insert_as_text),
+    );
   }
 }
