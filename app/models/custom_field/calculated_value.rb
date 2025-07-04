@@ -81,6 +81,16 @@ module CustomField::CalculatedValue
       formula ? formula.fetch("formula", "") : ""
     end
 
+    def usable_custom_field_references_for_formula
+      scope = type == "ProjectCustomField" ? ProjectCustomField : CustomField
+
+      scope
+        .where(field_format: FIELD_FORMATS_FOR_FORMULA)
+        # Disallow the current custom field to avoid circular references
+        .where.not(id: id)
+        .visible
+    end
+
     private
 
     def perform_calculation
