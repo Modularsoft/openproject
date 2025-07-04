@@ -31,7 +31,7 @@ See COPYRIGHT and LICENSE files for more details.
 
 <div class="form--field">
   <%= styled_label_tag "lang-for-#{name}" do %>
-    <%= content_tag(:span, t("setting_#{name}"), class: "sr-only") %>
+    <%= content_tag(:span, setting_label(name), class: "sr-only") %>
   <% end %>
   <div class="form--field-container">
     <%=
@@ -50,20 +50,20 @@ See COPYRIGHT and LICENSE files for more details.
   <%=
     hidden_field_tag(
       "settings[#{name}][#{lang}]",
-      Setting.send(name)[lang],
+      setting_value(name)[lang],
       id: "lang-for-#{name}-#{lang}"
     )
   %>
 <% end %>
 
 <div class="form--field -visible-overflow">
-  <%= styled_label_tag "settings-#{name}", t("setting_#{name}") %>
+  <%= styled_label_tag "settings-#{name}", setting_label(name) %>
   <div class="form--field-container">
     <%=
       styled_text_area_tag(
         "settings[#{name}][#{current_language}]",
-        Setting.send(name)[current_language.to_s],
-        disabled: !Setting.send(:"#{name}_writable?"),
+        setting_value(name)[current_language.to_s],
+        disabled: setting_disabled?(name),
         label: false,
         id: "settings-#{name}",
         class: "wiki-edit",
