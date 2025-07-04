@@ -1,3 +1,5 @@
+import { ICKEditorInstance } from 'core-app/shared/components/editor/components/ckeditor/ckeditor.types';
+
 /**
  * Move from legacy app/assets/javascripts/application.js.erb
  *
@@ -32,10 +34,10 @@ export function listenToSettingChanges() {
     const id:string = self.attr('id') || '';
     const settingName = id.replace('lang-for-', '');
     const newLang = self.val() as string;
-    const textAreaId = `#settings-${settingName}`;
-    const textArea = jQuery(textAreaId);
-    /* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */
-    const editor = jQuery(`opce-ckeditor-augmented-textarea[data-textarea-selector='"${textAreaId}"'`).data('editor');
+    const textAreaId = `settings-${settingName}`;
+    const textArea = jQuery(`#${textAreaId}`);
+    const augmentedTextarea = jQuery(`opce-ckeditor-augmented-textarea[data-text-area-id='"${textAreaId}"']`);
+    const editor = augmentedTextarea.data('editor') as ICKEditorInstance;
 
     return {
       id, settingName, newLang, textArea, editor,
@@ -57,7 +59,7 @@ export function listenToSettingChanges() {
     .change(function () {
       const data = langSelectSwitchData(this);
 
-      const storedValue = jQuery(`#${data.id}-${data.newLang}`).val();
+      const storedValue = jQuery(`#${data.id}-${data.newLang}`).val()!.toString();
 
       data.editor.setData(storedValue);
       data.textArea.attr('name', `settings[${data.settingName}][${data.newLang}]`);

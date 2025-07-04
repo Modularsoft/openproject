@@ -25,7 +25,7 @@ export interface ICKEditorInstance {
 
   state:string;
 
-  getData(options:{ trim:boolean }):string;
+  getData(options?:{ trim:boolean }):string;
 
   setData(content:string):void;
 
