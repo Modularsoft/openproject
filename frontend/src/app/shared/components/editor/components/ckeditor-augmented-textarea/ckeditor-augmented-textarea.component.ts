@@ -146,7 +146,7 @@ export class CkeditorAugmentedTextareaComponent extends UntilDestroyedMixin impl
     // Parse the resource if any exists
     this.halResource = this.resource ? this.halResourceService.createHalResource(this.resource, true) : undefined;
 
-    this.formElement = this.element.closest<HTMLFormElement>('form') as HTMLFormElement;
+    this.formElement = this.element.closest<HTMLFormElement>('form')!;
 
     this.wrappedTextArea = document.getElementById(this.textAreaId) as HTMLTextAreaElement;
 
