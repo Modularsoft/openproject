@@ -1,4 +1,5 @@
-import { ICKEditorInstance } from 'core-app/shared/components/editor/components/ckeditor/ckeditor.types';
+import { retrieveCkEditorInstance } from 'core-app/shared/helpers/ckeditor-helpers';
+import invariant from 'tiny-invariant';
 
 /**
  * Move from legacy app/assets/javascripts/application.js.erb
@@ -29,15 +30,17 @@ export function listenToSettingChanges() {
   });
 
   /* Javascript for Settings::TextSettingComponent */
-  const langSelectSwitchData = function (select:any) {
-    const self = jQuery(select);
-    const id:string = self.attr('id') || '';
+  const langSelectSwitchData = function (select:HTMLSelectElement) {
+    const id = select.getAttribute('id') || '';
     const settingName = id.replace('lang-for-', '');
-    const newLang = self.val() as string;
+    const newLang = select.value;
     const textAreaId = `settings-${settingName}`;
-    const textArea = jQuery(`#${textAreaId}`);
-    const augmentedTextarea = jQuery(`opce-ckeditor-augmented-textarea[data-text-area-id='"${textAreaId}"']`);
-    const editor = augmentedTextarea.data('editor') as ICKEditorInstance;
+    const textArea = document.getElementById(textAreaId);
+    invariant(textArea, `Expected textarea "${textAreaId}"`);
+    const ckEditor = document.querySelector<HTMLElement>(`opce-ckeditor-augmented-textarea[data-text-area-id='"${textAreaId}"'`);
+    invariant(ckEditor, `Expected ckEditor for augmented textarea "${textAreaId}"`);
+    const editor = retrieveCkEditorInstance(ckEditor);
+    invariant(editor, `Expected ckEditorInstance for augmented textarea "${textAreaId}"`);
 
     return {
       id, settingName, newLang, textArea, editor,
@@ -50,19 +53,24 @@ export function listenToSettingChanges() {
   //   * get the current value from the hidden field for that lang and set the editor text to that value.
   //   * Set the name of the textarea to reflect the current lang so that the value stored in the hidden field
   //     is overwritten.
-  jQuery('.lang-select-switch')
-    .focus(function () {
-      const data = langSelectSwitchData(this);
 
-      jQuery(`#${data.id}-${data.newLang}`).val(data.editor.getData());
-    })
-    .change(function () {
-      const data = langSelectSwitchData(this);
+  function langSelectSwitchFocusListener(this:HTMLSelectElement, _ev:Event) {
+      const { id, newLang, editor } = langSelectSwitchData(this);
+      const hiddenInput = document.querySelector<HTMLInputElement>(`#${id}-${newLang}`)!;
+      hiddenInput.value = editor.getData();
+  }
 
-      const storedValue = jQuery(`#${data.id}-${data.newLang}`).val()!.toString();
+  function langSelectSwitchChangeListener(this:HTMLSelectElement, _ev:Event) {
+      const { id, settingName, newLang, textArea, editor } = langSelectSwitchData(this);
+      const hiddenInput = document.querySelector<HTMLInputElement>(`#${id}-${newLang}`)!;
+      editor.setData(hiddenInput.value);
+      textArea.setAttribute('name', `settings[${settingName}][${newLang}]`);
+  }
 
-      data.editor.setData(storedValue);
-      data.textArea.attr('name', `settings[${data.settingName}][${data.newLang}]`);
+  document.querySelectorAll<HTMLSelectElement>('.lang-select-switch')
+    .forEach((selectSwitch) => {
+      selectSwitch.addEventListener('focus', langSelectSwitchFocusListener);
+      selectSwitch.addEventListener('change', langSelectSwitchChangeListener);
     });
   /* end Javascript for Settings::TextSettingComponent */
 

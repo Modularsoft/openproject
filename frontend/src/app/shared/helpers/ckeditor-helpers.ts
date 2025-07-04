@@ -1,7 +1,7 @@
 /*
  * -- copyright
  * OpenProject is an open source project management software.
- * Copyright (C) the OpenProject GmbH
+ * Copyright (C) 2023 the OpenProject GmbH
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License version 3.
@@ -28,24 +28,12 @@
  * ++
  */
 
-import { Controller } from '@hotwired/stimulus';
-import { retrieveCkEditorInstance } from 'core-app/shared/helpers/ckeditor-helpers';
+import { ICKEditorInstance } from 'core-app/shared/components/editor/components/ckeditor/ckeditor.types';
 
-export default class extends Controller {
-  static values = { autofocus: Boolean };
-  declare autofocusValue:boolean;
+export function retrieveCkEditorInstance(element:HTMLElement):ICKEditorInstance|undefined {
+  return getEditableElement(element)?.ckeditorInstance;
+}
 
-  static targets = ['editor'];
-  declare readonly editorTarget:HTMLElement;
-
-  connect():void {
-    if (this.autofocusValue) {
-      this.focusInput();
-    }
-  }
-
-  focusInput():void {
-    this.element.scrollIntoView({ block: 'center' });
-    retrieveCkEditorInstance(this.editorTarget)?.editing.view.focus();
-  }
+function getEditableElement(element:HTMLElement):HTMLElement|null {
+  return element.querySelector<HTMLElement>('.ck-editor__editable_inline');
 }

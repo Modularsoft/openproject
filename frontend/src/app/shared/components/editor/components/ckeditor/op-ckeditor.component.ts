@@ -83,7 +83,7 @@ export class OpCkeditorComponent extends UntilDestroyedMixin implements OnInit, 
   @Output() editorFocus = new EventEmitter<string>();
 
   // View container of the replacement used to initialize CKEditor5
-  @ViewChild('opCkeditorReplacementContainer', { static: true }) opCkeditorReplacementContainer:ElementRef;
+  @ViewChild('opCkeditorReplacementContainer', { static: true }) opCkeditorReplacementContainer:ElementRef<HTMLDivElement>;
 
   @ViewChild('codeMirrorPane') codeMirrorPane:ElementRef;
 
@@ -118,10 +118,8 @@ export class OpCkeditorComponent extends UntilDestroyedMixin implements OnInit, 
     { leading: true },
   );
 
-  private $element:JQuery;
-
   constructor(
-    private readonly elementRef:ElementRef,
+    private readonly elementRef:ElementRef<HTMLElement>,
     private readonly Notifications:ToastService,
     private readonly I18n:I18nService,
     private readonly configurationService:ConfigurationService,
@@ -223,9 +221,7 @@ export class OpCkeditorComponent extends UntilDestroyedMixin implements OnInit, 
   }
 
   private initializeEditor() {
-    this.$element = jQuery(this.elementRef.nativeElement);
-
-    const editorPromise = this.ckEditorSetup
+    void this.ckEditorSetup
       .create(
         this.opCkeditorReplacementContainer.nativeElement,
         this.context,
@@ -262,8 +258,6 @@ export class OpCkeditorComponent extends UntilDestroyedMixin implements OnInit, 
         this.initializeDone.emit(watchdog.editor);
         return watchdog.editor;
       });
-
-    this.$element.data('editor', editorPromise);
   }
 
   private interceptModifiedEnterKeystrokes(editor:ICKEditorInstance) {
@@ -346,7 +340,7 @@ export class OpCkeditorComponent extends UntilDestroyedMixin implements OnInit, 
       .then((imported:any[]) => {
         const CodeMirror = imported[0].default;
         this.codeMirrorInstance = CodeMirror(
-          this.$element.find('.ck-editor__source')[0],
+          this.elementRef.nativeElement.querySelector('.ck-editor__source'),
           {
             lineNumbers: true,
             smartIndent: true,

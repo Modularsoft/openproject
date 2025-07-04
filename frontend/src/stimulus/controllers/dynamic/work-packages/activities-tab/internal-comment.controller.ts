@@ -150,6 +150,6 @@ export default class InternalCommentController extends Controller {
   }
 
   private get ckEditorInstance() {
-    return this.workPackagesActivitiesTabIndexOutlet.getCkEditorInstance();
+    return this.workPackagesActivitiesTabIndexOutlet.ckEditorInstance;
   }
 }

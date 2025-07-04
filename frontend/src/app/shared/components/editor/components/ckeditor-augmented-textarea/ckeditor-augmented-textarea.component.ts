@@ -212,10 +212,6 @@ export class CkeditorAugmentedTextareaComponent extends UntilDestroyedMixin impl
   }
 
   public setup(editor:ICKEditorInstance) {
-    // Have a hacky way to access the editor from outside of angular.
-    // This is e.g. employed to set the text from outside to reuse the same editor for different languages.
-    jQuery(this.element).data('editor', editor);
-
     this.setupMarkingReadonlyWhenTextareaIsDisabled(editor);
 
     if (this.halResource?.attachments) {

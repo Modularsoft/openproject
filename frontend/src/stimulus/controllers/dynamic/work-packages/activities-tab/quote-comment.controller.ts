@@ -92,7 +92,7 @@ export default class QuoteCommentController extends Controller {
   }
 
   private get ckEditorInstance() {
-    return this.workPackagesActivitiesTabIndexOutlet.getCkEditorInstance();
+    return this.workPackagesActivitiesTabIndexOutlet.ckEditorInstance;
   }
 
   private get isFormVisible():boolean {

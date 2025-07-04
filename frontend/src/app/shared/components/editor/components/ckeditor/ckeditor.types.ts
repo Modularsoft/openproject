@@ -107,3 +107,9 @@ export interface ICKEditorContext {
   // disabled specific mentions
   disabledMentions?:['user'|'work_package'];
 }
+
+declare global {
+  interface HTMLElement {
+    ckeditorInstance?:ICKEditorInstance;
+  }
+}
