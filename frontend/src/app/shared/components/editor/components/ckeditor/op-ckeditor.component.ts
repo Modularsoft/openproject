@@ -39,8 +39,9 @@ import { CKEditorSetupService } from 'core-app/shared/components/editor/componen
 import { KeyCodes } from 'core-app/shared/helpers/keycodes';
 import { debugLog } from 'core-app/shared/helpers/debug_output';
 import { UntilDestroyedMixin } from 'core-app/shared/helpers/angular/until-destroyed.mixin';
-
-declare module 'codemirror';
+import invariant from 'tiny-invariant';
+import { type EditorView } from 'codemirror';
+import {Transaction, Annotation} from "@codemirror/state"
 
 @Component({
   selector: 'op-ckeditor',
@@ -104,8 +105,8 @@ export class OpCkeditorComponent extends UntilDestroyedMixin implements OnInit, 
     errorTitle: this.I18n.t('js.editor.ckeditor_error'),
   };
 
-  // Codemirror instance, initialized lazily when running source mode
-  public codeMirrorInstance:undefined|any;
+  // CodeMirror EditorView instance, initialized lazily when entering source mode
+  public sourceEditorView:EditorView|null;
 
   // Debounce change listener for both CKE and codemirror
   // to read back changes as they happen
@@ -136,8 +137,7 @@ export class OpCkeditorComponent extends UntilDestroyedMixin implements OnInit, 
     let content:string;
 
     if (this.manualMode) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access
-      content = this.codeMirrorInstance.getValue() as string;
+      content = this.sourceEditorView!.state.doc.toString();
     } else {
       content = this.ckEditorInstance.getData({ trim: false });
     }
@@ -321,7 +321,7 @@ export class OpCkeditorComponent extends UntilDestroyedMixin implements OnInit, 
 
     // Apply content to ckeditor
     this.ckEditorInstance.setData(current);
-    this.codeMirrorInstance = null;
+    this.sourceEditorView = null;
     this.manualMode = false;
   }
 
@@ -330,27 +330,36 @@ export class OpCkeditorComponent extends UntilDestroyedMixin implements OnInit, 
    */
   private enableManualMode() {
     const current = this.getRawData();
-    const cmMode = 'gfm';
+    const sourceContainer = this.elementRef.nativeElement.querySelector('.ck-editor__source');
+    invariant(sourceContainer, `Source container is not defined.`);
 
     Promise
       .all([
         import('codemirror'),
-        import(/* webpackChunkName: "codemirror-mode" */ `codemirror/mode/${cmMode}/${cmMode}.js`),
+        import('@codemirror/lang-markdown')
       ])
-      .then((imported:any[]) => {
-        const CodeMirror = imported[0].default;
-        this.codeMirrorInstance = CodeMirror(
-          this.elementRef.nativeElement.querySelector('.ck-editor__source'),
-          {
-            lineNumbers: true,
-            smartIndent: true,
-            value: current,
-            mode: '',
-          },
-        );
+      .then(([codemirrorModule, markdownModule]) => {
+        const { EditorView, basicSetup } = codemirrorModule;
+        const { markdown } = markdownModule;
 
-        this.codeMirrorInstance.on('change', this.debouncedEmitter);
-        setTimeout(() => this.codeMirrorInstance.refresh(), 100);
+        this.sourceEditorView = new EditorView({
+          parent: sourceContainer,
+          doc: current,
+          extensions: [
+            basicSetup,
+            markdown()
+          ],
+          dispatch: (tr, view) => {
+            view.update([tr]);
+            console.log(tr.newDoc);
+            if (tr.docChanged) {
+              this.contentChanged.emit(tr.newDoc.toString());
+              // void this.debouncedEmitter();
+            }
+          }
+        });
+
+        //setTimeout(() => this.codeMirrorInstance.refresh(), 100);
         this.manualMode = true;
       });
   }
@@ -369,4 +378,14 @@ export class OpCkeditorComponent extends UntilDestroyedMixin implements OnInit, 
       this.error = error.message;
     });
   }
+
+  // private syncDispatch(tr: Transaction, view: EditorView, other: EditorView) {
+  //   view.update([tr])
+  //   if (!tr.changes.empty && !tr.annotation(syncAnnotation)) {
+  //     let annotations: Annotation<any>[] = [syncAnnotation.of(true)]
+  //     let userEvent = tr.annotation(Transaction.userEvent)
+  //     if (userEvent) annotations.push(Transaction.userEvent.of(userEvent))
+  //     other.dispatch({changes: tr.changes, annotations})
+  //   }
+  // }
 }
