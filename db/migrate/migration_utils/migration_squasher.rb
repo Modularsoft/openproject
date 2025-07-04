@@ -35,7 +35,7 @@ module Migration
 
     # define all the following methods as class methods
     class << self
-      def squash(aggregated_versions)
+      def squash(aggregated_versions, minimum_version)
         intersection = aggregated_versions & all_versions
 
         if intersection == []
@@ -63,14 +63,17 @@ module Migration
 
           # Only a part of the migrations that this migration aggregates
           # have already been applied. In this case, fail miserably.
-          raise IncompleteMigrationsError, <<-MESSAGE.split("\n").map(&:strip!).join(" ") + "\n"
-            It appears you are migrating from an incompatible version.
-            Your database has only some migrations to be squashed.
-            Please update your installation to a version including all the
-            aggregated migrations and run this migration again.
-            The following migrations are missing: #{missing}
-          MESSAGE
+          raise IncompleteMigrationsError,
+                <<~MESSAGE.squish
+                  It appears you are migrating from an incompatible version.
+                  Your database has only some migrations to be squashed.
 
+                  OpenProject only supports migrating from one major version to the next.
+                  Please update your installation to OpenProject v#{minimum_version} (any minor or patch level) first.
+                  After the migrations in that version ran successfully, reinstall this OpenProject version and rerun the migrations.
+
+                  The following migrations are missing: #{missing}
+                MESSAGE
         end
       end
 

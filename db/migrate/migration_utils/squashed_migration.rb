@@ -66,7 +66,7 @@ class SquashedMigration < ActiveRecord::Migration[8.0]
   end
 
   def up
-    Migration::MigrationSquasher.squash(self.class.squashed_migrations) do
+    Migration::MigrationSquasher.squash(self.class.squashed_migrations, self.class.minimum_version) do
       self.class.extensions.each do |extension|
         extension.create(self)
       end
@@ -80,6 +80,7 @@ class SquashedMigration < ActiveRecord::Migration[8.0]
   end
 
   def down
-    raise ActiveRecord::IrreversibleMigration, "Use OpenProject v#{self.class.minimum_version} for the down migrations"
+    raise ActiveRecord::IrreversibleMigration,
+          "Use an OpenProject v#{self.class.minimum_version} (any minor or patch level) for the down migrations."
   end
 end
