@@ -7,6 +7,7 @@
 
 /// <reference path="../../node_modules/@types/jquery/index.d.ts" />
 /// <reference path="../../node_modules/@types/jqueryui/index.d.ts" />
+/// <reference path="../../node_modules/@types/jquery.cookie/index.d.ts" />
 /// <reference path="../../node_modules/@types/mousetrap/index.d.ts" />
 /// <reference path="../../node_modules/@types/jquery.cookie/index.d.ts" />
 /// <reference path="../../node_modules/@types/moment-timezone/index.d.ts" />

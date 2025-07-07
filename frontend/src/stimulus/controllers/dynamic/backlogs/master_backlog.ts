@@ -28,12 +28,16 @@
  * ++
  */
 
+import jQuery from 'jquery';
+
+import { Backlog } from './backlog';
+
 // Initialize the backlogs after DOM is loaded
 jQuery(($:JQueryStatic):void => {
   // Initialize each backlog
   $('.backlog').each(function (this:HTMLElement, index:number):void {
     // 'this' refers to an element with class="backlog"
-    (window as any).RB.Factory.initialize((window as any).RB.Backlog, this);
+    new Backlog(this);
   });
 
   $('.backlog .toggler').on('click', function (this:HTMLElement):void {

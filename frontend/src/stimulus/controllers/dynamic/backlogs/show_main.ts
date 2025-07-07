@@ -28,13 +28,17 @@
  * ++
  */
 
+import jQuery from 'jquery';
+
+import { Taskboard } from './taskboard';
+
 // Initialize everything after DOM is loaded
 jQuery(($:JQueryStatic):void => {
   let defaultDialogColor:string; // this var is used as cache for some computation in
-                                  // the inner function. -> Do not move to where it
-                                  // actually belongs!
+  // the inner function. -> Do not move to where it
+  // actually belongs!
 
-  (window as any).RB.Factory.initialize((window as any).RB.Taskboard, $('#taskboard'));
+  new Taskboard($('#taskboard')[0]);
 
   $('#assigned_to_id_options').change(function (this:HTMLElement):void {
     const selected = $(this).children(':selected');
@@ -42,7 +46,9 @@ jQuery(($:JQueryStatic):void => {
       // fetch the color from the task rendered as a prototype/template for new tasks
       defaultDialogColor = $('#work_package_').css('background-color');
     }
-    $(this).parents('.ui-dialog').css('background-color', selected.attr('color') || defaultDialogColor);
+    $(this)
+      .parents('.ui-dialog')
+      .css('background-color', selected.attr('color') || defaultDialogColor);
     ($(this).parents('.ui-dialog') as any).colorcontrast();
   });
 });

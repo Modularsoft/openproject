@@ -21,94 +21,74 @@
 // See COPYRIGHT and LICENSE files for more details.
 //++
 
+import $ from 'jquery';
+import { UserPreferences } from './common';
+import { Impediment } from './impediment';
+import { Model } from './model';
+import { Task } from './task';
+
 /***************************************
   TASKBOARD
 ***************************************/
-
-// Interface for jQuery sortable options
-interface SortableOptions {
-  placeholder:string;
-  start:(event:any, ui:any) => void;
-  stop:(event:any, ui:any) => void;
-  update:(event:any, ui:any) => void;
-  cancel:string;
-  connectWith?:string;
-}
-
-// Interface for sortable UI object
-interface SortableUI {
-  item:JQuery;
-  sender:any;
-}
-
-// Interface for Taskboard properties and methods
-interface TaskboardInterface {
-  $:JQuery;
-  el:HTMLElement;
+export class Taskboard extends Model {
   colWidthUnit:number;
   defaultColWidth:number;
 
-  initialize(el:HTMLElement):void;
-  initializeNewButtons():void;
-  initializeSortables():void;
-  initializeTasks():void;
-  initializeImpediments():void;
-  initializeTaskboardMenus():void;
-  dragComplete(e:any, ui:SortableUI):void;
-  dragStart(e:any, ui:SortableUI):void;
-  dragStop(e:any, ui:SortableUI):void;
-  handleAddNewImpedimentClick(e:JQuery.TriggeredEvent):void;
-  handleAddNewTaskClick(e:JQuery.TriggeredEvent):void;
-  loadColWidthPreference():void;
-  newImpediment(row:JQuery):void;
-  newTask(row:JQuery):void;
-  updateColWidths():void;
-}
+  constructor(el:HTMLElement) {
+    super(el);
 
-(window as any).RB.Taskboard = (function ($:JQueryStatic) {
-  return (window as any).RB.Object.create((window as any).RB.Model, {
+    const self = this; // So we can bind the event handlers to this object
 
-    initialize(el:HTMLElement):void {
-      const self = this as TaskboardInterface; // So we can bind the event handlers to this object
+    // Associate this object with the element for later retrieval
+    this.$.data('this', this);
 
-      this.$ = $(el);
-      this.el = el;
+    // Initialize column widths
+    this.colWidthUnit = 107;
+    this.defaultColWidth = 1;
+    this.loadColWidthPreference();
+    this.updateColWidths();
 
-      // Associate this object with the element for later retrieval
-      this.$.data('this', this);
+    $('#col_width_input').on('keyup', (evt:JQuery.TriggeredEvent) => {
+      if ((evt as any).which === 13) {
+        self.updateColWidths();
+      }
+    });
 
-      // Initialize column widths
-      this.colWidthUnit = 107;
-      this.defaultColWidth = 1;
-      this.loadColWidthPreference();
-      this.updateColWidths();
+    this.initializeTasks();
+    this.initializeImpediments();
 
-      $('#col_width_input')
-        .on('keyup', (evt:JQuery.TriggeredEvent) => {
-          if ((evt as any).which === 13) {
-            self.updateColWidths();
-          }
-        });
+    this.initializeNewButtons();
+    this.initializeSortables();
 
-      this.initializeTasks();
-      this.initializeImpediments();
+    this.initializeTaskboardMenus();
+  }
 
-      this.initializeNewButtons();
-      this.initializeSortables();
+  initializeNewButtons():void {
+    const self = this;
+    this.$.find('#tasks .add_new.clickable').click(self.handleAddNewTaskClick);
+    this.$.find('#impediments .add_new.clickable').click(self.handleAddNewImpedimentClick);
+  }
 
-      this.initializeTaskboardMenus();
-    },
+  initializeSortables():void {
+    const self = this;
 
-    initializeNewButtons():void {
-      const self = this as TaskboardInterface;
-      this.$.find('#tasks .add_new.clickable').click(self.handleAddNewTaskClick);
-      this.$.find('#impediments .add_new.clickable').click(self.handleAddNewImpedimentClick);
-    },
+    const impedimentSortableOptions:JQueryUI.SortableOptions = {
+      placeholder: 'placeholder',
+      start: self.dragStart,
+      stop: self.dragStop,
+      update: self.dragComplete,
+      cancel: '.prevent_edit',
+    };
 
-    initializeSortables():void {
-      const self = this as TaskboardInterface;
+    this.$.find('#impediments .list')
+      .sortable(impedimentSortableOptions)
+      .sortable('option', 'connectWith', '#impediments .list');
+    $('#impediments .list').disableSelection();
 
-      const impedimentSortableOptions:SortableOptions = {
+    const list = this.$.find('#tasks .list');
+
+    const augmentList = function ():void {
+      const taskSortableOptions:JQueryUI.SortableOptions = {
         placeholder: 'placeholder',
         start: self.dragStart,
         stop: self.dragStop,
@@ -116,124 +96,109 @@ interface TaskboardInterface {
         cancel: '.prevent_edit',
       };
 
-      (this.$.find('#impediments .list')).sortable(impedimentSortableOptions)
-        .sortable('option', 'connectWith', '#impediments .list');
-      ($('#impediments .list') as any).disableSelection();
+      $(list.slice(0, 50)).sortable(taskSortableOptions).sortable('option', 'connectWith', '#tasks .list');
+      $('#tasks .list').disableSelection();
 
-      const list = this.$.find('#tasks .list');
-
-      const augmentList = function ():void {
-        const taskSortableOptions:SortableOptions = {
-          placeholder: 'placeholder',
-          start: self.dragStart,
-          stop: self.dragStop,
-          update: self.dragComplete,
-          cancel: '.prevent_edit',
-        };
-
-        ($(list.splice(0, 50)) as any).sortable(taskSortableOptions)
-          .sortable('option', 'connectWith', '#tasks .list');
-        ($('#tasks .list') as any).disableSelection();
-
-        if (list.length > 0) {
-          /*globals setTimeout*/
-          setTimeout(augmentList, 10);
-        }
-      };
-      augmentList();
-    },
-
-    initializeTasks():void {
-      this.$.find('.task').each(function (this:HTMLElement, index:number) {
-        (window as any).RB.Factory.initialize((window as any).RB.Task, this);
-      });
-    },
-
-    initializeImpediments():void {
-      this.$.find('.impediment').each(function (this:HTMLElement, index:number) {
-        (window as any).RB.Factory.initialize((window as any).RB.Impediment, this);
-      });
-    },
-
-    initializeTaskboardMenus():void {
-      const toggleOpen = 'open icon-pulldown-up icon-pulldown';
-
-      $('.backlog .backlog-menu > div.menu-trigger').on('click', function () {
-        $(this).toggleClass(toggleOpen);
-      });
-
-      $('.backlog .backlog-menu > ul.items li.item').on('click', function () {
-        $(this).closest('.backlog-menu').find('div.menu-trigger').toggleClass(toggleOpen);
-      });
-    },
-
-    dragComplete(e:any, ui:SortableUI):void {
-      // Handler is triggered for source and target. Thus the need to check.
-      const isDropTarget = (ui.sender === null);
-
-      if (isDropTarget) {
-        (ui.item.data('this')).saveDragResult();
+      if (list.length > 0) {
+        /*globals setTimeout*/
+        setTimeout(augmentList, 10);
       }
-    },
+    };
+    augmentList();
+  }
 
-    dragStart(e:any, ui:SortableUI):void {
-      ui.item.addClass('dragging');
-    },
+  initializeTasks():void {
+    this.$.find('.task').each(function (this:HTMLElement, index:number) {
+      new Task(this);
+    });
+  }
 
-    dragStop(e:any, ui:SortableUI):void {
-      ui.item.removeClass('dragging');
-    },
+  initializeImpediments():void {
+    this.$.find('.impediment').each(function (this:HTMLElement, index:number) {
+      new Impediment(this);
+    });
+  }
 
-    handleAddNewImpedimentClick(e:JQuery.TriggeredEvent):void {
-      const row = $(this).parents('tr').first();
-      ($('#taskboard').data('this') as TaskboardInterface).newImpediment(row);
-    },
+  initializeTaskboardMenus():void {
+    const toggleOpen = 'open icon-pulldown-up icon-pulldown';
 
-    handleAddNewTaskClick(e:JQuery.TriggeredEvent):void {
-      const row = $(this).parents('tr').first();
-      ($('#taskboard').data('this') as TaskboardInterface).newTask(row);
-    },
+    $('.backlog .backlog-menu > div.menu-trigger').on('click', function () {
+      $(this).toggleClass(toggleOpen);
+    });
 
-    loadColWidthPreference():void {
-      let w = (window as any).RB.UserPreferences.get('taskboardColWidth');
-      if (w === null || w === undefined) {
-        w = this.defaultColWidth;
-        (window as any).RB.UserPreferences.set('taskboardColWidth', w);
-      }
-      $('#col_width input').val(w);
-    },
+    $('.backlog .backlog-menu > ul.items li.item').on('click', function () {
+      $(this).closest('.backlog-menu').find('div.menu-trigger').toggleClass(toggleOpen);
+    });
+  }
 
-    newImpediment(row:JQuery):void {
-      let impediment:JQuery; let
-o:any;
+  dragComplete(e:JQueryEventObject, ui:JQueryUI.SortableUIParams):void {
+    // Handler is triggered for source and target. Thus the need to check.
+    const isDropTarget = ui.sender === null;
 
-      impediment = $('#impediment_template').children().first().clone();
-      row.find('.list').first().prepend(impediment);
+    if (isDropTarget) {
+      ui.item.data('this').saveDragResult();
+    }
+  }
 
-      o = (window as any).RB.Factory.initialize((window as any).RB.Impediment, impediment);
-      o.edit();
-    },
+  dragStart(e:JQueryEventObject, ui:JQueryUI.SortableUIParams):void {
+    ui.item.addClass('dragging');
+  }
 
-    newTask(row:JQuery):void {
-      let task:JQuery; let
-o:any;
+  dragStop(e:JQueryEventObject, ui:JQueryUI.SortableUIParams):void {
+    ui.item.removeClass('dragging');
+  }
 
-      task = $('#task_template').children().first().clone();
-      row.find('.list').first().prepend(task);
+  handleAddNewImpedimentClick(e:JQuery.TriggeredEvent):void {
+    const row = $(this).parents('tr').first();
+    ($('#taskboard').data('this') as Taskboard).newImpediment(row);
+  }
 
-      o = (window as any).RB.Factory.initialize((window as any).RB.Task, task);
-      o.edit();
-    },
+  handleAddNewTaskClick(e:JQuery.TriggeredEvent):void {
+    const row = $(this).parents('tr').first();
+    ($('#taskboard').data('this') as Taskboard).newTask(row);
+  }
 
-    updateColWidths():void {
-      let w = parseInt($('#col_width_input').val() as string, 10);
+  loadColWidthPreference():void {
+    let w = UserPreferences.get('taskboardColWidth');
+    if (w === null || w === undefined) {
+      w = this.defaultColWidth.toString();
+      UserPreferences.set('taskboardColWidth', w.toString());
+    }
+    $('#col_width input').val(w);
+  }
 
-      if (isNaN(w) || w <= 0) {
-        w = this.defaultColWidth;
-      }
-      $('#col_width_input').val(w);
-      (window as any).RB.UserPreferences.set('taskboardColWidth', w);
-      $('.swimlane').width(this.colWidthUnit * w).css('min-width', this.colWidthUnit * w);
-    },
-  });
-}(jQuery));
+  newImpediment(row:JQuery):void {
+    let impediment:JQuery;
+    let o:Impediment;
+
+    impediment = $('#impediment_template').children().first().clone();
+    row.find('.list').first().prepend(impediment);
+
+    o = new Impediment(impediment[0]);
+    o.edit();
+  }
+
+  newTask(row:JQuery):void {
+    let task:JQuery;
+    let o:Task;
+
+    task = $('#task_template').children().first().clone();
+    row.find('.list').first().prepend(task);
+
+    o = new Task(task[0]);
+    o.edit();
+  }
+
+  updateColWidths():void {
+    let w = parseInt($('#col_width_input').val() as string, 10);
+
+    if (isNaN(w) || w <= 0) {
+      w = this.defaultColWidth;
+    }
+    $('#col_width_input').val(w);
+    UserPreferences.set('taskboardColWidth', w.toString());
+    $('.swimlane')
+      .width(this.colWidthUnit * w)
+      .css('min-width', this.colWidthUnit * w);
+  }
+}

@@ -28,72 +28,52 @@
  * ++
  */
 
+import { SaveDirectives, RB } from './common';
+import { Model } from './model';
+
 /***************************************
   SPRINT
 ***************************************/
+export class Sprint extends Model {
+  constructor(el:HTMLElement) {
+    super(el);
 
-interface SaveDirectives {
-  url:string;
-  data:string;
+    // Associate this object with the element for later retrieval
+    this.$.data('this', this);
+    this.$.on('mouseup', '.editable', this.handleClick as any);
+  }
+
+  beforeSave():void {
+    // Do nothing
+  }
+
+  getType():string {
+    return 'Sprint';
+  }
+
+  markIfClosed():void {
+    // Do nothing
+  }
+
+  refreshed():void {
+    // Do nothing
+  }
+
+  saveDirectives():SaveDirectives {
+    const wrapper = this.$;
+    const editor = wrapper.find('.editor');
+    const data = `${editor.serialize()}&_method=put`;
+    const url = RB.urlFor('update_sprint', { id: this.getID() });
+
+    return {
+      url,
+      data,
+    };
+  }
+
+  beforeSaveDragResult():void {
+    // Do nothing
+  }
 }
 
-interface SprintInstance {
-  $:JQuery;
-  el:HTMLElement;
-
-  initialize(el:HTMLElement):void;
-  beforeSave():void;
-  getType():string;
-  markIfClosed():void;
-  refreshed():void;
-  saveDirectives():SaveDirectives;
-  beforeSaveDragResult():void;
-  getID?():string | number;
-  handleClick?:(e:JQuery.MouseUpEvent) => void;
-}
-
-(window as any).RB.Sprint = (function ($:JQueryStatic) {
-  return (window as any).RB.Object.create((window as any).RB.Model, (window as any).RB.EditableInplace, {
-
-    initialize(this:SprintInstance, el:HTMLElement):void {
-      this.$ = $(el);
-      this.el = el;
-
-      // Associate this object with the element for later retrieval
-      this.$.data('this', this);
-      this.$.on('mouseup', '.editable', this.handleClick as any);
-    },
-
-    beforeSave(this:SprintInstance):void {
-      // Do nothing
-    },
-
-    getType(this:SprintInstance):string {
-      return 'Sprint';
-    },
-
-    markIfClosed(this:SprintInstance):void {
-      // Do nothing
-    },
-
-    refreshed(this:SprintInstance):void {
-      // Do nothing
-    },
-
-    saveDirectives(this:SprintInstance):SaveDirectives {
-      const wrapper = this.$;
-      const editor = wrapper.find('.editor');
-      const data = `${editor.serialize()}&_method=put`;
-      const url = (window as any).RB.urlFor('update_sprint', { id: this.getID!() });
-
-      return {
-        url,
-        data,
-      };
-    },
-
-    beforeSaveDragResult(this:SprintInstance):void {
-      // Do nothing
-    },
-  } as SprintInstance);
-}(jQuery));
+// export const EditableSprint = new EditableInplace(Sprint);

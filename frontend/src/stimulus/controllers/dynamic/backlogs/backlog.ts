@@ -28,6 +28,12 @@
  * ++
  */
 
+import $ from 'jquery';
+
+import { Burndown } from './burndown';
+import { Sprint } from './sprint';
+import { Story } from './story';
+
 /******************************************
   BACKLOG
   A backlog is a visual representation of
@@ -39,165 +45,142 @@
   sheet (or in Redmine Backlogs!) to
   visualize the sprint.
 ******************************************/
-
-interface BacklogInstance {
+export class Backlog {
   $:JQuery;
   el:HTMLElement;
-  burndown?:any;
+  burndown?:Burndown;
 
-  initialize(el:HTMLElement):void;
-  dragChanged(e:any, ui:any):void;
-  dragComplete(e:any, ui:any):void;
-  dragStart(e:any, ui:any):void;
-  dragStop(e:any, ui:any):void;
-  getSprint():JQuery;
-  getStories():JQuery;
-  getList():JQuery;
-  handleNewStoryClick(e:JQuery.ClickEvent):void;
-  isSprintBacklog():boolean;
-  newStory():void;
-  refresh():void;
-  recalcVelocity():boolean | void;
-  recalcOddity():void;
+  constructor(el:HTMLElement) {
+    this.$ = $(el);
+    this.el = el;
+
+    // Associate this object with the element for later retrieval
+    this.$.data('this', this);
+
+    // Make the list sortable
+    this.getList().sortable({
+      connectWith: '.stories',
+      dropOnEmpty: true,
+      start: this.dragStart,
+      stop: this.dragStop,
+      update: this.dragComplete,
+      receive: this.dragChanged,
+      remove: this.dragChanged,
+      containment: $('#backlogs_container'),
+      cancel: 'input, textarea, button, select, option, .prevent_drag',
+      scroll: true,
+      helper(event, ui):HTMLElement {
+        const $clone = $(ui).clone();
+        $clone.css('position', 'absolute');
+        return $clone.get(0) as unknown as HTMLElement;
+      },
+    });
+
+    // Observe menu items
+    this.$.find('.add_new_story').click(this.handleNewStoryClick);
+
+    if (this.isSprintBacklog()) {
+      new Sprint(this.getSprint()[0]);
+      this.burndown = new Burndown(this.$.find('.show_burndown_chart')[0]);
+      if (this.burndown) {
+        this.burndown.setSprintId(this.getSprint().data('this').getID());
+      }
+    }
+
+    // Initialize each item in the backlog
+    this.getStories().each(function (this:HTMLElement, index:number):void {
+      // 'this' refers to an element with class="story"
+      new Story(this);
+    });
+
+    if (this.isSprintBacklog()) {
+      this.refresh();
+    }
+  }
+
+  dragChanged(this:HTMLElement, e:JQueryEventObject, ui:JQueryUI.SortableUIParams):void {
+    $(this).parents('.backlog').data('this').refresh();
+  }
+
+  dragComplete(e:JQueryEventObject, ui:JQueryUI.SortableUIParams):void {
+    const isDropTarget = ui.sender === null || ui.sender === undefined;
+
+    // jQuery triggers dragComplete of source and target.
+    // Thus we have to check here. Otherwise, the story
+    // would be saved twice.
+    if (isDropTarget) {
+      ui.item.data('this').saveDragResult();
+    }
+  }
+
+  dragStart(e:JQueryInputEventObject, ui:JQueryUI.SortableUIParams):void {
+    ui.item.addClass('dragging');
+  }
+
+  dragStop(e:JQueryInputEventObject, ui:JQueryUI.SortableUIParams):void {
+    ui.item.removeClass('dragging');
+  }
+
+  getSprint():JQuery {
+    return $(this.el).find('.model.sprint').first();
+  }
+
+  getStories():JQuery {
+    return this.getList().children('.story');
+  }
+
+  getList():JQuery {
+    return this.$.children('.stories').first();
+  }
+
+  handleNewStoryClick(this:HTMLElement, e:JQuery.ClickEvent):void {
+    const toggler = $(this).parents('.header').find('.toggler');
+    if (toggler.hasClass('closed')) {
+      toggler.click();
+    }
+    e.preventDefault();
+    $(this).parents('.backlog').data('this').newStory();
+  }
+
+  // return true if backlog has an element with class="sprint"
+  isSprintBacklog():boolean {
+    return $(this.el).find('.sprint').length === 1;
+  }
+
+  newStory():void {
+    let story:JQuery;
+    let o:Story;
+
+    story = $('#story_template').children().first().clone();
+    this.getList().prepend(story);
+
+    o = new Story(story[0]);
+    o.edit();
+
+    story.find('.editor').first().focus();
+  }
+
+  refresh():void {
+    this.recalcVelocity();
+    this.recalcOddity();
+  }
+
+  recalcVelocity():boolean | void {
+    let total:number;
+
+    if (!this.isSprintBacklog()) {
+      return true;
+    }
+
+    total = 0;
+    this.getStories().each(function (this:HTMLElement, index:number):void {
+      total += $(this).data('this').getPoints();
+    });
+    this.$.children('.header').children('.velocity').text(total.toString());
+  }
+
+  recalcOddity():void {
+    this.$.find('.story:even').removeClass('odd').addClass('even');
+    this.$.find('.story:odd').removeClass('even').addClass('odd');
+  }
 }
-
-declare const RB:any;
-
-RB.Backlog = (function ($:JQueryStatic) {
-  return RB.Object.create({
-
-    initialize(this:BacklogInstance, el:HTMLElement):void {
-      this.$ = $(el);
-      this.el = el;
-
-      // Associate this object with the element for later retrieval
-      this.$.data('this', this);
-
-      // Make the list sortable
-      this.getList().sortable({
-        connectWith: '.stories',
-        dropOnEmpty: true,
-        start: this.dragStart,
-        stop: this.dragStop,
-        update: this.dragComplete,
-        receive: this.dragChanged,
-        remove: this.dragChanged,
-        containment: $('#backlogs_container'),
-        cancel: 'input, textarea, button, select, option, .prevent_drag',
-        scroll: true,
-        helper(event:any, ui:any):HTMLElement {
-          const $clone = $(ui).clone();
-          $clone.css('position', 'absolute');
-          return $clone.get(0) as HTMLElement;
-        },
-      });
-
-      // Observe menu items
-      this.$.find('.add_new_story').click(this.handleNewStoryClick);
-
-      if (this.isSprintBacklog()) {
-        RB.Factory.initialize(RB.Sprint, this.getSprint());
-        this.burndown = RB.Factory.initialize(RB.Burndown, this.$.find('.show_burndown_chart'));
-        if (this.burndown) {
-          this.burndown.setSprintId(this.getSprint().data('this').getID());
-        }
-      }
-
-      // Initialize each item in the backlog
-      this.getStories().each(function (this:HTMLElement, index:number):void {
-        // 'this' refers to an element with class="story"
-        RB.Factory.initialize(RB.Story, this);
-      });
-
-      if (this.isSprintBacklog()) {
-        this.refresh();
-      }
-    },
-
-    dragChanged(this:HTMLElement, e:any, ui:any):void {
-      $(this).parents('.backlog').data('this').refresh();
-    },
-
-    dragComplete(this:HTMLElement, e:any, ui:any):void {
-      const isDropTarget = (ui.sender === null || ui.sender === undefined);
-
-      // jQuery triggers dragComplete of source and target.
-      // Thus we have to check here. Otherwise, the story
-      // would be saved twice.
-      if (isDropTarget) {
-        ui.item.data('this').saveDragResult();
-      }
-    },
-
-    dragStart(this:HTMLElement, e:any, ui:any):void {
-      ui.item.addClass('dragging');
-    },
-
-    dragStop(this:HTMLElement, e:any, ui:any):void {
-      ui.item.removeClass('dragging');
-    },
-
-    getSprint(this:BacklogInstance):JQuery {
-      return $(this.el).find('.model.sprint').first();
-    },
-
-    getStories(this:BacklogInstance):JQuery {
-      return this.getList().children('.story');
-    },
-
-    getList(this:BacklogInstance):JQuery {
-      return this.$.children('.stories').first();
-    },
-
-    handleNewStoryClick(this:HTMLElement, e:JQuery.ClickEvent):void {
-      const toggler = $(this).parents('.header').find('.toggler');
-      if (toggler.hasClass('closed')) {
-        toggler.click();
-      }
-      e.preventDefault();
-      $(this).parents('.backlog').data('this').newStory();
-    },
-
-    // return true if backlog has an element with class="sprint"
-    isSprintBacklog(this:BacklogInstance):boolean {
-      return $(this.el).find('.sprint').length === 1;
-    },
-
-    newStory(this:BacklogInstance):void {
-      let story:JQuery;
-      let o:any;
-
-      story = $('#story_template').children().first().clone();
-      this.getList().prepend(story);
-
-      o = RB.Factory.initialize(RB.Story, story[0]);
-      o.edit();
-
-      story.find('.editor').first().focus();
-    },
-
-    refresh(this:BacklogInstance):void {
-      this.recalcVelocity();
-      this.recalcOddity();
-    },
-
-    recalcVelocity(this:BacklogInstance):boolean | void {
-      let total:number;
-
-      if (!this.isSprintBacklog()) {
-        return true;
-      }
-
-      total = 0;
-      this.getStories().each(function (this:HTMLElement, index:number):void {
-        total += $(this).data('this').getPoints();
-      });
-      this.$.children('.header').children('.velocity').text(total.toString());
-    },
-
-    recalcOddity(this:BacklogInstance):void {
-      this.$.find('.story:even').removeClass('odd').addClass('even');
-      this.$.find('.story:odd').removeClass('even').addClass('odd');
-    },
-  } as BacklogInstance);
-}(jQuery));

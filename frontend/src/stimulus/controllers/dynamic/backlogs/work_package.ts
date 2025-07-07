@@ -21,43 +21,28 @@
 // See COPYRIGHT and LICENSE files for more details.
 //++
 
+import { Model } from './model';
+
 /**************************************
   WORK PACKAGE
 ***************************************/
+export class WorkPackage extends Model {
+  constructor(el:HTMLElement) {
+    super(el);
+  }
 
-// Interface for WorkPackage properties and methods
-interface WorkPackageInterface {
-  $:JQuery;
-  el:HTMLElement;
+  beforeSaveDragResult():void {
+    // Do nothing
+  }
 
-  initialize(el:HTMLElement):void;
-  beforeSaveDragResult():void;
-  getType():string;
-  saveDragResult():void;
-  saveEdits():void;
+  getType():string {
+    return 'WorkPackage';
+  }
+
+  saveDragResult():void {
+    this.beforeSaveDragResult();
+    if (!this.$.hasClass('editing')) {
+      this.saveEdits();
+    }
+  }
 }
-
-(window as any).RB.WorkPackage = (function ($:JQueryStatic) {
-  return (window as any).RB.Object.create((window as any).RB.Model, {
-
-    initialize(el:HTMLElement):void {
-      this.$ = $(el);
-      this.el = el;
-    },
-
-    beforeSaveDragResult():void {
-      // Do nothing
-    },
-
-    getType():string {
-      return 'WorkPackage';
-    },
-
-    saveDragResult():void {
-      (this as WorkPackageInterface).beforeSaveDragResult();
-      if (!this.$.hasClass('editing')) {
-        (this as WorkPackageInterface).saveEdits();
-      }
-    },
-  });
-}(jQuery));

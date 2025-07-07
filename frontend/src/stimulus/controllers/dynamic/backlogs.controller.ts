@@ -3,7 +3,6 @@ import { Controller } from '@hotwired/stimulus';
 require('core-vendor/jquery.flot/jquery.flot');
 require('core-vendor/jquery.flot/excanvas');
 require('core-vendor/jquery.jeditable.mini');
-require('core-vendor/jquery.cookie');
 require('core-vendor/jquery.colorcontrast');
 
 require('./backlogs/common');

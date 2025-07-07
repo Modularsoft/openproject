@@ -28,53 +28,45 @@
  * ++
  */
 
-interface BurndownInstance {
-  $:JQuery;
-  el:HTMLElement;
-  sprintId:string | number;
+import $ from 'jquery';
+import { RB } from './common';
 
-  initialize(el:HTMLElement):void;
-  setSprintId(sprintId:string | number):void;
-  getSprintId():string | number;
-  show(e:JQuery.ClickEvent):void;
+export class Burndown {
+  private $:JQuery;
+  private el:HTMLElement;
+  private sprintId:string | number;
+
+  constructor(el:HTMLElement) {
+    this.$ = $(el);
+    this.el = el;
+
+    // Associate this object with the element for later retrieval
+    this.$.data('this', this);
+
+    // Observe menu items
+    this.$.click(this.show);
+  }
+
+  setSprintId(sprintId:string | number):void {
+    this.sprintId = sprintId;
+  }
+
+  getSprintId():string | number {
+    return this.sprintId;
+  }
+
+  show(e:JQuery.ClickEvent):void {
+    e.preventDefault();
+
+    if ($('#charts').length === 0) {
+      $('<div id="charts"></div>').appendTo('body');
+    }
+    $('#charts').html(`<div class='loading'>${RB.i18n.generating_graph}</div>`);
+
+    const url = RB.urlFor('show_burndown_chart', {
+      sprint_id: $(this).data('this').sprintId,
+      project_id: RB.constants.project_id,
+    });
+    window.open(url);
+  }
 }
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-(RB).Burndown = (function ($:JQueryStatic) {
-  return (RB).Object.create({
-
-    initialize(this:BurndownInstance, el:HTMLElement):void {
-      this.$ = $(el);
-      this.el = el;
-
-      // Associate this object with the element for later retrieval
-      this.$.data('this', this);
-
-      // Observe menu items
-      this.$.click(this.show);
-    },
-
-    setSprintId(this:BurndownInstance, sprintId:string | number):void {
-      this.sprintId = sprintId;
-    },
-
-    getSprintId(this:BurndownInstance):string | number {
-      return this.sprintId;
-    },
-
-    show(this:HTMLElement, e:JQuery.ClickEvent):void {
-      e.preventDefault();
-
-      if ($('#charts').length === 0) {
-        $('<div id="charts"></div>').appendTo('body');
-      }
-      $('#charts').html(`<div class='loading'>${(RB).i18n.generating_graph}</div>`);
-
-      const url = (RB).urlFor('show_burndown_chart', {
-        sprint_id: $(this).data('this').sprintId,
-        project_id: (RB).constants.project_id,
-      });
-      window.open(url);
-    },
-  } as BurndownInstance);
-}(jQuery));

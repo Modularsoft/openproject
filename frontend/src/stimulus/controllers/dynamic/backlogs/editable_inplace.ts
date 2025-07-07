@@ -28,25 +28,21 @@
  * ++
  */
 
-interface EditableInplaceInstance {
-  $:JQuery;
+import $ from 'jquery';
+import { Model } from './model';
 
-  displayEditor(editor:JQuery):void;
-  getEditor():JQuery;
-  handleKeydown(e:JQuery.KeyDownEvent):boolean | void;
-  saveEdits?():void;
-  cancelEdit?():void;
-}
+type Constructor = new (...args:any[]) => {};
 
-(window as any).RB.EditableInplace = (function ($:JQueryStatic) {
-  return (window as any).RB.Object.create((window as any).RB.Model, {
+export function EditableInplace<TBase extends Constructor>(Base:TBase) {
+  return class extends Base {
+    protected $:JQuery;
 
-    displayEditor(this:EditableInplaceInstance, editor:JQuery):void {
+    displayEditor(editor:JQuery):void {
       this.$.addClass('editing');
       editor.find('.editor').bind('keydown', this.handleKeydown);
-    },
+    }
 
-    getEditor(this:EditableInplaceInstance):JQuery {
+    getEditor():JQuery {
       // Create the model editor container if it does not yet exist
       let editor = this.$.children('.editors');
 
@@ -56,12 +52,12 @@ interface EditableInplaceInstance {
         editor.first().html('');
       }
       return editor;
-    },
+    }
 
     // For detecting Enter and ESC
     handleKeydown(this:HTMLElement, e:JQuery.KeyDownEvent):boolean | void {
       let j:JQuery;
-      let that:any;
+      let that:Model;
 
       j = $(this).parents('.model').first();
       that = j.data('this');
@@ -74,6 +70,6 @@ interface EditableInplaceInstance {
       } else {
         return true;
       }
-    },
-  } as EditableInplaceInstance);
-}(jQuery));
+    }
+  };
+}

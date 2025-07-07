@@ -28,142 +28,112 @@
  * ++
  */
 
+import { WorkPackage } from './work_package';
+import { EditableInplace } from './editable_inplace';
+import { SaveDirectives, RB } from './common';
+
 /**************************************
   STORY
 ***************************************/
+export class Story extends WorkPackage {
+  constructor(el:HTMLElement) {
+    super(el);
 
-interface SaveDirectives {
-  url:string;
-  data:string;
-}
+    // Associate this object with the element for later retrieval
+    this.$.data('this', this);
+    this.$.on('click', '.editable', this.handleClick as any);
+  }
 
-interface StoryInstance {
-  $:JQuery;
-  el:HTMLElement;
+  /**
+   * Callbacks from model.js
+   **/
+  beforeSave():void {
+    this.refreshStory();
+  }
 
-  initialize(el:HTMLElement):void;
-  beforeSave():void;
-  afterCreate(data:any, textStatus:string, xhr:JQuery.jqXHR):void;
-  afterUpdate(data:any, textStatus:string, xhr:JQuery.jqXHR):void;
-  refreshed():void;
-  editDialogTitle():string;
-  editorDisplayed(editor:JQuery):void;
-  getPoints():number;
-  getType():string;
-  markIfClosed():void;
-  newDialogTitle():string;
-  refreshStory():void;
-  recalcVelocity():void;
-  saveDirectives():SaveDirectives;
-  beforeSaveDragResult():void;
-  getID?():string | number;
-  isNew?():boolean;
-  handleClick?:(e:JQuery.ClickEvent) => void;
-}
+  afterCreate(data:any, textStatus:string, xhr:JQuery.jqXHR):void {
+    this.refreshStory();
+  }
 
-(window as any).RB.Story = (function ($:JQueryStatic) {
-  return (window as any).RB.Object.create((window as any).RB.WorkPackage, (window as any).RB.EditableInplace, {
-    initialize(this:StoryInstance, el:HTMLElement):void {
-      this.$ = $(el);
-      this.el = el;
+  afterUpdate(data:any, textStatus:string, xhr:JQuery.jqXHR):void {
+    this.refreshStory();
+  }
 
-      // Associate this object with the element for later retrieval
-      this.$.data('this', this);
-      this.$.on('click', '.editable', this.handleClick as any);
-    },
+  refreshed():void {
+    this.refreshStory();
+  }
 
-    /**
-     * Callbacks from model.js
-     **/
-    beforeSave(this:StoryInstance):void {
-      this.refreshStory();
-    },
+  editDialogTitle():string {
+    return `Story #${this.getID()}`;
+  }
 
-    afterCreate(this:StoryInstance, data:any, textStatus:string, xhr:JQuery.jqXHR):void {
-      this.refreshStory();
-    },
+  editorDisplayed(editor:JQuery):void {
+    // Do nothing
+  }
 
-    afterUpdate(this:StoryInstance, data:any, textStatus:string, xhr:JQuery.jqXHR):void {
-      this.refreshStory();
-    },
+  getPoints():number {
+    const points = parseInt(this.$.find('.story_points').first().text(), 10);
+    return isNaN(points) ? 0 : points;
+  }
 
-    refreshed(this:StoryInstance):void {
-      this.refreshStory();
-    },
-    /**/
+  getType():string {
+    return 'Story';
+  }
 
-    editDialogTitle(this:StoryInstance):string {
-      return `Story #${this.getID!()}`;
-    },
+  markIfClosed():void {
+    // Do nothing
+  }
 
-    editorDisplayed(this:StoryInstance, editor:JQuery):void {
-      // Do nothing
-    },
+  newDialogTitle():string {
+    return 'New Story';
+  }
 
-    getPoints(this:StoryInstance):number {
-      const points = parseInt(this.$.find('.story_points').first().text(), 10);
-      return isNaN(points) ? 0 : points;
-    },
+  refreshStory():void {
+    this.recalcVelocity();
+  }
 
-    getType(this:StoryInstance):string {
-      return 'Story';
-    },
+  recalcVelocity():void {
+    this.$.parents('.backlog').first().data('this').refresh();
+  }
 
-    markIfClosed(this:StoryInstance):void {
-      // Do nothing
-    },
+  saveDirectives():SaveDirectives {
+    let url:string;
+    let prev:JQuery;
+    let sprintId:string;
+    let data:string;
 
-    newDialogTitle(this:StoryInstance):string {
-      return 'New Story';
-    },
-
-    refreshStory(this:StoryInstance):void {
-      this.recalcVelocity();
-    },
-
-    recalcVelocity(this:StoryInstance):void {
-      this.$.parents('.backlog').first().data('this').refresh();
-    },
-
-    saveDirectives(this:StoryInstance):SaveDirectives {
-      let url:string;
-      let prev:JQuery;
-      let sprintId:string;
-      let data:string;
-
-      prev = this.$.prev();
-      sprintId = this.$.parents('.backlog').data('this').isSprintBacklog()
-                   ? this.$.parents('.backlog').data('this').getSprint().data('this')
+    prev = this.$.prev();
+    sprintId = this.$.parents('.backlog').data('this').isSprintBacklog()
+      ? this.$.parents('.backlog').data('this').getSprint().data('this')
 .getID()
-                   : '';
+      : '';
 
-      data = `prev=${
-             prev.length === 1 ? prev.data('this').getID() : ''
-              }&version_id=${sprintId}`;
+    data = `prev=${prev.length === 1 ? prev.data('this').getID() : ''}&version_id=${sprintId}`;
 
-      if (this.$.find('.editor').length > 0) {
-        data += `&${this.$.find('.editor').serialize()}`;
-      }
+    if (this.$.find('.editor').length > 0) {
+      data += `&${this.$.find('.editor').serialize()}`;
+    }
 
-      //TODO: this might be unsave in case the parent of this story is not the
-      //      sprint backlog, then we dont have a sprintId an cannot generate a
-      //      valid url - one option might be to take RB.constants.sprint_id
-      //      hoping it exists
-      if (this.isNew!()) {
-        url = (window as any).RB.urlFor('create_story', { sprint_id: sprintId });
-      } else {
-        url = (window as any).RB.urlFor('update_story', { id: this.getID!(), sprint_id: sprintId });
-        data += '&_method=put';
-      }
+    //TODO: this might be unsave in case the parent of this story is not the
+    //      sprint backlog, then we dont have a sprintId an cannot generate a
+    //      valid url - one option might be to take RB.constants.sprint_id
+    //      hoping it exists
+    if (this.isNew()) {
+      url = RB.urlFor('create_story', { sprint_id: sprintId });
+    } else {
+      url = RB.urlFor('update_story', { id: this.getID(), sprint_id: sprintId });
+      data += '&_method=put';
+    }
 
-      return {
-        url,
-        data,
-      };
-    },
+    return {
+      url,
+      data,
+    };
+  }
 
-    beforeSaveDragResult(this:StoryInstance):void {
-      // Do nothing
-    },
-  } as StoryInstance);
-}(jQuery));
+  beforeSaveDragResult():void {
+    // Do nothing
+  }
+}
+
+// export const EditableStory = new EditableInplace(Story);

@@ -28,171 +28,86 @@
  * ++
  */
 
-interface RBObject {
-  create(...args:any[]):any;
+import $ from 'jquery';
+
+import 'core-vendor/jquery.cookie';
+
+export interface RB {
+  i18n:{ generating_graph:string; burndown_graph:string };
+  constants:{ project_id:string | number; sprint_id:string | number };
+  urlFor(routeName:string, options:{}):string;
 }
 
-interface RBFactory {
-  initialize(objType:any, el:HTMLElement | JQuery):any;
+declare global {
+  const RB:RB;
 }
 
-interface RBDialog {
-  msg(msg:string):void;
-}
+// Utilities
+export class Dialog {
+  static msg(msg:string):void {
+    let dialog:JQuery;
+    const baseClasses = 'ui-button ui-widget ui-state-default ui-corner-all';
 
-interface RBUserPreferences {
-  get(key:string):string | undefined;
-  set(key:string, value:string):void;
-}
+    if ($('#msgBox').length === 0) {
+      dialog = $('<div id="msgBox"></div>').appendTo('body');
+    } else {
+      dialog = $('#msgBox');
+    }
 
-interface RBAjax {
-  (options:JQuery.AjaxSettings):void;
-}
-
-interface RBNamespace {
-  Object:RBObject;
-  Factory:RBFactory;
-  Dialog:RBDialog;
-  UserPreferences:RBUserPreferences;
-  ajax:RBAjax;
-  i18n?:any;
-  constants?:any;
-  urlFor?:any;
-}
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const globalWindow = window as any;
-
-if (globalWindow.RB === null || globalWindow.RB === undefined) {
-  globalWindow.RB = {} as RBNamespace;
-}
-
-(function ($:JQueryStatic):void {
-  let object:RBObject;
-  let Factory:RBFactory;
-  let Dialog:RBDialog;
-  let UserPreferences:RBUserPreferences;
-  let ajax:RBAjax;
-
-  object = {
-    // Douglas Crockford's technique for object extension
-    // http://javascript.crockford.com/prototypal.html
-    create(...args:any[]):any {
-      let obj:any;
-      let i:number;
-      let methods:any;
-      let methodName:string;
-
-      function F():void {
-        // Empty constructor
-      }
-
-      (F as any).prototype = args[0];
-      obj = new (F as any)();
-
-      // Add all the other arguments as mixins that
-      // 'write over' any existing methods
-      for (i = 1; i < args.length; i += 1) {
-        methods = args[i];
-        if (typeof methods === 'object') {
-          for (methodName in methods) {
-            if (methods.hasOwnProperty(methodName)) {
-              obj[methodName] = methods[methodName];
-            }
-          }
-        }
-      }
-      return obj;
-    },
-  };
-
-  // Object factory for chiliproject_backlogs
-  Factory = object.create({
-    initialize(objType:any, el:HTMLElement | JQuery):any {
-      const obj = object.create(objType);
-      obj.initialize(el);
-      return obj;
-    },
-  });
-
-  // Utilities
-  Dialog = object.create({
-    msg(msg:string):void {
-      let dialog:JQuery;
-      const baseClasses = 'ui-button ui-widget ui-state-default ui-corner-all';
-
-      if ($('#msgBox').length === 0) {
-        dialog = $('<div id="msgBox"></div>').appendTo('body');
-      } else {
-        dialog = $('#msgBox');
-      }
-
-      dialog.html(msg);
-      dialog.dialog({
-        title: 'Backlogs Plugin',
-        buttons: [
-          {
-            text: 'OK',
-            class: 'button -primary',
-            click():void {
-              $(this).dialog('close');
-            },
+    dialog.html(msg);
+    dialog.dialog({
+      title: 'Backlogs Plugin',
+      buttons: [
+        {
+          text: 'OK',
+          class: 'button -primary',
+          click():void {
+            $(this).dialog('close');
           },
-        ],
-        modal: true,
-      });
-      $('.button').removeClass(baseClasses);
-      $('.ui-icon-closethick').prop('title', 'close');
-    },
-  });
-
-  ajax = (function ():RBAjax {
-    let ajaxQueue:JQuery.AjaxSettings[];
-    let ajaxOngoing:boolean;
-    let processAjaxQueue:() => void;
-
-    ajaxQueue = [];
-    ajaxOngoing = false;
-
-    processAjaxQueue = function ():void {
-      const options = ajaxQueue.shift();
-
-      if (options !== null && options !== undefined) {
-        ajaxOngoing = true;
-        $.ajax(options);
-      }
-    };
-
-    // Process outstanding entries in the ajax queue whenever an ajax request
-    // finishes.
-    $(document).ajaxComplete((event:JQuery.TriggeredEvent, xhr:JQuery.jqXHR, settings:JQuery.AjaxSettings):void => {
-      ajaxOngoing = false;
-      processAjaxQueue();
+        },
+      ],
+      modal: true,
     });
+    $('.button').removeClass(baseClasses);
+    $('.ui-icon-closethick').prop('title', 'close');
+  }
+}
 
-    return function (options:JQuery.AjaxSettings):void {
-      ajaxQueue.push(options);
-      if (!ajaxOngoing) {
-        processAjaxQueue();
-      }
-    };
-  }());
+// Abstract the user preference from the rest of the RB objects
+// so that we can change the underlying implementation as needed
+export class UserPreferences {
+  static get(key:string):string | undefined {
+    return $.cookie(key);
+  }
 
-  // Abstract the user preference from the rest of the RB objects
-  // so that we can change the underlying implementation as needed
-  UserPreferences = object.create({
-    get(key:string):string | undefined {
-      return ($ as any).cookie(key);
-    },
+  static set(key:string, value:string):void {
+    $.cookie(key, value, { expires: 365 * 10 });
+  }
+}
 
-    set(key:string, value:string):void {
-      ($ as any).cookie(key, value, { expires: 365 * 10 });
-    },
-  });
+const ajaxQueue:JQuery.AjaxSettings[] = [];
+let ajaxOngoing:boolean = false;
+const processAjaxQueue = () => {
+  const options = ajaxQueue.shift();
+  if (options !== null && options !== undefined) {
+    ajaxOngoing = true;
+    $.ajax(options);
+  }
+};
 
-  globalWindow.RB.Object = object;
-  globalWindow.RB.Factory = Factory;
-  globalWindow.RB.Dialog = Dialog;
-  globalWindow.RB.UserPreferences = UserPreferences;
-  globalWindow.RB.ajax = ajax;
-}(jQuery));
+// Process outstanding entries in the ajax queue whenever an ajax request finishes.
+$(document).ajaxComplete((event:JQuery.TriggeredEvent, xhr:JQuery.jqXHR, settings:JQuery.AjaxSettings):void => {
+  ajaxOngoing = false;
+  processAjaxQueue();
+});
+
+export function ajax(options:JQuery.AjaxSettings):void {
+  ajaxQueue.push(options);
+  if (!ajaxOngoing) {
+    processAjaxQueue();
+  }
+}
+export interface SaveDirectives {
+  url:string;
+  data:string;
+}

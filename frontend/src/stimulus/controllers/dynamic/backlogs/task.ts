@@ -28,117 +28,97 @@
  * ++
  */
 
+import $ from 'jquery';
+
+import { WorkPackage } from './work_package';
+import { SaveDirectives } from './common';
+
 /**************************************
   TASK
 ***************************************/
-
-interface SaveDirectives {
-  url:string;
-  data:string;
-}
-
-interface TaskInstance {
-  $:JQuery;
-  el:HTMLElement;
+export class Task extends WorkPackage {
   defaultColor:string;
 
-  initialize(el:HTMLElement):void;
-  beforeSave():void;
-  editorDisplayed(dialog:JQuery):void;
-  getType():string;
-  markIfClosed():void;
-  saveDirectives():SaveDirectives;
-  beforeSaveDragResult():void;
-  refreshed():void;
-  getID?():string | number;
-  isNew?():boolean;
-  handleClick?:(e:JQuery.MouseUpEvent) => void;
+  constructor(el:HTMLElement) {
+    super(el);
+
+    // If node is based on #task_template, it doesn't have the story class yet
+    this.$.addClass('task');
+
+    // Associate this object with the element for later retrieval
+    this.$.data('this', this);
+    this.$.on('mouseup', '.editable', this.handleClick as any);
+    this.defaultColor = $('#rb .task').css('background-color');
+  }
+
+  beforeSave():void {
+    if (this.el && $(this.el).hasClass('dragging')) {
+      return;
+    }
+    const c = this.$.find('select.assigned_to_id').children(':selected').attr('color') || this.defaultColor;
+    this.$.css('background-color', c);
+    (this.$ as any).colorcontrast();
+  }
+
+  editorDisplayed(dialog:JQuery):void {
+    dialog.parents('.ui-dialog').css('background-color', this.$.css('background-color'));
+    (dialog.parents('.ui-dialog') as any).colorcontrast();
+  }
+
+  getType():string {
+    return 'Task';
+  }
+
+  markIfClosed():void {
+    if (this.$.parent('td').first().hasClass('closed')) {
+      this.$.addClass('closed');
+    } else {
+      this.$.removeClass('closed');
+    }
+  }
+
+  saveDirectives():SaveDirectives {
+    let prev:JQuery;
+    let cellId:string[];
+    let data:string;
+    let url:string;
+
+    prev = this.$.prev();
+    cellId = this.$.parent('td').first().attr('id')!.split('_');
+
+    data = `${this.$.find('.editor').serialize()}&parent_id=${cellId[0]}&status_id=${cellId[1]}&prev=${
+      prev.length === 1 ? prev.data('this').getID() : ''
+    }${this.isNew() ? '' : `&id=${this.$.children('.id').text()}`}`;
+
+    if (this.isNew()) {
+      url = RB.urlFor('create_task', { sprint_id: RB.constants.sprint_id });
+    } else {
+      url = RB.urlFor('update_task', {
+        id: this.getID(),
+        sprint_id: RB.constants.sprint_id,
+      });
+      data += '&_method=put';
+    }
+
+    return {
+      url,
+      data,
+    };
+  }
+
+  beforeSaveDragResult():void {
+    if (this.$.parent('td').first().hasClass('closed')) {
+      // This is only for the purpose of making the Remaining Hours reset
+      // instantaneously after dragging to a closed status. The server should
+      // still make sure to reset the value.
+      this.$.children('.remaining_hours.editor').val('');
+      this.$.children('.remaining_hours.editable').text('');
+    }
+  }
+
+  refreshed():void {
+    const remainingHours = this.$.children('.remaining_hours.editable');
+
+    remainingHours.toggleClass('empty', remainingHours.is(':empty'));
+  }
 }
-
-(window as any).RB.Task = (function ($:JQueryStatic) {
-  return (window as any).RB.Object.create((window as any).RB.WorkPackage, {
-
-    initialize(this:TaskInstance, el:HTMLElement):void {
-      this.$ = $(el);
-      this.el = el;
-
-      // If node is based on #task_template, it doesn't have the story class yet
-      this.$.addClass('task');
-
-      // Associate this object with the element for later retrieval
-      this.$.data('this', this);
-      this.$.on('mouseup', '.editable', this.handleClick as any);
-      this.defaultColor = $('#rb .task').css('background-color');
-    },
-
-    beforeSave(this:TaskInstance):void {
-      if (this.el && $(this.el).hasClass('dragging')) {
-        return;
-      }
-      const c = this.$.find('select.assigned_to_id').children(':selected').attr('color') || this.defaultColor;
-      this.$.css('background-color', c);
-      (this.$ as any).colorcontrast();
-    },
-
-    editorDisplayed(this:TaskInstance, dialog:JQuery):void {
-      dialog.parents('.ui-dialog').css('background-color', this.$.css('background-color'));
-      (dialog.parents('.ui-dialog') as any).colorcontrast();
-    },
-
-    getType(this:TaskInstance):string {
-      return 'Task';
-    },
-
-    markIfClosed(this:TaskInstance):void {
-      if (this.$.parent('td').first().hasClass('closed')) {
-        this.$.addClass('closed');
-      } else {
-        this.$.removeClass('closed');
-      }
-    },
-
-    saveDirectives(this:TaskInstance):SaveDirectives {
-      let prev:JQuery;
-      let cellId:string[];
-      let data:string;
-      let url:string;
-
-      prev = this.$.prev();
-      cellId = this.$.parent('td').first().attr('id')!.split('_');
-
-      data = `${this.$.find('.editor').serialize()
-                 }&parent_id=${cellId[0]
-                 }&status_id=${cellId[1]
-                 }&prev=${prev.length === 1 ? prev.data('this').getID() : ''
-                 }${this.isNew!() ? '' : `&id=${this.$.children('.id').text()}`}`;
-
-      if (this.isNew!()) {
-        url = (window as any).RB.urlFor('create_task', { sprint_id: (window as any).RB.constants.sprint_id });
-      } else {
-        url = (window as any).RB.urlFor('update_task', { id: this.getID!(), sprint_id: (window as any).RB.constants.sprint_id });
-        data += '&_method=put';
-      }
-
-      return {
-        url,
-        data,
-      };
-    },
-
-    beforeSaveDragResult(this:TaskInstance):void {
-      if (this.$.parent('td').first().hasClass('closed')) {
-        // This is only for the purpose of making the Remaining Hours reset
-        // instantaneously after dragging to a closed status. The server should
-        // still make sure to reset the value.
-        this.$.children('.remaining_hours.editor').val('');
-        this.$.children('.remaining_hours.editable').text('');
-      }
-    },
-
-    refreshed(this:TaskInstance):void {
-      const remainingHours = this.$.children('.remaining_hours.editable');
-
-      remainingHours.toggleClass('empty', remainingHours.is(':empty'));
-    },
-  } as TaskInstance);
-}(jQuery));
