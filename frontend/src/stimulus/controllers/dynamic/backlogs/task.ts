@@ -78,13 +78,10 @@ export class Task extends WorkPackage {
   }
 
   saveDirectives():SaveDirectives {
-    let prev:JQuery;
-    let cellId:string[];
+    const prev = this.$.prev();
+    const cellId = this.$.parent('td').first().attr('id')!.split('_');
     let data:string;
     let url:string;
-
-    prev = this.$.prev();
-    cellId = this.$.parent('td').first().attr('id')!.split('_');
 
     data = `${this.$.find('.editor').serialize()}&parent_id=${cellId[0]}&status_id=${cellId[1]}&prev=${
       prev.length === 1 ? prev.data('this').getID() : ''

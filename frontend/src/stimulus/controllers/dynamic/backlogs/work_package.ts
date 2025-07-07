@@ -27,10 +27,6 @@ import { Model } from './model';
   WORK PACKAGE
 ***************************************/
 export class WorkPackage extends Model {
-  constructor(el:HTMLElement) {
-    super(el);
-  }
-
   beforeSaveDragResult():void {
     // Do nothing
   }

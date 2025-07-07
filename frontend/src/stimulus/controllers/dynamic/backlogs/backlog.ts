@@ -102,7 +102,7 @@ export class Backlog {
     $(this).parents('.backlog').data('this').refresh();
   }
 
-  dragComplete(e:JQueryEventObject, ui:JQueryUI.SortableUIParams):void {
+  dragComplete(_e:JQueryEventObject, ui:JQueryUI.SortableUIParams):void {
     const isDropTarget = ui.sender === null || ui.sender === undefined;
 
     // jQuery triggers dragComplete of source and target.
@@ -113,11 +113,11 @@ export class Backlog {
     }
   }
 
-  dragStart(e:JQueryInputEventObject, ui:JQueryUI.SortableUIParams):void {
+  dragStart(_e:JQueryInputEventObject, ui:JQueryUI.SortableUIParams):void {
     ui.item.addClass('dragging');
   }
 
-  dragStop(e:JQueryInputEventObject, ui:JQueryUI.SortableUIParams):void {
+  dragStop(_e:JQueryInputEventObject, ui:JQueryUI.SortableUIParams):void {
     ui.item.removeClass('dragging');
   }
 
@@ -148,13 +148,10 @@ export class Backlog {
   }
 
   newStory():void {
-    let story:JQuery;
-    let o:Story;
-
-    story = $('#story_template').children().first().clone();
+    const story = $('#story_template').children().first().clone();
     this.getList().prepend(story);
 
-    o = new Story(story[0]);
+    const o = new Story(story[0]);
     o.edit();
 
     story.find('.editor').first().focus();
@@ -166,13 +163,11 @@ export class Backlog {
   }
 
   recalcVelocity():boolean | void {
-    let total:number;
-
     if (!this.isSprintBacklog()) {
       return true;
     }
 
-    total = 0;
+    let total = 0;
     this.getStories().each(function (this:HTMLElement, index:number):void {
       total += $(this).data('this').getPoints();
     });

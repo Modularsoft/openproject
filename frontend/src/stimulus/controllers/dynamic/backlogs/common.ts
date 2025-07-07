@@ -45,8 +45,8 @@ declare global {
 // Utilities
 export class Dialog {
   static msg(msg:string):void {
-    let dialog:JQuery;
     const baseClasses = 'ui-button ui-widget ui-state-default ui-corner-all';
+    let dialog:JQuery;
 
     if ($('#msgBox').length === 0) {
       dialog = $('<div id="msgBox"></div>').appendTo('body');

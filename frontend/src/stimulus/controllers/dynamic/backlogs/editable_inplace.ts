@@ -56,11 +56,8 @@ export function EditableInplace<TBase extends Constructor>(Base:TBase) {
 
     // For detecting Enter and ESC
     handleKeydown(this:HTMLElement, e:JQuery.KeyDownEvent):boolean | void {
-      let j:JQuery;
-      let that:Model;
-
-      j = $(this).parents('.model').first();
-      that = j.data('this');
+      const j = $(this).parents('.model').first();
+      const that = j.data('this') as Model;
 
       // 13 is the key code of Enter, 27 of ESC.
       if (e.which === 13) {

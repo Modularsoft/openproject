@@ -40,8 +40,8 @@ import { ajax, Dialog, SaveDirectives } from './common';
 export class Model {
   protected $:JQuery;
   protected el:HTMLElement;
-  setSelection:any;
-  isSelected:any;
+  declare setSelection?:(selected:boolean) => void;
+  declare isSelected?:() => boolean;
 
   constructor(el:HTMLElement) {
     this.$ = $(el);
@@ -53,11 +53,8 @@ export class Model {
   }
 
   afterSave(data:any, textStatus:string, xhr:JQuery.jqXHR):void {
-    let isNew:boolean;
-    let result:Model;
-
-    isNew = this.isNew();
-    result = new Model(data);
+    const isNew = this.isNew();
+    const result = new Model(data);
 
     this.unmarkSaving();
     this.refresh(result);
@@ -91,7 +88,6 @@ export class Model {
 
   copyFromDialog():void {
     let editors:JQuery;
-
     if (this.$.find('.editors').length === 0) {
       editors = $("<div class='editors'></div>").appendTo(this.$);
     } else {
@@ -147,9 +143,7 @@ export class Model {
     let maxTabIndex = 0;
 
     $('.stories .editors .editor').each(function (this:HTMLElement, index:number):void {
-      let value:number;
-
-      value = parseInt($(this).attr('tabindex') || '0', 10);
+      const value = parseInt($(this).attr('tabindex') || '0', 10);
 
       if (maxTabIndex < value) {
         maxTabIndex = value;
@@ -304,12 +298,9 @@ export class Model {
   }
 
   getEditor():JQuery {
-    let editorId:string;
-    let editor:JQuery;
     // Create the model editor if it does not yet exist
-    editorId = `${this.getType().toLowerCase()}_editor`;
-
-    editor = $(`#${editorId}`).html('');
+    const editorId = `${this.getType().toLowerCase()}_editor`;
+    let editor = $(`#${editorId}`).html('');
 
     if (editor.length === 0) {
       editor = $(`<div id='${editorId}'></div>`).appendTo('body');
@@ -435,7 +426,6 @@ export class Model {
     const j = this.$;
     const self = this;
     const editors = j.find('.editor');
-    let saveDir:SaveDirectives;
 
     // Copy the values from the fields to the proper html elements
     editors.each(function (this:HTMLElement, index:number):void {
@@ -464,7 +454,7 @@ export class Model {
     self.markIfClosed();
 
     // Get the save directives.
-    saveDir = self.saveDirectives();
+    const saveDir = self.saveDirectives();
 
     self.beforeSave();
 

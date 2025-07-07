@@ -50,15 +50,11 @@ export class Impediment extends Task {
 
   // Override saveDirectives of RB.Task
   saveDirectives():SaveDirectives {
-    let j:JQuery;
-    let prev:JQuery;
-    let statusID:string;
+    const j = this.$;
+    const prev = this.$.prev();
+    const statusID = j.parent('td').first().attr('id')!.split('_')[1];
     let data:string;
     let url:string;
-
-    j = this.$;
-    prev = this.$.prev();
-    statusID = j.parent('td').first().attr('id')!.split('_')[1];
 
     data = `${j.find('.editor').serialize()}&is_impediment=true`
       + `&version_id=${RB.constants.sprint_id}&status_id=${statusID}&prev=${

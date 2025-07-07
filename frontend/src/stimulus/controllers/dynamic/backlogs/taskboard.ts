@@ -26,6 +26,7 @@ import { UserPreferences } from './common';
 import { Impediment } from './impediment';
 import { Model } from './model';
 import { Task } from './task';
+import { WorkPackage } from './work_package';
 
 /***************************************
   TASKBOARD
@@ -37,8 +38,6 @@ export class Taskboard extends Model {
   constructor(el:HTMLElement) {
     super(el);
 
-    const self = this; // So we can bind the event handlers to this object
-
     // Associate this object with the element for later retrieval
     this.$.data('this', this);
 
@@ -49,8 +48,8 @@ export class Taskboard extends Model {
     this.updateColWidths();
 
     $('#col_width_input').on('keyup', (evt:JQuery.TriggeredEvent) => {
-      if ((evt as any).which === 13) {
-        self.updateColWidths();
+      if (evt.which === 13) {
+        this.updateColWidths();
       }
     });
 
@@ -64,9 +63,8 @@ export class Taskboard extends Model {
   }
 
   initializeNewButtons():void {
-    const self = this;
-    this.$.find('#tasks .add_new.clickable').click(self.handleAddNewTaskClick);
-    this.$.find('#impediments .add_new.clickable').click(self.handleAddNewImpedimentClick);
+    this.$.find('#tasks .add_new.clickable').click(this.handleAddNewTaskClick);
+    this.$.find('#impediments .add_new.clickable').click(this.handleAddNewImpedimentClick);
   }
 
   initializeSortables():void {
@@ -131,29 +129,29 @@ export class Taskboard extends Model {
     });
   }
 
-  dragComplete(e:JQueryEventObject, ui:JQueryUI.SortableUIParams):void {
+  dragComplete(_e:JQueryEventObject, ui:JQueryUI.SortableUIParams):void {
     // Handler is triggered for source and target. Thus the need to check.
     const isDropTarget = ui.sender === null;
 
     if (isDropTarget) {
-      ui.item.data('this').saveDragResult();
+      (ui.item.data('this') as WorkPackage).saveDragResult();
     }
   }
 
-  dragStart(e:JQueryEventObject, ui:JQueryUI.SortableUIParams):void {
+  dragStart(_e:JQueryEventObject, ui:JQueryUI.SortableUIParams):void {
     ui.item.addClass('dragging');
   }
 
-  dragStop(e:JQueryEventObject, ui:JQueryUI.SortableUIParams):void {
+  dragStop(_e:JQueryEventObject, ui:JQueryUI.SortableUIParams):void {
     ui.item.removeClass('dragging');
   }
 
-  handleAddNewImpedimentClick(e:JQuery.TriggeredEvent):void {
+  handleAddNewImpedimentClick(_e:JQuery.TriggeredEvent):void {
     const row = $(this).parents('tr').first();
     ($('#taskboard').data('this') as Taskboard).newImpediment(row);
   }
 
-  handleAddNewTaskClick(e:JQuery.TriggeredEvent):void {
+  handleAddNewTaskClick(_e:JQuery.TriggeredEvent):void {
     const row = $(this).parents('tr').first();
     ($('#taskboard').data('this') as Taskboard).newTask(row);
   }
@@ -168,24 +166,18 @@ export class Taskboard extends Model {
   }
 
   newImpediment(row:JQuery):void {
-    let impediment:JQuery;
-    let o:Impediment;
-
-    impediment = $('#impediment_template').children().first().clone();
+    const impediment = $('#impediment_template').children().first().clone();
     row.find('.list').first().prepend(impediment);
 
-    o = new Impediment(impediment[0]);
+    const o = new Impediment(impediment[0]);
     o.edit();
   }
 
   newTask(row:JQuery):void {
-    let task:JQuery;
-    let o:Task;
-
-    task = $('#task_template').children().first().clone();
+    const task = $('#task_template').children().first().clone();
     row.find('.list').first().prepend(task);
 
-    o = new Task(task[0]);
+    const o = new Task(task[0]);
     o.edit();
   }
 

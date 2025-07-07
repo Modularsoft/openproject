@@ -97,18 +97,11 @@ export class Story extends WorkPackage {
   }
 
   saveDirectives():SaveDirectives {
-    let url:string;
-    let prev:JQuery;
-    let sprintId:string;
-    let data:string;
-
-    prev = this.$.prev();
-    sprintId = this.$.parents('.backlog').data('this').isSprintBacklog()
-      ? this.$.parents('.backlog').data('this').getSprint().data('this')
-.getID()
+    const prev = this.$.prev();
+    const sprintId = this.$.parents('.backlog').data('this').isSprintBacklog()
+      ? this.$.parents('.backlog').data('this').getSprint().data('this').getID()
       : '';
-
-    data = `prev=${prev.length === 1 ? prev.data('this').getID() : ''}&version_id=${sprintId}`;
+    let data = `prev=${prev.length === 1 ? prev.data('this').getID() : ''}&version_id=${sprintId}`;
 
     if (this.$.find('.editor').length > 0) {
       data += `&${this.$.find('.editor').serialize()}`;
@@ -118,6 +111,7 @@ export class Story extends WorkPackage {
     //      sprint backlog, then we dont have a sprintId an cannot generate a
     //      valid url - one option might be to take RB.constants.sprint_id
     //      hoping it exists
+    let url:string;
     if (this.isNew()) {
       url = RB.urlFor('create_story', { sprint_id: sprintId });
     } else {
