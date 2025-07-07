@@ -94,24 +94,6 @@ export function initializeGlobalListeners():void {
       console.log(`Could not scroll to given location hash: ${hash} ( ${e.message})`);
     }
   }
-
-  // Global submitting hook,
-  // necessary to avoid a data loss warning on beforeunload
-  jQuery(document).on('submit', 'form', () => {
-    window.OpenProject.pageIsSubmitted = true;
-  });
-
-  // Global beforeunload hook
-  jQuery(window).on('beforeunload', (e:JQuery.TriggeredEvent) => {
-    const event = e.originalEvent as BeforeUnloadEvent;
-    if (window.OpenProject.pageWasEdited && !window.OpenProject.pageIsSubmitted) {
-      // Cancel the event
-      event.preventDefault();
-      // Chrome requires returnValue to be set
-      event.returnValue = I18n.t('js.work_packages.confirm_edit_cancel');
-    }
-  });
-
   // Disable global drag & drop handling, which results in the browser loading the image and losing the page
   jQuery(document.documentElement)
     .on('dragover drop', (evt:Event) => {

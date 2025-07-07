@@ -23,6 +23,7 @@ import CkeditorFocusController from './controllers/ckeditor-focus.controller';
 import AutoSubmit from '@stimulus-components/auto-submit';
 import { OpenProjectStimulusApplication } from 'core-stimulus/openproject-stimulus-application';
 import { Application } from '@hotwired/stimulus';
+import { BeforeunloadController } from './controllers/beforeunload.controller';
 
 declare global {
   interface Window {
@@ -51,6 +52,8 @@ OpenProjectStimulusApplication.preregister('pattern-input', PatternInputControll
 OpenProjectStimulusApplication.preregister('scroll-into-view', ScrollIntoViewController);
 OpenProjectStimulusApplication.preregister('ckeditor-focus', CkeditorFocusController);
 OpenProjectStimulusApplication.preregister('auto-submit', AutoSubmit);
+OpenProjectStimulusApplication.preregister('beforeunload', BeforeunloadController);
+
 
 const instance = OpenProjectStimulusApplication.start();
 window.Stimulus = instance;

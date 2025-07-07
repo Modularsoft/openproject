@@ -39,13 +39,6 @@ export class OpenProject {
 
   public helpers = new GlobalHelpers();
 
-  /** Globally setable variable whether the page was edited */
-  public pageWasEdited = false;
-
-  /** Globally setable variable whether the page form is submitted.
-   * Necessary to avoid a data loss warning on beforeunload */
-  public pageIsSubmitted = false;
-
   /** Globally setable variable whether any of the EditFormComponent
    * contain changes.
    * Necessary to show a data loss warning on beforeunload when clicking

@@ -59,6 +59,7 @@ import { AttachmentCollectionResource } from 'core-app/features/hal/resources/at
 import { populateInputsFromDataset } from 'core-app/shared/components/dataset-inputs';
 import { navigator } from '@hotwired/turbo';
 import { uniqueId } from 'lodash';
+import { setPageWasEdited, setPageWasSubmitted } from '../../../../../../stimulus/controllers/beforeunload.controller';
 
 @Component({
   templateUrl: './ckeditor-augmented-textarea.html',
@@ -191,7 +192,7 @@ export class CkeditorAugmentedTextareaComponent extends UntilDestroyedMixin impl
     CkeditorAugmentedTextareaComponent.inFlight.set(this.formElement, true);
 
     this.syncToTextarea();
-    window.OpenProject.pageIsSubmitted = true;
+    setPageWasSubmitted();
 
     setTimeout(() => {
       if (evt?.submitter) {
@@ -236,7 +237,7 @@ export class CkeditorAugmentedTextareaComponent extends UntilDestroyedMixin impl
   }
 
   public syncToTextarea() {
-    window.OpenProject.pageWasEdited = true;
+    setPageWasEdited();
 
     try {
       this.wrappedTextArea.value = this.ckEditorInstance.getTransformedContent(true);
