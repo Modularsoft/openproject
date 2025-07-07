@@ -9,11 +9,6 @@
 // Copyright (C) 2006-2013 Jean-Philippe Lang
 // Copyright (C) 2010-2013 the ChiliProject Team
 //
-// This program is free software; you can redistribute it and/or
-// modify it under the terms of the GNU General Public License
-// as published by the Free Software Foundation; either version 2
-// of the License, or (at your option) any later version.
-//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -29,27 +24,40 @@
 /**************************************
   WORK PACKAGE
 ***************************************/
-RB.WorkPackage = (function ($) {
-  return RB.Object.create(RB.Model, {
 
-    initialize: function (el) {
+// Interface for WorkPackage properties and methods
+interface WorkPackageInterface {
+  $:JQuery;
+  el:HTMLElement;
+
+  initialize(el:HTMLElement):void;
+  beforeSaveDragResult():void;
+  getType():string;
+  saveDragResult():void;
+  saveEdits():void;
+}
+
+(window as any).RB.WorkPackage = (function ($:JQueryStatic) {
+  return (window as any).RB.Object.create((window as any).RB.Model, {
+
+    initialize(el:HTMLElement):void {
       this.$ = $(el);
       this.el = el;
     },
 
-    beforeSaveDragResult: function () {
+    beforeSaveDragResult():void {
       // Do nothing
     },
 
-    getType: function () {
-      return "WorkPackage";
+    getType():string {
+      return 'WorkPackage';
     },
 
-    saveDragResult: function () {
-      this.beforeSaveDragResult();
+    saveDragResult():void {
+      (this as WorkPackageInterface).beforeSaveDragResult();
       if (!this.$.hasClass('editing')) {
-        this.saveEdits();
+        (this as WorkPackageInterface).saveEdits();
       }
-    }
+    },
   });
 }(jQuery));
