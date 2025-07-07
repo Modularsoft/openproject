@@ -56,3 +56,7 @@ To ensure that the squashing process hasn't introduced any schema changes, you c
 3. Perform the squashing process
 4. Run `rails db:drop db:create db:migrate` again to generate a new `structure.sql` file
 5. Compare the two structure files (e.g., using `diff`) - there should be no differences. This includes known shortcomings. The shortcomings could be addressed in separate migrations.
+
+## Particularities
+
+good_job creates migration files when it is upgraded. It does so simply by looking for the existence of migration files with expected names. Removing the files as it is done for other migrations would therefore only lead to the file being recreated with a different timestamp once good_job is upgraded. To prevent that from happening, good_job's migration files are not removed. But they are emptied out and their contents moved to `tables` classes just like it is done for squashed migrations.

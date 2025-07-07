@@ -350,13 +350,6 @@ class AggregatedMigrations < SquashedMigration
     20240104172050_add_project_queries
     20240115112549_fix_spent_time_widget_identifier
     20240116165933_add_derived_done_ratio_to_work_packages
-    20240123151246_create_good_jobs
-    20240123151247_create_good_job_settings
-    20240123151248_create_index_good_jobs_jobs_on_priority_created_at_when_unfinished
-    20240123151249_create_good_job_batches
-    20240123151250_create_good_job_executions
-    20240123151251_create_good_jobs_error_event
-    20240123151252_recreate_good_job_cron_indexes_with_conditional
     20240131130134_fix_inherited_group_memberships
     20240206173841_fix_untranslated_work_package_roles
     20240207075946_add_status_to_attachment
@@ -364,10 +357,6 @@ class AggregatedMigrations < SquashedMigration
     20240222155909_rename_columns_on_project_queries
     20240227154544_remove_delayed_jobs
     20240306083241_change_default_value_of_alternative_color
-    20240306154734_create_good_job_labels
-    20240306154735_create_good_job_labels_index
-    20240306154736_remove_good_job_active_id_index
-    20240306154737_create_index_good_job_jobs_for_candidate_lookup
     20240206085104_remove_enums
     20240307094432_change_done_ratio_default_value_to_null
     20240307102541_reduce_configurable_design_variables
