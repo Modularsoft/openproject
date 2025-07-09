@@ -75,7 +75,7 @@ export default class extends ApplicationController {
     const textInputs = Array.from(document.querySelectorAll('input[type="text"], input[type="number"]'));
     const allTextSaved = textInputs.every((input) => (input as HTMLInputElement).value.trim().length === 0);
 
-    return !allTextSaved || this.beforeUnloadController.pageWasEdited;
+    return !allTextSaved || window.OpenProject.pageWasEdited;
   }
 
   private beforeUnloadHandler(event:BeforeUnloadEvent):void {
