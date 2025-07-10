@@ -757,6 +757,7 @@ en:
           last_day: "Last day"
 
     text_are_you_sure: "Are you sure?"
+    text_are_you_sure_to_cancel: "You have unsaved changes on this page. Are you sure you want to discard them?"
     breadcrumb: "Breadcrumb"
     text_data_lost: "All entered data will be lost."
     text_user_wrote: "%{value} wrote:"
