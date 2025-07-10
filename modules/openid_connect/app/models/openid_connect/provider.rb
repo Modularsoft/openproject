@@ -33,6 +33,9 @@ module OpenIDConnect
     include HashBuilder
 
     has_many :remote_identities, as: :auth_source, dependent: :destroy
+    has_many :oidc_group_memberships, inverse_of: :auth_provider,
+                                      class_name: "::OpenIDConnect::GroupMembership",
+                                      dependent: :delete_all
 
     OIDC_PROVIDERS = %w[google microsoft_entra custom].freeze
     DISCOVERABLE_STRING_ATTRIBUTES_MANDATORY = %i[authorization_endpoint
@@ -69,6 +72,11 @@ module OpenIDConnect
     store_attribute :options, :scope, :string, default: "openid email profile"
     store_attribute :options, :claims, :string
     store_attribute :options, :acr_values, :string
+
+    store_attribute :options, :sync_groups, :boolean, default: false
+    store_attribute :options, :groups_claim, :string, default: "groups"
+    store_attribute :options, :group_prefixes, :json, default: []
+    store_attribute :options, :group_regexes, :json, default: []
 
     # azure specific option
     store_attribute :options, :use_graph_api, :boolean
@@ -132,6 +140,16 @@ module OpenIDConnect
 
     def scopes
       (scope || "").split
+    end
+
+    def group_matchers
+      if group_prefixes.present?
+        group_prefixes.map { |p| Regexp.new("^#{Regexp.escape(p)}(.+)$") }
+      elsif group_regexes.present?
+        group_regexes.map { |r| Regexp.new(r) }
+      else
+        [/(.+)/]
+      end
     end
   end
 end

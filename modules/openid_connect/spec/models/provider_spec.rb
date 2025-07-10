@@ -54,4 +54,51 @@ RSpec.describe OpenIDConnect::Provider do
       it { is_expected.to be_falsey }
     end
   end
+
+  describe "#group_matchers" do
+    subject { provider.group_matchers }
+
+    let(:provider) { create(:oidc_provider, group_prefixes:, group_regexes:) }
+
+    context "when prefixes and regular expressions were never defined" do
+      let(:group_prefixes) { nil }
+      let(:group_regexes) { nil }
+
+      it { is_expected.to eq([/(.+)/]) }
+    end
+
+    context "when prefixes and regular expressions are empty" do
+      let(:group_prefixes) { [] }
+      let(:group_regexes) { [] }
+
+      it { is_expected.to eq([/(.+)/]) }
+    end
+
+    context "when prefixes were defined" do
+      let(:group_prefixes) { ["a_", "b_"] }
+      let(:group_regexes) { [] }
+
+      it { is_expected.to eq([/^a_(.+)$/, /^b_(.+)$/]) }
+
+      context "and when prefix contains regular expression special characters" do
+        let(:group_prefixes) { ["pre.fix", "(prefix)"] }
+
+        it { is_expected.to eq([/^pre\.fix(.+)$/, /^\(prefix\)(.+)$/]) }
+      end
+    end
+
+    context "when regular expressions were defined" do
+      let(:group_prefixes) { [] }
+      let(:group_regexes) { ["[a-z_]+", "^specific_group_name$"] }
+
+      it { is_expected.to eq([/[a-z_]+/, /^specific_group_name$/]) }
+    end
+
+    context "when prefixes and regular expressions were defined" do
+      let(:group_prefixes) { ["a"] }
+      let(:group_regexes) { [/[b]/] }
+
+      it { is_expected.to eq([/^a(.+)$/]) }
+    end
+  end
 end

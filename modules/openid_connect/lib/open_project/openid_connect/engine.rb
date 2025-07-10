@@ -56,7 +56,7 @@ module OpenProject::OpenIDConnect
       openid_connect/auth_provider-custom.png
     )
 
-    patches %i[Sessions::UserSession User]
+    patches %i[Sessions::UserSession Group User GroupUser]
 
     class_inflection_override("openid_connect" => "OpenIDConnect")
 
@@ -87,6 +87,7 @@ module OpenProject::OpenIDConnect
             omniauth.oidc_access_token
             omniauth.oidc_refresh_token
             omniauth.oidc_expires_in
+            omniauth.oidc_groups
           ]
 
           h[:backchannel_logout_callback] = ->(logout_token) do
