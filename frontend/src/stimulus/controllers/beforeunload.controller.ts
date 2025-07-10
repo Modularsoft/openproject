@@ -12,6 +12,8 @@ export class BeforeunloadController extends ApplicationController {
     window.addEventListener('beforeunload', this, { signal });
     document.addEventListener('turbo:before-visit', this, { signal });
     document.addEventListener('turbo:submit-end', this, { signal });
+    document.addEventListener('turbo:load', this, { signal });
+    document.addEventListener('turbo:render', this, { signal });
     document.addEventListener('submit', this, { signal });
   }
 
@@ -26,6 +28,8 @@ export class BeforeunloadController extends ApplicationController {
         this.beforeunloadHandler(evt as BeforeUnloadEvent|TurboBeforeVisitEvent);
         break;
       case 'turbo:submit-end':
+      case 'turbo:load':
+      case 'turbo:render':
         window.OpenProject.pageState = 'pristine';
         break;
       case 'submit':
