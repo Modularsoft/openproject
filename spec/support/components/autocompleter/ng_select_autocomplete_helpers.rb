@@ -4,8 +4,7 @@ module Components::Autocompleter
   module NgSelectAutocompleteHelpers
     def search_autocomplete(element, query:, results_selector: nil, wait_dropdown_open: true, wait_for_fetched_options: true)
       SeleniumHubWaiter.wait unless using_cuprite?
-      # Open the element
-      page.execute_script("arguments[0].click();", element.native)
+      ng_click_autocompleter(element)
 
       # Wait for dropdown to open
       ng_find_dropdown(element, results_selector:) if wait_dropdown_open
@@ -31,6 +30,17 @@ module Components::Autocompleter
       dropdown_list = ng_find_dropdown(element, results_selector:)
       scroll_to_element(dropdown_list)
       dropdown_list
+    end
+
+    def ng_click_autocompleter(element)
+      input = element.first(".ng-input input")
+      target = input || element
+
+      if using_cuprite?
+        target.click
+      else
+        page.execute_script("arguments[0].click();", target.native)
+      end
     end
 
     def ng_find_dropdown(element, results_selector: nil)
