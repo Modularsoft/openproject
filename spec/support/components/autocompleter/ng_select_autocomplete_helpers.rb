@@ -34,7 +34,7 @@ module Components::Autocompleter
 
     def ng_click_autocompleter(target)
       if using_cuprite?
-        target.click
+        target.trigger('click')
       else
         page.execute_script("arguments[0].click();", target.native)
       end
