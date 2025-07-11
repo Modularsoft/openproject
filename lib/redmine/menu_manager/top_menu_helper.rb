@@ -79,20 +79,10 @@ module Redmine::MenuManager::TopMenuHelper
     capture do
       concat render_quick_add_menu
       concat render_top_menu_teaser
-      concat top_menu_right_node
+      concat render_notification_top_menu_node
+      concat render_help_top_menu_node
+      concat render_user_top_menu_node
     end
-  end
-
-  def top_menu_right_node
-    content_tag(:ul, class: "op-app-menu") do
-      safe_join top_menu_right_menu_items
-    end
-  end
-
-  def top_menu_right_menu_items
-    [render_notification_top_menu_node,
-     render_help_top_menu_node,
-     render_user_top_menu_node]
   end
 
   private
@@ -242,10 +232,6 @@ module Redmine::MenuManager::TopMenuHelper
 
       groups
     end
-  end
-
-  def project_menu_items
-    split_top_menu_into_main_or_more_menus[:projects]
   end
 
   def help_menu_item

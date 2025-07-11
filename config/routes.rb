@@ -878,6 +878,7 @@ Rails.application.routes.draw do
 
   scope controller: "onboarding" do
     patch "user_settings", action: "user_settings"
+    get "onboarding_video_dialog", action: "onboarding_video_dialog"
   end
 
   resources :colors do

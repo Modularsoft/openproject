@@ -50,6 +50,7 @@ module Redmine::MenuManager::TopMenu::QuickAddMenu
                             "aria-label": I18n.t("menus.quick_add.label"))
 
       add_first_level_items(menu)
+      menu.with_divider
       add_second_level_items(menu)
     end
   end
