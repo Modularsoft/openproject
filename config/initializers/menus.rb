@@ -82,8 +82,7 @@ Redmine::MenuManager.map :quick_add_menu do |menu|
             caption: ->(_) { Project.model_name.human },
             icon: "plus",
             html: {
-              aria: { label: I18n.t(:label_project_new) },
-              title: I18n.t(:label_project_new)
+              aria: { label: I18n.t(:label_project_new) }
             },
             if: ->(project) {
               User.current.allowed_globally?(:add_project) ||

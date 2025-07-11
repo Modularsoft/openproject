@@ -49,7 +49,7 @@ module Components
 
     def expect_work_package_type(*names, present: true)
       within_dropdown do
-        expect(page).to have_text "WORK PACKAGES"
+        expect(page).to have_text "Work Packages"
       end
 
       names.each do |name|
@@ -80,7 +80,7 @@ module Components
     end
 
     def trigger_element
-      page.find('a[title="Open quick add menu"]')
+      page.find_test_selector("quick-add-menu-button")
     end
   end
 end

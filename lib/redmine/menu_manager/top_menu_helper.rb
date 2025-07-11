@@ -40,7 +40,7 @@ module Redmine::MenuManager::TopMenuHelper
   def top_menu_left_menu_items
     [render_module_top_menu_node,
      render_logo,
-     render_main_top_menu_nodes]
+     render_main_top_menu_nodes] # ToDo: Check wether render_main_top_menu_nodes can be removed
   end
 
   def render_top_menu_center
@@ -179,7 +179,7 @@ module Redmine::MenuManager::TopMenuHelper
                                            anchor_align: :end) do |menu|
         menu.with_show_button(icon: "op-grid-menu",
                               scheme: :invisible,
-                              classes: "op-app-menu--item-action op-app-header--primer-button",
+                              classes: "op-app-header--primer-button",
                               title: I18n.t("label_modules"),
                               test_selector: "op-app-header--modules-menu-button",
                               "aria-label": I18n.t("label_modules"))

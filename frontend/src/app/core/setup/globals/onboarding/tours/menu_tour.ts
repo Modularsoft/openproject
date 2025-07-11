@@ -15,10 +15,10 @@ export function menuTourSteps():OnboardingStep[] {
       condition: () => document.getElementsByClassName('wiki-menu--main-item').length !== 0,
     },
     {
-      'next .op-quick-add-menu': I18n.t('js.onboarding.steps.quick_add_button'),
+      'next #op-app-header--quick-add-menu-button': I18n.t('js.onboarding.steps.quick_add_button'),
       showSkip: false,
       nextButton: { text: I18n.t('js.onboarding.buttons.next') },
-      condition: () => document.getElementsByClassName('op-quick-add-menu--icon').length !== 0,
+      condition: () => document.getElementById('op-app-header--quick-add-menu-button') !== undefined,
     },
     {
       'next .op-app-help': I18n.t('js.onboarding.steps.help_menu'),
