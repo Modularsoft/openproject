@@ -51,6 +51,8 @@ module Storages
     store_attribute :provider_fields, :storage_audience, :string
     store_attribute :provider_fields, :token_exchange_scope, :string
 
+    def self.short_provider_name = :nextcloud
+
     def oauth_configuration
       Adapters::Providers::Nextcloud::OAuthConfiguration.new(self)
     end

@@ -50,7 +50,7 @@ class Storages::FileLinks::CreateContract < ModelContract
   validate :validate_storage_presence
   validate :validate_user_allowed_to_manage
   validate :validate_project_storage_link
-  validate :require_ee_token_for_one_drive
+  validate :check_for_enterprise_token_requirements
 
   private
 
@@ -83,8 +83,8 @@ class Storages::FileLinks::CreateContract < ModelContract
     errors.add(:storage, :not_linked_to_project)
   end
 
-  def require_ee_token_for_one_drive
-    if model.storage && ::Storages::Storage.one_drive_without_ee_token?(model.storage.provider_type)
+  def check_for_enterprise_token_requirements
+    if model.storage && !model.storage.has_required_enterprise_token?
       errors.add(:base, I18n.t("api_v3.errors.code_500_missing_enterprise_token"))
     end
   end

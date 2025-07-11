@@ -30,4 +30,6 @@
 
 class Storages::Storage::InexistentStorage < Storages::Storage
   include InexistentModel
+
+  def self.short_provider_name = :inexistent
 end

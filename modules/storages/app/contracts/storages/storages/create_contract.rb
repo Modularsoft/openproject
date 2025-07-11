@@ -32,7 +32,7 @@ module Storages::Storages
   class CreateContract < ::Storages::Storages::BaseContract
     attribute :creator
     validate :creator_must_be_user
-    validate :require_ee_token_for_one_drive
+    validate :requires_enterprise_token?
 
     private
 
@@ -42,8 +42,8 @@ module Storages::Storages
       end
     end
 
-    def require_ee_token_for_one_drive
-      if ::Storages::Storage.one_drive_without_ee_token?(provider_type)
+    def requires_enterprise_token?
+      unless model.has_required_enterprise_token?
         errors.add(:base, I18n.t("api_v3.errors.code_500_missing_enterprise_token"))
       end
     end

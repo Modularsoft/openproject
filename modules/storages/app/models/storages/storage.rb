@@ -57,7 +57,7 @@ module Storages
     store_attribute :provider_fields, :automatically_managed, :boolean
     store_attribute :provider_fields, :health_notifications_enabled, :boolean, default: true
 
-    has_many :file_links, class_name: "Storages::FileLink"
+    has_many :file_links, class_name: "Storages::FileLink", dependent: :destroy
     belongs_to :creator, class_name: "User"
     has_many :project_storages, dependent: :destroy, class_name: "Storages::ProjectStorage"
     has_many :projects, through: :project_storages
@@ -65,24 +65,18 @@ module Storages
     has_one :oauth_application, class_name: "::Doorkeeper::Application", as: :integration, dependent: :destroy
     has_many :remote_identities, as: :integration, dependent: :destroy
 
-    validates_uniqueness_of :host, allow_nil: true
-    validates_uniqueness_of :name
+    validates :host, uniqueness: { allow_nil: true }
+    validates :name, uniqueness: true
 
     scope :visible, ->(user = User.current) do
       if user.allowed_in_any_project?(:manage_files_in_project)
         all
       else
-        where(
-          project_storages: ::Storages::ProjectStorage.where(
-            project: Project.allowed_to(user, :view_file_links)
-          )
-        )
+        where(project_storages: ::Storages::ProjectStorage.where(project: Project.allowed_to(user, :view_file_links)))
       end
     end
 
-    scope :not_enabled_for_project, ->(project) do
-      where.not(id: project.project_storages.pluck(:storage_id))
-    end
+    scope :not_enabled_for_project, ->(project) { where.not(id: project.project_storages.pluck(:storage_id)) }
 
     scope :automatic_management_enabled, -> { where("provider_fields->>'automatically_managed' = 'true'") }
 
@@ -96,28 +90,26 @@ module Storages
       unhealthy: "unhealthy"
     }, prefix: :health
 
-    def self.shorten_provider_type(provider_type)
-      short, = PROVIDER_TYPE_SHORT_NAMES.find { |_, long| provider_type == long }
-      return short.to_s if short
+    class << self
+      def provider_types
+        subclasses.to_h { [it.short_provider_name, it.name] }
+      end
 
-      raise ArgumentError,
-            "Unknown provider_type! Given: #{provider_type}. " \
-            "Known provider types are defined in Storages::Storage::PROVIDER_TYPE_SHORT_NAMES."
-    end
+      def short_provider_name = raise Errors::SubclassResponsibility
 
-    def self.one_drive_without_ee_token?(provider_type)
-      provider_type == ::Storages::Storage::PROVIDER_TYPE_ONE_DRIVE &&
-        !EnterpriseToken.allows_to?(:one_drive_sharepoint_file_storage)
-    end
+      def has_required_enterprise_token? = true
 
-    def self.extract_part_from_piped_string(text, index)
-      return if text.nil?
+      def extract_part_from_piped_string(text, index)
+        return if text.nil?
 
-      split_reason = text.split(/[|:]/)
-      if split_reason.length > index
-        split_reason[index].strip
+        split_reason = text.split(/[|:]/)
+        if split_reason.length > index
+          split_reason[index].strip
+        end
       end
     end
+
+    delegate :short_provider_name, :has_required_enterprise_token?, to: :class
 
     def oauth_access_granted?(user)
       (user.authentication_provider.is_a?(OpenIDConnect::Provider) && authenticate_via_idp?) ||
@@ -197,12 +189,8 @@ module Storages
       raise Errors::SubclassResponsibility
     end
 
-    def short_provider_type
-      @short_provider_type ||= self.class.shorten_provider_type(provider_type)
-    end
-
     def to_s
-      short_provider_type
+      self.class.short_provider_name.to_s
     end
 
     def provider_type_nextcloud?

@@ -39,6 +39,12 @@ module Storages
 
     using ::Storages::Peripherals::ServiceResultRefinements
 
+    def self.short_provider_name = :one_drive
+
+    def self.has_required_enterprise_token?
+      EnterpriseToken.allows_to?(:one_drive_sharepoint_file_storage)
+    end
+
     def configuration_checks
       {
         storage_oauth_client_configured: oauth_client.present?,

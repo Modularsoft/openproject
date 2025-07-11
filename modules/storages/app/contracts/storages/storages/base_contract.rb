@@ -59,7 +59,7 @@ module Storages::Storages
     end
 
     attribute :provider_type
-    validates :provider_type, inclusion: { in: Storages::Storage::PROVIDER_TYPES }, allow_nil: false
+    validates :provider_type, inclusion: { in: Storages::Storage.provider_types.values }, allow_nil: false
 
     attribute :provider_fields
 
@@ -90,7 +90,7 @@ module Storages::Storages
     end
 
     def default_provider_contract
-      ::Storages::Adapters::Registry.resolve("#{model.short_provider_type}.contracts.storage")
+      ::Storages::Adapters::Registry.resolve("#{model}.contracts.storage")
     end
   end
 end
