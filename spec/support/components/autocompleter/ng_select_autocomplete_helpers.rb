@@ -32,10 +32,7 @@ module Components::Autocompleter
       dropdown_list
     end
 
-    def ng_click_autocompleter(element)
-      input = element.first(".ng-input input")
-      target = input || element
-
+    def ng_click_autocompleter(target)
       if using_cuprite?
         target.click
       else
