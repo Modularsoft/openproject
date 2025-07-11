@@ -34,7 +34,7 @@ module Components::Autocompleter
 
     def ng_click_autocompleter(target)
       if using_cuprite?
-        target.trigger('click')
+        target.click
       else
         page.execute_script("arguments[0].click();", target.native)
       end
@@ -156,7 +156,7 @@ module Components::Autocompleter
       text = select_text.presence || query
 
       # click the element to select it
-      target_dropdown.find(".ng-option", text:, match: :first, wait: 15).click
+      target_dropdown.first(".ng-option", text:, wait: 15).click
     end
 
     # Finds the currently visible, expanded user auto completer and returns its dropdown menu options.
@@ -174,7 +174,7 @@ module Components::Autocompleter
     def visible_user_auto_completer_options
       find(".ng-dropdown-panel [role='listbox']").all(".ng-option[role='option']").filter_map do |opt|
         name = opt.find(".op-user-autocompleter--name").text
-        email_element = opt.all(".op-autocompleter__option-principal-email").first
+        email_element = opt.first(".op-autocompleter__option-principal-email")
         email = email_element&.text
 
         { name:, email: }
