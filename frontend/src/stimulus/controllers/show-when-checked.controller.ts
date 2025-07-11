@@ -25,14 +25,16 @@ export default class OpShowWhenCheckedController extends ApplicationController {
 
   private toggleDisabled(evt:InputEvent):void {
     const input = evt.target as HTMLInputElement;
-    const targetName = input.dataset.targetName;
+    const targetNames = (input.dataset.targetName || '')
+      .split(/\s+/)
+      .map(name => name.trim())
+      .filter(name => name.length > 0);
     const checked = input.checked;
     const hidden = (this.hasReversedValue && this.reversedValue) ? checked : !checked;
 
-    this
-      .effectTargets
-      .filter((el) => targetName === el.dataset.targetName)
-      .forEach((el) => {
+    this.effectTargets.forEach((el) => {
+      const elTargetName = el.dataset.targetName;
+      if (elTargetName && targetNames.includes(elTargetName)) {
         if (el.dataset.setVisibility === 'true') {
           el.style.setProperty('visibility', hidden ? 'hidden' : 'visible');
         } else if (el.dataset.visibilityClass) {
@@ -40,6 +42,7 @@ export default class OpShowWhenCheckedController extends ApplicationController {
         } else {
           el.hidden = hidden;
         }
-      });
+      }
+    });
   }
 }

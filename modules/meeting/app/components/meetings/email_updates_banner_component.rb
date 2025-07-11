@@ -30,9 +30,10 @@
 
 module Meetings
   class EmailUpdatesBannerComponent < ApplicationComponent
-    def initialize(meeting)
+    def initialize(meeting, override: nil)
       super
       @meeting = meeting
+      @override = override
     end
 
     def call
@@ -42,10 +43,16 @@ module Meetings
     private
 
     def description
+      return I18n.t("text_email_updates_enabled") if @override == :enabled
+      return I18n.t("text_email_updates_muted") if @override == :muted
+
       @meeting.notify? ? I18n.t("text_email_updates_enabled") : I18n.t("text_email_updates_muted")
     end
 
     def scheme
+      return :default if @override == :enabled
+      return :warning if @override == :muted
+
       @meeting.notify? ? :default : :warning
     end
   end

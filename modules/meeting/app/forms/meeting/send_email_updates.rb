@@ -33,7 +33,15 @@ class Meeting::SendEmailUpdates < ApplicationForm
     meeting_form.check_box(
       name: "notify",
       label: I18n.t("label_meeting_send_updates"),
-      checked: @meeting.notify? != false
+      checked: @meeting.notify? != false,
+      data: {
+        "show-when-checked--enabled-target": "cause",
+        "show-when-checked--enabled-target-name": "enabled",
+
+        "show-when-checked--muted-target": "cause",
+        "show-when-checked--muted-target-name": "muted",
+        "show-when-checked--muted-reversed-value": true
+      }
     )
   end
 
