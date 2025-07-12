@@ -173,9 +173,11 @@ module Components::Autocompleter
     # The order of elements in the Array is equal to the visible order on the website.
     def visible_user_auto_completer_options
       find(".ng-dropdown-panel [role='listbox']").all(".ng-option[role='option']").filter_map do |opt|
-        name = opt.find(".op-user-autocompleter--name").text
-        email_element = opt.first(".op-autocompleter__option-principal-email")
-        email = email_element&.text
+        name = opt.find(".op-user-autocompleter--name", wait: 0).text
+        email =
+          if opt.has_css?(".op-autocompleter__option-principal-email", wait: 0)
+            opt.find(".op-autocompleter__option-principal-email", wait: 0).text
+          end
 
         { name:, email: }
       rescue Capybara::ElementNotFound
