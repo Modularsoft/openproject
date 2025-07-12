@@ -33,6 +33,16 @@ require "support/pages/work_packages/abstract_work_package_create"
 
 module Pages
   class FullWorkPackageCreate < AbstractWorkPackageCreate
+    def set_status(status)
+      # Scroll back to the top to avoid the activation of the status field
+      # displaying the dropdown overlapping it as it would prevent additional
+      # clicks on it.
+      # When scrolled on top, the dropdown is always under it.
+      scroll_to_top
+      status_field = edit_field(:status)
+      status_field.update(status)
+    end
+
     private
 
     def container
@@ -48,16 +58,6 @@ module Pages
       elsif project
         new_project_work_packages_path(project.identifier)
       end
-    end
-
-    def set_status(status)
-      # Scroll back to the top to avoid the activation of the status field
-      # displaying the dropdown overlapping it as it would prevent additional
-      # clicks on it.
-      # When scrolled on top, the dropdown is always under it.
-      scroll_to_top
-      status_field = edit_field(:status)
-      status_field.update(status)
     end
   end
 end
