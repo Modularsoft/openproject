@@ -109,6 +109,7 @@ module Components
         within(selected_filter) do
           find('[data-filter-autocomplete="true"]').click
         end
+        wait_for_network_idle if using_cuprite?
         options = visible_user_auto_completer_options
 
         expect(options).to eq(expected_options)
