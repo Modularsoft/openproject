@@ -39,7 +39,8 @@ module OAuth
     skip_before_action :check_if_login_required
     no_authorization_required! :new,
                                :create,
-                               :show
+                               :show,
+                               :destroy
 
     layout "only_logo"
 
