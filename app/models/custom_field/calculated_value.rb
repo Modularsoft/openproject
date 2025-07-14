@@ -55,13 +55,12 @@ module CustomField::CalculatedValue
         return
       end
 
-      # WP-64348: check for valid (i.e., visible & enabled) custom field references (see #cf_ids_used_in_formula)
-
-      calculation_result = perform_calculation
-      unless calculation_result
+      unless valid_formula_syntax?
         errors.add(:formula, :invalid)
         return
       end
+
+      # WP-64348: check for valid (i.e., visible & enabled) custom field references (see #cf_ids_used_in_formula)
 
       # TODO: consider differentiating between a formula that contains missing variables, invalid
       #       syntax, or mathematical errors.
@@ -93,17 +92,19 @@ module CustomField::CalculatedValue
 
     private
 
-    def perform_calculation
-      # Dentaku will return nil if the formula is invalid.
+    def calculator
+      @calculator ||= Dentaku::Calculator.new(case_sensitive: true)
+    end
+
+    def valid_formula_syntax?
       # Accept both cf_123 and {{cf_123}} in the formula string
-      formula_for_eval = formula_string.gsub(/\{\{(cf_\d+)}}/, '\1')
+      f = formula_string.gsub(/\{\{(cf_\d+)}}/, '\1')
 
-      variables = cf_ids_used_in_formula(formula_for_eval).map do |cf_id|
-        # TODO: insert real value here instead of hardcoded number
-        ["cf_#{cf_id}", 1]
-      end
-
-      Dentaku::Calculator.new.evaluate(formula_for_eval, variables.to_h)
+      # Attempt to parse the formula. If no error is returned, the formula is syntactically valid.
+      calculator.ast(f)
+      true
+    rescue Dentaku::ParseError, Dentaku::TokenizerError
+      false
     end
 
     def formula_contains_only_allowed_characters?
