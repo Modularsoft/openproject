@@ -56,7 +56,7 @@ RSpec.describe "Admin Create a new file storage",
         within_test_selector("storages-select-provider-action-menu") { click_on("Nextcloud") }
       end
 
-      expect(page).to have_current_path(new_admin_settings_storage_path(provider: "nextcloud"))
+      wait_for { page }.to have_current_path(new_admin_settings_storage_path(provider: "nextcloud"))
 
       aggregate_failures "New provider view" do
         # Page Header
@@ -201,6 +201,8 @@ RSpec.describe "Admin Create a new file storage",
         within_test_selector("storages-select-provider-action-menu") { click_on("Nextcloud") }
       end
 
+      wait_for { page }.to have_current_path(new_admin_settings_storage_path(provider: "nextcloud"))
+
       within_test_selector("storage-general-info-form") do
         expect(page).not_to have_enterprise_banner
 
@@ -276,15 +278,14 @@ RSpec.describe "Admin Create a new file storage",
 
       within(".SubHeader") do
         page.find_test_selector("storages-create-new-provider-button").click
-
         within_test_selector("storages-select-provider-action-menu") do
           expect(page).to have_css(".octicon-op-enterprise-addons")
-          click_on("OneDrive/SharePoint")
+          click_on("OneDrive")
         end
       end
 
-      expect(page).to have_current_path(upsell_admin_settings_storages_path)
-      wait_for { page }.to have_text("OneDrive/SharePoint integration")
+      wait_for { page }.to have_current_path(upsell_admin_settings_storages_path)
+      expect(page).to have_text("OneDrive integration")
     end
   end
 
@@ -296,16 +297,16 @@ RSpec.describe "Admin Create a new file storage",
 
       within(".SubHeader") do
         page.find_test_selector("storages-create-new-provider-button").click
-        within_test_selector("storages-select-provider-action-menu") { click_on("OneDrive/SharePoint") }
+        within_test_selector("storages-select-provider-action-menu") { click_on("OneDrive") }
       end
 
       expect(page).to have_current_path(new_admin_settings_storage_path(provider: "one_drive"))
 
       aggregate_failures "New provider view" do
         # Page Header
-        expect(page).to have_test_selector("storage-new-page-header--title", text: "New OneDrive/SharePoint storage")
+        expect(page).to have_test_selector("storage-new-page-header--title", text: "New OneDrive storage")
         expect(page).to have_test_selector("storage-new-page-header--description",
-                                           text: "Read our documentation on setting up a OneDrive/SharePoint " \
+                                           text: "Read our documentation on setting up a OneDrive " \
                                                  "file storage integration for more information.")
 
         # General information
@@ -327,7 +328,7 @@ RSpec.describe "Admin Create a new file storage",
         expect(page).not_to have_test_selector("label-storage_oauth_client_configured-status")
         expect(page).to have_test_selector("storage-oauth-client-id-description",
                                            text: "Allow OpenProject to access Azure data using OAuth " \
-                                                 "to connect OneDrive/Sharepoint.")
+                                                 "to connect OneDrive.")
         expect(page).to have_test_selector("storage-redirect-uri-description",
                                            text: "Complete the setup with the correct URI redirection.")
       end
@@ -351,7 +352,7 @@ RSpec.describe "Admin Create a new file storage",
 
         wait_for { page }.to have_test_selector("label-name_configured-storage_tenant_drive_configured-status",
                                                 text: "Completed")
-        expect(page).to have_test_selector("storage-description", text: "OneDrive/SharePoint - My OneDrive")
+        expect(page).to have_test_selector("storage-description", text: "OneDrive - My OneDrive")
       end
 
       aggregate_failures "Access Management" do

@@ -34,7 +34,7 @@ require_module_spec_helper
 RSpec.describe Storages::Storage do
   describe "provider_types" do
     it "maps the short_name to the provider class name" do
-      expect(described_class.provider_types[:nextcloud]).to eq(Storages::NextcloudStorage.name)
+      expect(described_class.provider_types["nextcloud"]).to eq(Storages::NextcloudStorage.name)
     end
   end
 

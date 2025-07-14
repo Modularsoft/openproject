@@ -37,7 +37,7 @@ module API::V3::StorageFiles
 
     helpers do
       def validate_upload_request(body)
-        if Storages::Storage::one_drive_without_ee_token?(@storage.provider_type)
+        if @storage.provider_type.constantize.missing_required_enterprise_token?
           raise API::Errors::EnterpriseTokenMissing.new
         end
 

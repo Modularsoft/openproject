@@ -40,8 +40,6 @@
 # db/migrate/20220113144323_create_storage.rb "migration".
 module Storages
   class Storage < ApplicationRecord
-    using Peripherals::ServiceResultRefinements
-
     PROVIDER_TYPES = [
       PROVIDER_TYPE_NEXTCLOUD = "Storages::NextcloudStorage",
       PROVIDER_TYPE_ONE_DRIVE = "Storages::OneDriveStorage"
@@ -57,11 +55,12 @@ module Storages
     store_attribute :provider_fields, :automatically_managed, :boolean
     store_attribute :provider_fields, :health_notifications_enabled, :boolean, default: true
 
-    has_many :file_links, class_name: "Storages::FileLink", dependent: :destroy
     belongs_to :creator, class_name: "User"
+    has_many :file_links, class_name: "Storages::FileLink", dependent: :destroy
     has_many :project_storages, dependent: :destroy, class_name: "Storages::ProjectStorage"
     has_many :projects, through: :project_storages
     has_one :oauth_client, as: :integration, dependent: :destroy
+    # TODO: Are we using this? - 2025-07-14 @mereghost
     has_one :oauth_application, class_name: "::Doorkeeper::Application", as: :integration, dependent: :destroy
     has_many :remote_identities, as: :integration, dependent: :destroy
 
@@ -72,7 +71,7 @@ module Storages
       if user.allowed_in_any_project?(:manage_files_in_project)
         all
       else
-        where(project_storages: ::Storages::ProjectStorage.where(project: Project.allowed_to(user, :view_file_links)))
+        where(project_storages: ProjectStorage.where(project: Project.allowed_to(user, :view_file_links)))
       end
     end
 
@@ -91,25 +90,33 @@ module Storages
     }, prefix: :health
 
     class << self
+      def visible? = true
+
       def provider_types
-        subclasses.to_h { [it.short_provider_name, it.name] }
+        subclasses.filter_map { [it.short_provider_name.to_s, it.name] if it.visible? }.to_h
       end
 
       def short_provider_name = raise Errors::SubclassResponsibility
 
       def has_required_enterprise_token? = true
+      def missing_required_enterprise_token? = !has_required_enterprise_token?
+
+      # TODO: Compatibility Method To be Removed once all references are removed - 2025-07-14 @mereghost
+      def shorten_provider_type(provider_type)
+        provider_type.constantize.short_provider_name.to_s
+      end
 
       def extract_part_from_piped_string(text, index)
         return if text.nil?
 
         split_reason = text.split(/[|:]/)
-        if split_reason.length > index
-          split_reason[index].strip
-        end
+        split_reason[index].strip if split_reason.length > index
       end
     end
 
-    delegate :short_provider_name, :has_required_enterprise_token?, to: :class
+    delegate :short_provider_name, :has_required_enterprise_token?, :missing_required_enterprise_token?, to: :class
+    delegate :to_s, to: :short_provider_name
+    alias :short_provider_type :to_s
 
     def oauth_access_granted?(user)
       (user.authentication_provider.is_a?(OpenIDConnect::Provider) && authenticate_via_idp?) ||
@@ -135,32 +142,20 @@ module Storages
 
     alias automatic_management_enabled automatically_managed
 
-    def available_project_folder_modes
-      raise Errors::SubclassResponsibility
-    end
+    def available_project_folder_modes = raise Errors::SubclassResponsibility
 
     # Returns a value of an audience, if configured for this storage.
     # The presence of an audience signals that this storage prioritizes
     # remote authentication via Single-Sign-On if possible.
-    def audience
-      raise Errors::SubclassResponsibility
-    end
+    def audience = raise Errors::SubclassResponsibility
 
-    def authenticate_via_idp?
-      raise Errors::SubclassResponsibility
-    end
+    def authenticate_via_idp? = raise Errors::SubclassResponsibility
 
-    def authenticate_via_storage?
-      raise Errors::SubclassResponsibility
-    end
+    def authenticate_via_storage? = raise Errors::SubclassResponsibility
 
-    def configured?
-      configuration_checks.values.all?
-    end
+    def configured? = configuration_checks.values.all?
 
-    def configuration_checks
-      raise Errors::SubclassResponsibility
-    end
+    def configuration_checks = raise Errors::SubclassResponsibility
 
     def uri
       return unless host
@@ -177,28 +172,18 @@ module Storages
       ["#{uri.scheme}://#{uri.host}#{port_part}"]
     end
 
-    def oauth_configuration
-      raise Errors::SubclassResponsibility
-    end
+    def oauth_configuration = raise Errors::SubclassResponsibility
 
-    def automatic_management_new_record?
-      raise Errors::SubclassResponsibility
-    end
+    def automatic_management_new_record? = raise Errors::SubclassResponsibility
 
-    def provider_fields_defaults
-      raise Errors::SubclassResponsibility
-    end
-
-    def to_s
-      self.class.short_provider_name.to_s
-    end
+    def provider_fields_defaults = raise Errors::SubclassResponsibility
 
     def provider_type_nextcloud?
-      provider_type == ::Storages::Storage::PROVIDER_TYPE_NEXTCLOUD
+      provider_type == PROVIDER_TYPE_NEXTCLOUD
     end
 
     def provider_type_one_drive?
-      provider_type == ::Storages::Storage::PROVIDER_TYPE_ONE_DRIVE
+      provider_type == PROVIDER_TYPE_ONE_DRIVE
     end
 
     def health_reason_identifier

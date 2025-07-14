@@ -189,7 +189,7 @@ en:
     configuration_checks:
       oauth_client_incomplete:
         nextcloud: Allow OpenProject to access Nextcloud data using OAuth.
-        one_drive: Allow OpenProject to access Azure data using OAuth to connect OneDrive/Sharepoint.
+        one_drive: Allow OpenProject to access Azure data using OAuth to connect OneDrive.
       redirect_uri_incomplete:
         one_drive: Complete the setup with the correct URI redirection.
     confirm_replace_oauth_application: This action will reset the current OAuth credentials. After confirming you will have to reenter the credentials at the storage provider and all remote users will have to authorize against OpenProject again. Are you sure you want to proceed?
@@ -299,7 +299,7 @@ en:
         od_drive_id_not_found: The configured drive id could not be found. Please check the configuration.
         od_oauth_request_not_found: The endpoint to fetch the currently connected user was not found. Please check the server logs for further information.
         od_oauth_request_unauthorized: The current user isn't authorized to access the remote file storage. Please check the server logs for further information.
-        od_oauth_token_missing: OpenProject cannot test the user level communication with OneDrive/SharePoint as the user did not yet link their Microsoft account.
+        od_oauth_token_missing: OpenProject cannot test the user level communication with OneDrive as the user did not yet link their Microsoft account.
         od_tenant_id_wrong: The configured directory (tenant) id is invalid. Please check the configuration.
         od_test_folder_exists: The folder %{folder_name} needed for testing already exists. Please delete it and try again.
         od_unexpected_content: Unexpected content found in the drive.
@@ -365,9 +365,9 @@ en:
       one_drive:
         application_link_text: Azure portal
         copy_redirect_uri: Copy redirect URI
-        documentation_link_text: OneDrive/SharePoint file storages documentation
+        documentation_link_text: OneDrive file storages documentation
         drive_id: Please copy the ID from the desired drive by following the steps in the %{drive_id_link_text}.
-        integration: OneDrive/SharePoint
+        integration: OneDrive
         missing_client_id_for_redirect_uri: Please fill the OAuth values to generate a URI
         oauth_client_redirect_uri: Please copy this value to a new Web redirect URI under Redirect URIs.
         oauth_client_secret: In case there is no application client secret under Client credentials, please create a new one.
@@ -478,8 +478,13 @@ en:
       one_drive:
         label_oauth_client_id: Azure OAuth Application (client) ID
         label_oauth_client_secret: Azure OAuth Client Secret Value
-        name: OneDrive/SharePoint
+        name: OneDrive
         name_placeholder: e.g. OneDrive
+      sharepoint:
+        name: Sharepoint
+        label_oauth_client_id: Azure OAuth Application (client) ID
+        label_oauth_client_secret: Azure OAuth Client Secret Value
+        name_placeholder: e.g. Sharepoint
     show_attachments_toggle:
       description: Deactivating this option will hide the attachments list on the work packages files tab. The files attached in the description of a work package will still be uploaded in the internal attachments storage.
       label: Show attachments in the work packages files tab
@@ -497,6 +502,6 @@ en:
     successful_storage_connection: Storage connected successfully! Remember to activate the storage in the Projects tab for each desired project to use it.
     upsell:
       description: |-
-        Integrate your OneDrive/SharePoint as a file storage with OpenProject. Upload files and link them directly to
+        Integrate your OneDrive as a file storage with OpenProject. Upload files and link them directly to
         work packages in a project.
-      title: OneDrive/SharePoint integration
+      title: OneDrive integration

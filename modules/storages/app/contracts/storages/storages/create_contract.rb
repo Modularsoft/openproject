@@ -43,7 +43,7 @@ module Storages::Storages
     end
 
     def requires_enterprise_token?
-      unless model.has_required_enterprise_token?
+      if model.missing_required_enterprise_token?
         errors.add(:base, I18n.t("api_v3.errors.code_500_missing_enterprise_token"))
       end
     end

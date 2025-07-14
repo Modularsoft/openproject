@@ -28,7 +28,6 @@
 # See COPYRIGHT and LICENSE files for more details.
 #++
 
-# Purpose: CRUD the global admin page of Storages (=Nextcloud servers)
 class Storages::Admin::StoragesController < ApplicationController
   using Storages::Peripherals::ServiceResultRefinements
 
@@ -75,7 +74,6 @@ class Storages::Admin::StoragesController < ApplicationController
                    .call
                    .result
     end
-
     @wizard = storage_wizard(@storage)
     @target_step = @wizard.prepare_next_step
   end
@@ -225,6 +223,7 @@ class Storages::Admin::StoragesController < ApplicationController
                  .result
   end
 
+  # rubocop:disable Metrics/AbcSize
   def ensure_valid_wizard_parameters
     if params[:continue_wizard].present?
       @storage = ::Storages::Storage.find(params[:continue_wizard])
@@ -232,11 +231,12 @@ class Storages::Admin::StoragesController < ApplicationController
     end
 
     short_provider_type = params[:provider]
-    if short_provider_type.blank? || (@provider_type = ::Storages::Storage::PROVIDER_TYPE_SHORT_NAMES[short_provider_type]).blank?
+    if short_provider_type.blank? || (@provider_type = ::Storages::Storage.provider_types[short_provider_type]).blank?
       flash[:error] = I18n.t("storages.error_invalid_provider_type")
       redirect_to admin_settings_storages_path
     end
   end
+  # rubocop:enable Metrics/AbcSize
 
   # Called by create and update above in order to check if the
   # update parameters are correctly set.
@@ -270,7 +270,7 @@ class Storages::Admin::StoragesController < ApplicationController
   end
 
   def require_ee_token_for_one_drive
-    if ::Storages::Storage::one_drive_without_ee_token?(@provider_type)
+    if (@provider_type&.constantize || @storage).missing_required_enterprise_token?
       redirect_to action: :upsell
     end
   end
