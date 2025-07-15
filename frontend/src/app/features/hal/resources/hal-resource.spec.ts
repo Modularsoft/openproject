@@ -35,7 +35,8 @@ import { of } from 'rxjs';
 import { HalResourceService } from 'core-app/features/hal/services/hal-resource.service';
 import { OpenprojectHalModule } from 'core-app/features/hal/openproject-hal.module';
 import { HalLink, HalLinkInterface } from 'core-app/features/hal/hal-link/hal-link';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import Spy = jasmine.Spy;
 
 describe('HalResource', () => {
@@ -51,16 +52,15 @@ describe('HalResource', () => {
   beforeEach(waitForAsync(() => {
     // noinspection JSIgnoredPromiseFromCall
     TestBed.configureTestingModule({
-      imports: [
-        OpenprojectHalModule,
-        HttpClientTestingModule,
-      ],
-      providers: [
+    imports: [OpenprojectHalModule],
+    providers: [
         HalResourceService,
         States,
         I18nService,
-      ],
-    })
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+    ]
+})
       .compileComponents()
       .then(() => {
         halResourceService = TestBed.inject(HalResourceService);

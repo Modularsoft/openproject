@@ -29,10 +29,7 @@
 /* jshint expr: true */
 
 import { TestBed } from '@angular/core/testing';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { States } from 'core-app/core/states/states.service';
 import { HalResourceService } from 'core-app/features/hal/services/hal-resource.service';
 import { ConfigurationService } from 'core-app/core/config/configuration.service';
@@ -46,6 +43,7 @@ import { ICapability } from 'core-app/core/state/capabilities/capability.model';
 import URI from 'urijs';
 import { ApiV3ListParameters } from 'core-app/core/apiv3/paths/apiv3-list-resource.interface';
 import { CurrentUserQuery } from 'core-app/core/current-user/current-user.query';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 const globalCapability:ICapability = {
   id: 'placeholder_users/read/g-3',
@@ -136,10 +134,8 @@ describe('Capabilities service', () => {
     const ConfigurationServiceStub = {};
 
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-      ],
-      providers: [
+    imports: [],
+    providers: [
         HalResourceService,
         { provide: ConfigurationService, useValue: ConfigurationServiceStub },
         { provide: States, useValue: new States() },
@@ -147,8 +143,10 @@ describe('Capabilities service', () => {
         CurrentUserStore,
         CurrentUserQuery,
         CurrentUserService,
-      ],
-    });
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+    ]
+});
 
     currentUser = TestBed.inject(CurrentUserService);
     currentUser.setUser(user);
