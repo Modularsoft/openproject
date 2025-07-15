@@ -18,7 +18,7 @@ module Risks
                       User.current.allowed_in_project?(:view_work_packages, project)
                   },
                   after: :work_packages,
-                  icon: "meter")
+                  icon: :alert)
       end
     end
 
