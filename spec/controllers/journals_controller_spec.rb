@@ -63,13 +63,13 @@ RSpec.describe JournalsController do
         it "presents the diff correctly" do
           expect(response.body.strip).to be_html_eql <<-HTML
             <div class="text-diff">
-              <label class="hidden-for-sighted">Begin of the insertion</label>
+              <label class="sr-only">Begin of the insertion</label>
               <ins class="diffmod">
                 description
                 <br/>
                 more changes
               </ins>
-              <label class="hidden-for-sighted">End of the insertion</label>
+              <label class="sr-only">End of the insertion</label>
             </div>
           HTML
         end
@@ -111,9 +111,9 @@ RSpec.describe JournalsController do
         it "presents the diff correctly" do
           expect(response.body.strip).to be_html_eql <<-HTML
             <div class="text-diff">
-              <label class="hidden-for-sighted">Begin of the insertion</label>
+              <label class="sr-only">Begin of the insertion</label>
               <ins class="diffmod">foo</ins>
-              <label class="hidden-for-sighted">End of the insertion</label>
+              <label class="sr-only">End of the insertion</label>
             </div>
           HTML
         end
@@ -165,9 +165,9 @@ RSpec.describe JournalsController do
         it "presents the diff correctly" do
           expect(response.body.strip).to be_html_eql <<-HTML
             <div class="text-diff">
-              <label class="hidden-for-sighted">Begin of the insertion</label>
+              <label class="sr-only">Begin of the insertion</label>
               <ins class="diffmod">description</ins>
-              <label class="hidden-for-sighted">End of the insertion</label>
+              <label class="sr-only">End of the insertion</label>
             </div>
           HTML
         end

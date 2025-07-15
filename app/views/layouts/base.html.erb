@@ -60,8 +60,8 @@ See COPYRIGHT and LICENSE files for more details.
 <opce-toasts-container></opce-toasts-container>
 <opce-modal-overlay></opce-modal-overlay>
 <live-region>
-  <div id="polite" aria-live="polite" aria-atomic="true" class="hidden-for-sighted"></div>
-  <div id="assertive" aria-live="assertive" aria-atomic="true" class="hidden-for-sighted"></div>
+  <div id="polite" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+  <div id="assertive" aria-live="assertive" aria-atomic="true" class="sr-only"></div>
 </live-region>
 <opce-spot-drop-modal-portal></opce-spot-drop-modal-portal>
 <% main_menu = render_main_menu(local_assigns.fetch(:menu_name, nil), @project) %>
@@ -71,10 +71,10 @@ See COPYRIGHT and LICENSE files for more details.
   <% if show_decoration %>
     <header class="op-app-header<%= " op-app-header_development" if OpenProject::Configuration.development_highlight_enabled? %>">
       <div class="op-app-header--start">
-        <h1 class="hidden-for-sighted">
+        <h1 class="sr-only">
           <%= t(:label_top_menu) %>
         </h1>
-        <a href="" class="hidden-for-sighted skip-navigation-link"
+        <a href="" class="sr-only skip-navigation-link"
            id="skip-navigation--content"
            aria-label="<%= I18n.t("js.work_packages.jump_marks.label_content") %>">
           <%= I18n.t("js.work_packages.jump_marks.content") %>
@@ -98,7 +98,7 @@ See COPYRIGHT and LICENSE files for more details.
         id="main-menu"
         class="main-menu"
         data-controller="menus--main">
-        <h1 class="hidden-for-sighted"><%= t(:label_main_menu) %></h1>
+        <h1 class="sr-only"><%= t(:label_main_menu) %></h1>
         <opce-main-menu-resizer></opce-main-menu-resizer>
         <div id="menu-sidebar">
           <div class="main-menu--top-container">
@@ -149,7 +149,7 @@ See COPYRIGHT and LICENSE files for more details.
       <%= content_tag :div,
                       id: "content",
                       class: "#{initial_classes} #{'content--split' if content_for?(:content_body_right)}" do %>
-        <h1 class="hidden-for-sighted accessibility-helper"><%= t(:label_content) %></h1>
+        <h1 class="sr-only accessibility-helper"><%= t(:label_content) %></h1>
         <% if content_for?(:content_header) %>
           <div id="content-header">
             <%= render(OpenProject::Common::MainMenuToggleComponent.new(expanded: false)) %>

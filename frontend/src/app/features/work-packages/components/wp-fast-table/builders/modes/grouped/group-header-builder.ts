@@ -76,7 +76,7 @@ export class GroupHeaderBuilder {
     row.innerHTML = `
       <td colspan="${colspan}" class="-no-highlighting">
         <div class="expander icon-context ${togglerIconClass}">
-          <span class="hidden-for-sighted">${_.escape(text)}</span>
+          <span class="sr-only">${_.escape(text)}</span>
         </div>
         <div class="group--value" data-test-selector="op-group--value">
           ${leadingIcon ? leadingIcon.outerHTML : ''}

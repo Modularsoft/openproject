@@ -85,7 +85,7 @@ module WorkPackagesHelper
     if package.closed? && !options[:no_hidden]
       parts[:hidden_link] << content_tag(:span,
                                          I18n.t(:label_closed_work_packages),
-                                         class: "hidden-for-sighted")
+                                         class: "sr-only")
     end
 
     # Suffix part
