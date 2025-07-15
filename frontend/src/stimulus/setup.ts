@@ -19,10 +19,10 @@ import PatternInputController from './controllers/pattern-input.controller';
 import HoverCardTriggerController from './controllers/hover-card-trigger.controller';
 import ScrollIntoViewController from './controllers/scroll-into-view.controller';
 import CkeditorFocusController from './controllers/ckeditor-focus.controller';
-
 import AutoSubmit from '@stimulus-components/auto-submit';
 import { OpenProjectStimulusApplication } from 'core-stimulus/openproject-stimulus-application';
 import { Application } from '@hotwired/stimulus';
+import Chartjs from './controllers/chartjs.controller';
 
 declare global {
   interface Window {
@@ -51,6 +51,7 @@ OpenProjectStimulusApplication.preregister('pattern-input', PatternInputControll
 OpenProjectStimulusApplication.preregister('scroll-into-view', ScrollIntoViewController);
 OpenProjectStimulusApplication.preregister('ckeditor-focus', CkeditorFocusController);
 OpenProjectStimulusApplication.preregister('auto-submit', AutoSubmit);
+OpenProjectStimulusApplication.preregister('chartjs', Chartjs);
 
 const instance = OpenProjectStimulusApplication.start();
 window.Stimulus = instance;

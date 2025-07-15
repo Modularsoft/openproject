@@ -31,22 +31,21 @@
 module Overviews
   module Portfolios
     module Widgets
-      class ProblemsComponent < ApplicationComponent
+      class RisksComponent < ApplicationComponent
         include OpPrimer::ComponentHelpers
         include ApplicationHelper
-        include PlaceholderUsersHelper
-        include AvatarHelper
-
-        attr_reader :wps
+        include RisksHelper
 
         def initialize(model = nil, project:, **)
           super(model, **)
 
           @project = project
-          @wps = WorkPackage
-                    .visible
-                    .where(type: Type.where(name: ["Risiko", "Problem"]))
-                    .where(project_id: @project.self_and_descendants.select(:id))
+          @query = Query.new(name: "_", project:)
+          @query.include_subprojects = true
+          @query.add_filter("type_id", "=", [BmdsHackathon::References.risk_type.id])
+          @query.group_by = BmdsHackathon::References.risk_level_cf.column_name
+
+          @groups = aggregate_risk_counts_by_range(@query.results.work_package_count_by_group)
         end
       end
     end

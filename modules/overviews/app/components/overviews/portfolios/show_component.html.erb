@@ -13,7 +13,7 @@
     end
 
     grid.with_area(:problems, tag: :div) do
-      render(Overviews::Portfolios::Widgets::ProblemsComponent.new(project: @project))
+      render(Overviews::Portfolios::Widgets::RisksComponent.new(project: @project))
     end
   end
 %>

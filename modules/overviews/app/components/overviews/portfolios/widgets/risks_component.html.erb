@@ -31,25 +31,59 @@ See COPYRIGHT and LICENSE files for more details.
 <%= render(Primer::Beta::BorderBox.new) do |component|
   component.with_header do
     render(Primer::OpenProject::BorderBox::CollapsibleHeader.new(box: component)) do |header|
-      header.with_count(count: wps.count)
       header.with_title do
         concat(render(Primer::Beta::Octicon.new(icon: :alert, color: :muted, mr: 2)))
-        concat(render(Primer::Beta::Text.new) {"Probleme und Risiken"})
+        concat(render(Primer::Beta::Text.new) { "Risiken" })
       end
     end
   end
-  wps.find_each do |work_package|
-    component.with_row do
-      render(Primer::OpenProject::FlexLayout.new(justify_content: :space_between, align_items: :center)) do |flex|
-        flex.with_column(flex_layout: true) do |wp_flex|
-          wp_flex.with_row do
-            render(WorkPackages::InfoLineComponent.new(work_package:))
-          end
-          wp_flex.with_row do
-            render(Primer::Beta::Text.new(font_weight: :bold)) { work_package.subject }
+  component.with_row do
+    helpers.stimulus_chartjs_canvas(
+      type: :bar,
+      data: {
+        labels: %w[Niedrig Mittel Hoch],
+        datasets: [
+          {
+            "label": "Risiken",
+            "borderColor": "#3B82F6",
+            "backgroundColor": %w[#4AC26B #D4A72C #FA4549],
+            "data": [@groups[:low], @groups[:medium], @groups[:high]]
+          }
+        ]
+      },
+      options: {
+        plugins: {
+          legend: {
+            display: false
+          },
+          datalabels: {
+            anchor: 'end',
+            align: 'top',
+            color: '#333333',
+            font: {
+              weight: 'bold'
+            },
+            display: true
+          }
+        }
+      }
+    )
+  end
+
+  if @project.enabled_module_names.include?("risks")
+    component.with_footer do
+      flex_layout do |flex|
+        flex.with_column(flex: 1) do
+          "#{@groups.values.sum} in allen Portfolio-Elementen"
+        end
+
+        flex.with_column do
+          render(Primer::Beta::Link.new(href: project_risks_path(@project))) do
+            render(Primer::Beta::Text.new(font_weight: :bold)) { "Alle anzeigen" }
           end
         end
       end
     end
   end
-end %>
+end
+%>

@@ -17,6 +17,30 @@ module RisksHelper
       .select { |co| co.value.to_i.in?(values) }
   end
 
+  def aggregate_risk_counts_by_range(work_package_count_by_group)
+    return { low: 0, medium: 0, high: 0 } if work_package_count_by_group.blank?
+
+    aggregated_counts = { low: 0, medium: 0, high: 0 }
+
+    work_package_count_by_group.each do |custom_option, count|
+      next unless custom_option.respond_to?(:value)
+
+      risk_level = custom_option.value.to_i
+      range = case risk_level
+              when 1..5
+                :low
+              when 6..15
+                :medium
+              else
+                :high
+              end
+
+      aggregated_counts[range] += count
+    end
+
+    aggregated_counts
+  end
+
   def get_risk_level(work_package)
     risk_likelihood_cf = BmdsHackathon::References.risk_likelihood_cf
     risk_impact_cf = BmdsHackathon::References.risk_impact_cf
