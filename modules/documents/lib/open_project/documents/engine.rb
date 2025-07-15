@@ -64,6 +64,17 @@ module OpenProject::Documents
       Redmine::Search.register :documents
     end
 
+    initializer "overviews.permissions" do
+      Rails.application.reloader.to_prepare do
+        # TODO: this grants access to overviews-module controllers, but using permissions of the documents module, where to put?
+        OpenProject::AccessControl.permission(:manage_documents)
+            .controller_actions
+            .push(
+              "overviews/status_report/create"
+            )
+      end
+    end
+
     activity_provider :documents, class_name: "Activities::DocumentActivityProvider", default: false
 
     patches %i[Project]

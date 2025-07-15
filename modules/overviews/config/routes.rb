@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
     get "projects/:project_id/project_life_cycle_sidebar",
         to: "overviews/overviews#project_life_cycle_sidebar", as: :project_life_cycle_sidebar
+
+    post "projects/:project_id/status_report", to: "overviews/status_report#create", as: :create_project_status_report
   end
 
   resources :project_phases, controller: "overviews/project_phases", only: %i[edit update] do

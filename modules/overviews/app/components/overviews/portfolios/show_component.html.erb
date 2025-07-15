@@ -4,6 +4,10 @@
       render(Overviews::Portfolios::Widgets::KpiComponent.new(project: @project))
     end
 
+    grid.with_area(:status_report, tag: :div) do
+      render(Overviews::Portfolios::Widgets::StatusReportComponent.new(project: @project))
+    end
+
     grid.with_area(:subportfolio, tag: :div) do
       render(Overviews::Portfolios::Widgets::SubportfoliosComponent.new(project: @project))
     end
