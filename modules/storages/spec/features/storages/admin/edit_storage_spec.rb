@@ -395,7 +395,7 @@ RSpec.describe "Admin Edit File storage",
     end
   end
 
-  context "with OneDrive/SharePoint Storage" do
+  context "with OneDrive Storage" do
     let(:storage) { create(:one_drive_storage, :as_automatically_managed, name: "Test Drive") }
     let(:oauth_client) { create(:oauth_client, integration: storage) }
 
@@ -408,14 +408,14 @@ RSpec.describe "Admin Edit File storage",
         .within("#content")
         .skipping("heading-order")
 
-      expect(page).to have_test_selector("storage-new-page-header--title", text: "Test Drive (OneDrive/SharePoint)")
+      expect(page).to have_test_selector("storage-new-page-header--title", text: "Test Drive (OneDrive)")
 
       aggregate_failures "Storage edit view" do
         # General information
         expect(page).to have_test_selector("storage-provider-label", text: "Storage provider")
         expect(page).to have_test_selector("label-name_configured-storage_tenant_drive_configured-status",
                                            text: "Completed")
-        expect(page).to have_test_selector("storage-description", text: "OneDrive/SharePoint - Test Drive")
+        expect(page).to have_test_selector("storage-description", text: "OneDrive - Test Drive")
 
         # OAuth client
         expect(page).to have_test_selector("storage-oauth-client-label", text: "Azure OAuth")
@@ -432,8 +432,8 @@ RSpec.describe "Admin Edit File storage",
           click_on "Save and continue"
         end
 
-        expect(page).to have_test_selector("storage-new-page-header--title", text: "My OneDrive (OneDrive/SharePoint)")
-        expect(page).to have_test_selector("storage-description", text: "OneDrive/SharePoint - My OneDrive")
+        expect(page).to have_test_selector("storage-new-page-header--title", text: "My OneDrive (OneDrive)")
+        expect(page).to have_test_selector("storage-description", text: "OneDrive - My OneDrive")
 
         # Update a storage - unhappy path
         find_test_selector("storage-edit-host-button").click
@@ -505,7 +505,7 @@ RSpec.describe "Admin Edit File storage",
     end
   end
 
-  context "with OneDrive/SharePoint Storage and not automatically managed" do
+  context "with OneDrive Storage and not automatically managed" do
     let(:storage) { create(:one_drive_storage, :as_not_automatically_managed, name: "Cloud Storage") }
 
     it "renders health status information but without health notifications for automatically managed folders" do
