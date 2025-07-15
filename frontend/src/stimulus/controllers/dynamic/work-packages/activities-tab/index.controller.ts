@@ -696,7 +696,7 @@ export default class IndexController extends Controller<HTMLElement> {
   }
 
   private isEditorEmpty():boolean {
-    return this.ckEditorInstance?.getData({ trim: false }) !== '';
+    return this.ckEditorInstance?.getData({ trim: false }) === '';
   }
 
   private handleTurboSubmitStart(_event:Event) {
