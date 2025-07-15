@@ -32,32 +32,39 @@ See COPYRIGHT and LICENSE files for more details.
     <div class="matrix-wrapper">
       <table class="risk-matrix">
         <thead>
-        <tr>
-          <th class="matrix-corner">
-            <% if params[:impact] || params[:likelihood] %>
-              <%= link_to project_risks_path, class: "matrix-reset" do %>
-                Filter zurücksetzen
-              <% end %>
-            <% end %>
-          </th>
-          <th colspan="<%= impact_options.length %>" class="impact-header">
-            Auswirkung
-          </th>
-        </tr>
-        <tr>
-          <th class="likelihood-header">
-            <div>Eintrittswahrscheinlichkeit</div>
-          </th>
-          <% impact_options.each_with_index do |impact, _| %>
-            <th class="impact-label">
-              <%= impact.value %>
-            </th>
-          <% end %>
-        </tr>
-        </thead>
-        <tbody>
-        <% likelihood_options.reverse.each_with_index do |likelihood| %>
           <tr>
+            <th class="matrix-corner">
+              <% if params[:impact] || params[:likelihood] %>
+                <%= link_to project_risks_path, class: "matrix-reset" do %>
+                  Filter zurücksetzen
+                <% end %>
+              <% end %>
+            </th>
+            <th class="matrix-corner-right"></th>
+            <th colspan="<%= impact_options.length %>" class="impact-header">
+              Impact
+            </th>
+          </tr>
+          <tr>
+            <th class="matrix-corner-bottom"></th>
+            <th class="matrix-reset">
+            </th>
+            <% impact_options.each_with_index do |impact, _| %>
+              <th class="impact-label">
+                <%= impact.value %>
+              </th>
+            <% end %>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% likelihood_options.reverse.each_with_index do |likelihood, index| %>
+          <tr>
+            <% if index == 0 %>
+              <th rowspan="5" class="likelihood-header">
+                Likelihood
+              </th>
+            <% end %>
             <th class="likelihood-label">
               <%= likelihood.value %>
             </th>
@@ -77,13 +84,18 @@ See COPYRIGHT and LICENSE files for more details.
     </div>
 
     <div class="risk-legend">
-      <h3>Risikostufen</h3>
+      <div class="header">
+        <h3>Risiko-Level</h3>
+      </div>
       <div class="legend-content">
         <p class="legend-description">
           Zellen zeigen die Anzahl der Risiken in jeder Kategorie.
           Klicken Sie auf eine Kategorie, um die entsprechenden Risiken zu filtern.
         </p>
         <div class="legend-items">
+          <div class="legend-total">
+            Gesamtrisiken: <%= risk_work_packages.count %>
+          </div>
           <div class="legend-item">
             <span class="legend-color low-risk"></span>
             <%=
@@ -106,9 +118,6 @@ See COPYRIGHT and LICENSE files for more details.
             %>
           </div>
         </div>
-      </div>
-      <div class="risk-total">
-        <strong>Summe: <%= risk_work_packages.count %></strong>
       </div>
     </div>
   </div>

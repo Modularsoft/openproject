@@ -19,33 +19,66 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1)
   background: white
 
+  .matrix-corner
+    background: #f8f9fa
+    border-right: none
+    border-bottom: none
+    max-width: 50px
+
+  .matrix-corner-right
+    background: #f8f9fa
+    border-left: none !important
+    border-bottom: none !important
+
+  .matrix-corner-bottom
+    background: #f8f9fa
+    border-top: none !important
+    border-right: none !important
+
+  .matrix-reset
+    background: #f8f9fa
+    border-top: none
+    border-left: none
+
   th,
   td
+    width: auto
     border: 2px solid #ddd
     text-align: center
-    font-weight: bold
+    //font-weight: bold
 
 .matrix-corner
   background: #f8f9fa
-  width: 50px
+  border-right: none
+  border-bottom: none
+
+.matrix-corner-right
+  background: #f8f9fa
+  border-left: none !important
+  border-bottom: none !important
+
+.matrix-corner-bottom
+  background: #f8f9fa
+  border-top: none !important
+  border-right: none !important
 
 .impact-header
-  background: #e9ecef
+  background: #AFB8C133
   padding: 15px
-  font-size: 11px
-  font-weight: bold
+  font-size: 14px
+  font-weight: 600
   color: #495057
 
 .likelihood-header
-  background: #e9ecef
-  width: 50px
-  max-width: 50px
-  position: relative
-  padding: 15px 2px
-  word-wrap: break-word
-  overflow-wrap: break-word
-  hyphens: auto
+  background: #AFB8C133
+  font-weight: 600
+  color: #495057
+  font-size: 14px
+  padding: 15px 5px
   text-align: center
+  vertical-align: middle
+  writing-mode: vertical-rl
+  transform: rotate(180deg)
 
   div
     font-size: 11px
@@ -54,13 +87,15 @@
 
 .impact-label,
 .likelihood-label
+  font-weight: normal
   background: #f8f9fa
   padding: 6px 2px
   font-size: 12px
   color: #495057
-  min-width: 40px
+  max-width: 40px
 
 .risk-cell
+  color: black
   width: 80px
   height: 60px
   position: relative
@@ -78,25 +113,31 @@
 
   &:hover
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 0 0 2px rgba(255, 255, 255, 0.3)
-    filter: brightness(1.1)
+    filter: brightness(1.025)
 
 .risk-count
-  font-size: 18px
-  font-weight: bold
-  color: white
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3)
+  font-size: 16px
 
 .low-risk
-  background: linear-gradient(135deg, #28a745, #20c997)
+  background: #DAFBE1
 
 .medium-risk
-  background: linear-gradient(135deg, #ffc107, #fd7e14)
+  background: #FFF8C5
 
 .high-risk
-  background: linear-gradient(135deg, #dc3545, #e83e8c)
+  background: #FFEBE9
 
 .risk-selected
-  filter: brightness(0.8)
+  color: white
+
+.low-risk.risk-selected
+  background: #4AC26B
+
+.medium-risk.risk-selected
+  background: #D4A72C
+
+.high-risk.risk-selected
+  background: #FA4549
 
 .risk-legend
   width: 20%
@@ -109,22 +150,28 @@
   flex-direction: column
   justify-content: space-between
 
-  h3
-    margin-bottom: 15px
-    color: #333
-    text-align: center
+  .header
+    border-bottom: 2px solid #ddd
+
+    h3
+      font-size: 14px
+      font-weight: 600
+      margin-bottom: 15px
+      color: #333
+      text-align: center
 
 .legend-description
-  font-size: 14px
-  color: #666
-  margin-bottom: 20px
-  font-style: italic
+  font-size: 12px
+  color: #636C76
+  padding-bottom: 20px
   text-align: center
+  border-bottom: 2px solid #ddd
 
 .legend-items
   display: flex
   flex-direction: column
   gap: 15px
+  padding-top: 10px
 
 .legend-item
   display: flex
@@ -144,14 +191,11 @@
   flex-direction: column
   justify-content: center
 
-.risk-total
+.legend-total
   margin-top: auto
-  padding: 15px
-  background: #ffffff
-  border-radius: 8px
+  font-weight: 600
   font-size: 16px
-  color: #495057
-  border: 1px solid #dee2e6
+  color: #636C76
 
 @media (max-width: 768px)
   .risk-matrix-container
