@@ -481,9 +481,9 @@ en:
         name: OneDrive
         name_placeholder: e.g. OneDrive
       sharepoint:
-        name: Sharepoint
         label_oauth_client_id: Azure OAuth Application (client) ID
         label_oauth_client_secret: Azure OAuth Client Secret Value
+        name: Sharepoint
         name_placeholder: e.g. Sharepoint
     show_attachments_toggle:
       description: Deactivating this option will hide the attachments list on the work packages files tab. The files attached in the description of a work package will still be uploaded in the internal attachments storage.
